@@ -6,6 +6,8 @@ use App\Http\Controllers\Site\AuthController as AuthController;
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

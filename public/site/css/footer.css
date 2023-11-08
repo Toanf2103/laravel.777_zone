@@ -1,0 +1,16 @@
+/* footer */
+.my-5 {
+    margin: 0 !important;
+}
+
+footer {
+    background-color: #101010;
+}
+
+footer a {
+    transition: color ease-out 0.3s;
+}
+
+footer a:hover {
+    color: #2997ff !important;
+}
