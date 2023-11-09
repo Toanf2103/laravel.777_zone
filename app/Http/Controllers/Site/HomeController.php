@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function home(){
+        $test = User::all();
+        dd($test);
         return view('site.pages.home');
     }
 
     public function catelory(){
+        
         return view('site.pages.catelory');
     }
 

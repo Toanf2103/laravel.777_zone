@@ -17,10 +17,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = "accounts";
+
     protected $fillable = [
-        'name',
+        'full_name',
+        'phone_number',
         'email',
+        'username',
         'password',
+        'ward_id',
+        'address',
+        'role',
+        'status',
+        'verification_token',
+        'last_email_sent_at'
     ];
 
     /**
@@ -42,4 +52,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function comments(){
+        return $this->hasMany(Comment::class,'user_id','id');
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class,'user_id','id');
+    }
 }

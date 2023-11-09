@@ -177,8 +177,17 @@ header .header-form-search input {
     font-size: 2rem;
 }
 
-.header-form-search>* {
+header .header-form-search>* {
     font-size: 2rem;
+}
+header .login{
+    cursor: pointer;
+}
+header .login img{
+    
+    display: block;
+    max-height: 4rem;
+    border-radius: 999px;
 }
 
 /* content */

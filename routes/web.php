@@ -24,6 +24,7 @@ Route::get('/catelory', [HomeController::class, 'catelory'])->name('site.catelor
 Route::get('/product', [HomeController::class, 'product'])->name('site.product');
 Route::get('/cart', [HomeController::class, 'cart'])->name('site.cart');
 
+
 //login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');

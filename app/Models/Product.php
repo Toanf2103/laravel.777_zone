@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    use HasFactory;
+
+    protected $table = "products";
+
+    protected $fillable = [
+        'brand_category_id', 
+        'name', 
+        'slug', 
+        'price', 
+        'quantity', 
+        'specs', 
+        'description', 
+        'status'
+    ];
+
+    public function brandCategory(){
+        return $this->hasOne(BrandCategory::class,'id','brand_category_id');
+    }
+
+    public function productImages(){
+        return $this->hasMany(ProductImage::class,'product_id','id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class,'comment_id','id');
+    }
+
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class,'order_id','id');
+    }
+
+    
+
+}
