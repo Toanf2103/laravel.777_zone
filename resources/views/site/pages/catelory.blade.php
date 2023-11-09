@@ -6,7 +6,9 @@
 @stop
 
 @section('content')
-    <h1>catelory</h1>
+
+    <h2>catelory</h2>
+
 @stop
 
 @section('js')
