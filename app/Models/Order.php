@@ -11,26 +11,15 @@ class Order extends Model
 
     protected $table = "orders";
 
-    protected $fillable = [
-        'user_id',
-        'name',
-        'phone_number', 
-        'ward_id', 
-        'address', 
-        'pay_method', 
-        'pay_id', 
-        'pay_status', 
-        'ship_fee', 
-        'note', 
-        'status'
-    ];
+    protected $fillable = ['user_id', 'name', 'phone_number', 'ward_id', 'address', 'pay_method', 'pay_id', 'pay_status', 'ship_fee', 'note', 'status'];
 
-    public function user(){
-        return $this->hasOne(User::class,'id','user_id');
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function orderDetails(){
-        return $this->hasMany(OrderDetail::class,'order_id','id');
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
-    
 }

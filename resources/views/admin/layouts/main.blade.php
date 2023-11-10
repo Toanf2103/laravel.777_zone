@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="root-url" data-index="{{ URL::to('/'); }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - Toanf-messi</title>
+    <title>@yield('title')</title>
 
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -34,15 +34,14 @@
         @include('admin/partials/header')
         @include('admin/partials/sidebar')
         <div class="content">
-            <div class="content-header row mb-2">
+            <div class="content-header row mb-5">
                 <div class="col-6 d-flex">
-                    <h1>Dashboard</h1>
+                    <h1 class="fw-bold" style="font-size: 1.8rem;">@yield('title-content')</h1>
                 </div>
                 <div class="col-6 d-flex align-items-end justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            @yield('breadcrumb')
                         </ol>
                     </nav>
                 </div>

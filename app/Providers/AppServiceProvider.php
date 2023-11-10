@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $views = ['site.pages.*', 'admin.pages.products.*', 'admin.pages.banner.*'];
+        foreach ($views as $view) {
+            view()->composer($view, function ($view) {
+                $view->with([
+                    'listCategories' => Category::all()
+                ]);
+            });
+        }
     }
 }

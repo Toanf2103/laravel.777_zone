@@ -11,15 +11,10 @@ class Comment extends Model
 
     protected $table = "comments";
 
-    protected $fillable = [
-        'user_id',
-        'product_id',
-        'content',
-        'reply_id'
-    ];
+    protected $fillable = ['user_id', 'product_id', 'content', 'reply_id'];
 
-    public function product(){
-        return $this->hasOne(Product::class,'id','product_id');
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
-    
 }
