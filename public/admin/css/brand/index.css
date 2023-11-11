@@ -1,0 +1,13 @@
+tr[data-url] {
+    cursor: pointer;
+}
+
+th,
+td {
+    text-align: center;
+}
+
+.brand-image {
+    width: 200px;
+    border-radius: 5px;
+}

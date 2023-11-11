@@ -9,7 +9,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
 <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.products.index') }}">Sản phẩm</a></li>
-<li class="breadcrumb-item active" aria-current="page">Cập nhật thông tin sản phẩm</li>
+<li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
 @stop
 
 @section('content')
@@ -19,13 +19,22 @@
         @method('PUT')
         <input type="hidden" name="id" value="{{ $product->id }}">
 
-        @if (session('success'))
-        <div class="col-12">
-            <div class="alert alert-success">
-                {{ session('success') }}
+        <div>
+            @if (session('success'))
+            <div class="col-12">
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
             </div>
+            @endif
+            @if (session('warning'))
+            <div class="col-12">
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+            </div>
+            @endif
         </div>
-        @endif
 
         <div class="col-12">
             <input class="btn btn-success ms-auto" type="submit" value="Lưu thay đổi">

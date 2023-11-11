@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Chỉnh sửa danh mục - 777 Zone Admin')
-@section('title-content', 'Chỉnh sửa danh mục')
+@section('title', 'Cập nhật thông tin danh mục - 777 Zone Admin')
+@section('title-content', 'Cập nhật thông tin danh mục')
 
 @section('css')
 @stop
@@ -9,7 +9,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
 <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.categories.index') }}">Danh mục</a></li>
-<li class="breadcrumb-item active" aria-current="page">Chỉnh sửa danh mục</li>
+<li class="breadcrumb-item active" aria-current="page">Cập nhật</li>
 @stop
 
 @section('content')

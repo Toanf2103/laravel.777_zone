@@ -1,15 +1,15 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Danh sách danh mục - 777 Zone Admin')
-@section('title-content', 'Danh sách danh mục')
+@section('title', 'Danh sách thương hiệu - 777 Zone Admin')
+@section('title-content', 'Danh sách thương hiệu')
 
 @section('css')
-<link rel="stylesheet" href="{{ url('public/admin/css/category/index.css') }}">
+<link rel="stylesheet" href="{{ url('public/admin/css/brand/index.css') }}">
 @stop
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Danh mục</li>
+<li class="breadcrumb-item active" aria-current="page">Thương hiệu</li>
 @stop
 
 @section('content')
@@ -21,7 +21,7 @@
     @endif
 
     <div>
-        <a href="{{ route('admin.categories.create') }}" class="btn btn-success d-flex justify-content-center align-items-center gap-2 ms-auto" style="width: fit-content;">
+        <a href="{{ route('admin.brands.create') }}" class="btn btn-success d-flex justify-content-center align-items-center gap-2 ms-auto" style="width: fit-content;">
             <i class="fa-solid fa-plus"></i>
             <span>Thêm mới</span>
         </a>
@@ -32,19 +32,23 @@
             <thead class="table-secondary">
                 <tr>
                     <th>Id</th>
-                    <th>Tên danh mục</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên thương hiệu</th>
                     <th>Số lượng sản phẩm</th>
                     <th>Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($categories as $category)
-                <tr data-url="{{ route('admin.categories.edit', ['category' => $category->id]) }}">
-                    <th>{{ $category->id }}</th>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->products->count() }}</td>
+                @foreach($brands as $brand)
+                <tr data-url="{{ route('admin.brands.edit', ['brand' => $brand->id]) }}">
+                    <th>{{ $brand->id }}</th>
                     <td>
-                        @if($category->status)
+                        <img src="{{ $brand->avatar }}" alt="" class="brand-image">
+                    </td>
+                    <td>{{ $brand->name }}</td>
+                    <td>{{ $brand->products->count() }}</td>
+                    <td>
+                        @if($brand->status)
                         <span class='badge bg-success'>Hiển thị</span>
                         @else
                         <span class='badge bg-secondary'>Ẩn</span>
@@ -56,7 +60,7 @@
         </table>
     </div>
 
-    {{ $categories->withQueryString()->links('pagination::bootstrap-5') }}
+    {{ $brands->withQueryString()->links('pagination::bootstrap-5') }}
 </div>
 @stop
 

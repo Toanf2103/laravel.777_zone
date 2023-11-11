@@ -55,19 +55,24 @@ class BannerController extends Controller
 
     public function update(UpdateBannerRequest $request, Banner $banner)
     {
-        $banner->update([
+        $redirect = redirect()->back()->with("success", "Cập nhật banner thành công!");
+
+        $dataUpdate = [
             'category_id' => $request->input('category'),
             'link' => $request->input('link'),
             'status' => $request->status,
-        ]);
+        ];
 
         if ($request->hasFile('image')) {
             $uploadImageResult = $this->firebaseStorageService->uploadImage($request->file('image'), $banner->id, 'banner');
-            $banner->image = $uploadImageResult['full_url'];
-            $banner->image_object_name = $uploadImageResult['short_url'];
-            $banner->save();
+            $dataUpdate['image'] = $uploadImageResult['full_url'];
+            $dataUpdate['image_object_name'] = $uploadImageResult['short_url'];
+
+            $redirect = $redirect->with('warning', 'Lưu ý: Hình ảnh sẽ mất một ít thời gian để cập nhật lên hệ thống.');
         }
 
-        return redirect()->back()->with("success", "Cập nhật banner thành công! Lưu ý: Hình ảnh sẽ mất một ít thời gian để cập nhật lên hệ thống.");
+        $banner->update($dataUpdate);
+
+        return $redirect;
     }
 }

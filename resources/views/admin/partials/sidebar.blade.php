@@ -45,6 +45,18 @@
                 <span>Danh mục</span>
             </a>
         </li>
+        <li class="@if(request()->is('admin/brands*')){{ 'active' }}@endif">
+            <a href="{{ route('admin.brands.index') }}" class="d-flex align-items-center gap-2 ">
+                <div class="icon-box">
+                    @if(request()->is('admin/brands*'))
+                    <i class="fa-solid fa-folder"></i>
+                    @else
+                    <i class="fa-light fa-folder"></i>
+                    @endif
+                </div>
+                <span>Thương hiệu</span>
+            </a>
+        </li>
         <li class="@if(request()->is('admin/products*')){{ 'active' }}@endif">
             <a href="{{ route('admin.products.index') }}" class="d-flex align-items-center gap-2 ">
                 <div class="icon-box">

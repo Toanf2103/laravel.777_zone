@@ -95,6 +95,8 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $request, Product $product)
     {
+        $redirect = redirect()->back()->with("success", "Cập nhật thông tin sản phẩm thành công!");
+
         $product->update([
             'brand_category_id' => BrandCategory::firstOrCreate(['category_id' => $request->category, 'brand_id' => $request->brand])->id,
             'name' => str()->ucfirst($request->name),
@@ -119,8 +121,9 @@ class ProductController extends Controller
             });
 
             $product->productImages()->saveMany($productImages);
+            $redirect = $redirect->with('warning', 'Lưu ý: Hình ảnh sẽ mất một ít thời gian để cập nhật lên hệ thống.');
         }
 
-        return redirect()->back()->with("success", "Cập nhật sản phẩm thành công!");
+        return $redirect;
     }
 }

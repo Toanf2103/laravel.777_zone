@@ -9,7 +9,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
 <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.banners.index') }}">Banner</a></li>
-<li class="breadcrumb-item active" aria-current="page">Thêm mới banner</li>
+<li class="breadcrumb-item active" aria-current="page">Thêm mới</li>
 @stop
 
 @section('content')
