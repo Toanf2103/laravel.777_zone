@@ -27,12 +27,7 @@ class FirebaseStorageService
 
         $objectName = "$destinationPath/$imageName." . $file->getClientOriginalExtension();
 
-        $bucket->upload(
-            file_get_contents($file->getPathname()),
-            [
-                'name' => $objectName,
-            ]
-        );
+        $bucket->upload(file_get_contents($file->getPathname()), ['name' => $objectName,]);
 
         $object = $bucket->object($objectName);
         $object->update(['acl' => []], ['predefinedAcl' => 'publicRead']);
@@ -43,10 +38,22 @@ class FirebaseStorageService
         ];
     }
 
+    public function uploadManyImages(array $files, $destinationPath)
+    {
+        $uploadedFiles = [];
+
+        foreach ($files as $index => $file) {
+            $imageName = $index + 1;
+            $uploadedFile = $this->uploadImage($file, $imageName, $destinationPath);
+            $uploadedFiles[] = $uploadedFile;
+        }
+
+        return $uploadedFiles;
+    }
+
     public function deleteImage($objectName)
     {
         $bucket = $this->storage->bucket($this->bucketName);
-
         $object = $bucket->object($objectName);
 
         if ($object->exists()) {
@@ -55,5 +62,19 @@ class FirebaseStorageService
         }
 
         return false;
+    }
+
+    public function deleteAllImagesInFolder($folderPath)
+    {
+        $bucket = $this->storage->bucket($this->bucketName);
+        $objects = $bucket->objects(['prefix' => $folderPath]);
+
+        foreach ($objects as $object) {
+            if ($object->exists()) {
+                $object->delete();
+            }
+        }
+
+        return true;
     }
 }

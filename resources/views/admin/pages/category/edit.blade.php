@@ -8,7 +8,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-<li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.categories.index') }}">Banner</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.categories.index') }}">Danh mục</a></li>
 <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa danh mục</li>
 @stop
 

@@ -31,24 +31,7 @@
 
 <body>
     <div class="wrapper">
-        @include('admin/partials/header')
-        @include('admin/partials/sidebar')
-        <div class="content">
-            <div class="content-header row mb-5">
-                <div class="col-6 d-flex">
-                    <h1 class="fw-bold" style="font-size: 1.8rem;">@yield('title-content')</h1>
-                </div>
-                <div class="col-6 d-flex align-items-end justify-content-end">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            @yield('breadcrumb')
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-
-            @yield('content')
-        </div>
+        @yield('content')
     </div>
 
     <!-- Bootstrap JS -->

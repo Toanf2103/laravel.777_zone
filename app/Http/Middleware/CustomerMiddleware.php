@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerMiddleware
 {
@@ -22,6 +23,7 @@ class CustomerMiddleware
             Auth::guard('cus')->logout();
             return redirect()->route('site.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
         }
+
         return $next($request);
     }
 }

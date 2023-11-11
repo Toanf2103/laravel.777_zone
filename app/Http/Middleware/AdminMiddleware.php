@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
@@ -15,13 +16,16 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::guard('admin')->check()){
-            return redirect()->route('admin.auth.login');
+        if (!Auth::guard('admin')->check()) {
+            return redirect()->route('admin.auth.login')->with('error', 'Vui lòng đăng nhập');
         }
-
-        if (Auth::guard('admin')->user()->status === 0 || Auth::guard('admin')->user()->role !== 'admin') {
+        if (Auth::guard('admin')->user()->status === 0) {
             Auth::guard('admin')->logout();
-            return redirect()->route('admin.auth.login');
+            return redirect()->route('admin.auth.login')->with('error', 'Tài khoản của bạn đã bị cấm sử dụng');
+        }
+        if (Auth::guard('admin')->user()->role !== 'admin') {
+            Auth::guard('admin')->logout();
+            return redirect()->route('admin.auth.login')->with('error', 'Bạn không có quyền truy cập vào trang này');
         }
 
         return $next($request);

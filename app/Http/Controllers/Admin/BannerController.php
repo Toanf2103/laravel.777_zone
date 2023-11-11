@@ -15,6 +15,8 @@ class BannerController extends Controller
 
     public function __construct(FirebaseStorageService $firebaseStorageService)
     {
+        $this->middleware('admin');
+
         $this->firebaseStorageService = $firebaseStorageService;
     }
 

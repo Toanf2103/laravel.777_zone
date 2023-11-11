@@ -8,7 +8,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-<li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.categories.index') }}">Banner</a></li>
+<li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.categories.index') }}">Danh mục</a></li>
 <li class="breadcrumb-item active" aria-current="page">Thêm mới danh mục</li>
 @stop
 
@@ -35,8 +35,8 @@
             <div class="form-group">
                 <label for="status" class="form-label fw-bold">Trạng thái <span class="text-danger">*</span></label>
                 <select class="form-select @if($errors->has('status')) is-invalid @endif" id="status" name="status" required>
-                    <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Hiển thị</option>
-                    <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Ẩn</option>
+                    <option value="1" {{ old('status') === 1 ? 'selected' : '' }}>Hiển thị</option>
+                    <option value="0" {{ old('status') === 0 ? 'selected' : '' }}>Ẩn</option>
                 </select>
                 @if ($errors->has('status'))
                 <small class="text-danger">{{ $errors->first('status') }}</small>

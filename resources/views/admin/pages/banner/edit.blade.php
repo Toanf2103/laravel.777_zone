@@ -63,6 +63,16 @@
 
         <div class="col-12">
             <div class="form-group">
+                <label for="image" class="form-label fw-bold">Hình ảnh mới <span class="text-danger">*</span></label>
+                <input type="file" class="form-control @if($errors->has('image')) is-invalid @endif" id="image" name="image" accept="image/*">
+                @if ($errors->has('image'))
+                <small class="text-danger">{{ $errors->first('image') }}</small>
+                @endif
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
                 <label for="status" class="form-label fw-bold">Trạng thái <span class="text-danger">*</span></label>
                 @php
                 $statusChosen = old('status') !== null ? old('status') : $banner->status;
@@ -73,16 +83,6 @@
                 </select>
                 @if ($errors->has('status'))
                 <small class="text-danger">{{ $errors->first('status') }}</small>
-                @endif
-            </div>
-        </div>
-
-        <div class="col-12">
-            <div class="form-group">
-                <label for="image" class="form-label fw-bold">Hình ảnh mới <span class="text-danger">*</span></label>
-                <input type="file" class="form-control @if($errors->has('image')) is-invalid @endif" id="image" name="image" accept="image/*">
-                @if ($errors->has('image'))
-                <small class="text-danger">{{ $errors->first('image') }}</small>
                 @endif
             </div>
         </div>

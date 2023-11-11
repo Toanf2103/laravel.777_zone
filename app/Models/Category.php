@@ -18,11 +18,6 @@ class Category extends Model
         return $this->hasMany(Banners::class, 'category_id', 'id');
     }
 
-    public function brandCategories()
-    {
-        $this->hasMany(BrandCategory::class, 'category_id', 'id');
-    }
-
     public function brands()
     {
         return $this->hasManyThrough(Brand::class, BrandCategory::class, 'category_id', 'id', 'id', 'brand_id');
@@ -30,6 +25,6 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasManyThrough(Product::class, BrandCategory::class, 'category_id', 'brand_category_id');
+        return $this->hasManyThrough(Product::class, BrandCategory::class, 'category_id', 'brand_category_id', 'id', 'id');
     }
 }

@@ -10,6 +10,11 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         $categories = Category::orderBy('id', 'desc')->paginate(5);

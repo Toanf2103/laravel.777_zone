@@ -39,6 +39,14 @@ aside ul li {
     border-radius: 0.4rem;
 }
 
+aside ul li .icon-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+}
+
 aside ul li a {
     display: block;
     border-radius: 0.4rem;
