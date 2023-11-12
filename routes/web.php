@@ -24,11 +24,11 @@ use Livewire\Livewire;
 
 //Site
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(basename(base_path()).'/vendor/livewire/livewire/dist/livewire.js', $handle);
+    return Route::get(basename(base_path()) . '/vendor/livewire/livewire/dist/livewire.js', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(basename(base_path()).'/livewire/update', $handle);
+    return Route::post(basename(base_path()) . '/livewire/update', $handle);
 });
 
 
@@ -92,5 +92,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/', [Admin\ProductController::class, 'store'])->name('admin.products.store');
         Route::get('/{product}/edit', [Admin\ProductController::class, 'edit'])->name('admin.products.edit');
         Route::put('/{product}', [Admin\ProductController::class, 'update'])->name('admin.products.update');
+    });
+
+    // Customer
+    Route::group(['prefix' => 'customers'], function () {
+        Route::get('/', [Admin\CustomerController::class, 'index'])->name('admin.customers.index');
+        Route::get('/{customer}/toggleStatus', [Admin\CustomerController::class, 'toggleStatus'])->name('admin.customers.toggleStatus');
     });
 });
