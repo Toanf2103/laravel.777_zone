@@ -1,7 +1,8 @@
 :root {
     --color-bg: #3e3e3f;
     --color-bg-header: #101010;
-    --padding-content:
+    --color-bg-item: #323232;
+    --height-header: 6rem;
 }
 
 * {
@@ -38,6 +39,12 @@ span {
 body {
     background-color: var(--color-bg);
     color: #fff;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 1000000;
 }
 
 .wrapper-icon {
@@ -87,12 +94,16 @@ body {
     z-index: 998;
 }
 
+.swal2-popup {
+    font-size: 14px !important;
+}
+
 
 /* header */
 header {
     background-color: var(--color-bg-header);
     width: 100%;
-    height: 6rem;
+    height: var(--height-header);
 }
 
 header .head {
@@ -127,7 +138,6 @@ header ul.header-menu {
 header .header-menu li {
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
     cursor: pointer;
     transition: all ease-in-out 0.1s;
     height: 100%;
@@ -139,9 +149,12 @@ header .header-menu li:hover {
 }
 
 header .header-menu a {
-    display: block;
-    /* height: 100%; */
-    text-align: center;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    padding: 1rem 2rem;
+
 }
 
 header .header-search_cart .wrapper-icon {
@@ -163,6 +176,7 @@ header .header-form-search {
     z-index: 999;
     /* margin-left: -30rem; */
     width: 50%;
+    position: relative;
 }
 
 header .header-form-search input {
@@ -180,22 +194,71 @@ header .header-form-search input {
 header .header-form-search>* {
     font-size: 2rem;
 }
-header .login{
+
+header .login {
     cursor: pointer;
 }
-header .login img{
-    
+
+header .login img {
+
     display: block;
     max-height: 4rem;
     border-radius: 999px;
 }
 
+header .header-form-search .history-key {
+    position: absolute;
+    top: calc(var(--height-header) - 1.8rem);
+    width: 100%;
+    min-height: 100px;
+    background-color: #fff;
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
+}
+
+header .history-key-content {
+    padding: 2rem;
+}
+
+header .history-header {
+    color: #888;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    pointer-events: none;
+}
+
+header .item-key a {
+    display: block;
+    color: #222;
+    padding: 0.5rem 0;
+}
+
+header .cart-header {
+    position: relative;
+}
+
+header .cart-header span {
+    position: absolute;
+    background-color: #ff361d;
+    border-radius: 999px;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0.3rem;
+    left: 0.3rem;
+}
+
+
 /* content */
 .content {
-    min-height: 1000px;
+    /* min-height: 1000px; */
     /* background-color: red; */
     max-width: 1200px;
     min-width: 1024px;
     height: 100%;
-    margin: 0 auto;
+    margin: 3rem auto;
+    padding: 0rem 5rem;
+    min-height: 60vh;
 }

@@ -1,34 +1,43 @@
 <header>
     <div class="head d-flex align-items-center justify-content-center">
         <div class="header-logo">
-            <a href="#">
+            <a href="{{route('site.home')}}">
                 <img src="https://cdn.freebiesupply.com/images/large/2x/google-logo-transparent.png" alt="">
             </a>
         </div>
-        <ul class="header-menu d-flex align-items-center justify-content-start ">
-            <li class="active">
-                <a href="#">Iphone</a>
+        <ul class="header-menu d-flex align-items-center justify-content-start">
+
+            @foreach($listCategories as $category)
+
+            <li class=' {{ request()->is("category/{$category->slug}*") ? "active" :"" }} '>
+                <a href="{{ route('site.category',['categorySlug'=>$category->slug]) }}">{{ $category->name }}</a>
             </li>
-            <li>
-                <a href="#">Iphone</a>
-            </li>
-            <li>
-                <a href="#">Iphone</a>
-            </li>
-            <li>
-                <a href="#">Iphone</a>
-            </li>
-            <li>
-                <a href="#">Iphone</a>
-            </li>
+            @endforeach
+
+
         </ul>
         <div class="d-flex align-items-center gap-3 header-search_cart justify-content-center ">
             <div class="wrapper-icon" onclick="showSearchForm()">
                 <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
             </div>
-            <div class="wrapper-icon">
+            @php
+            use Illuminate\Support\Facades\Session;
+
+            $cart = Session::get('cart') ?? [];
+            $count= count($cart);
+            @endphp
+            <!-- cart -->
+            <a href="{{ route('site.cart') }}" class="wrapper-icon cart-header">
                 <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-            </div>
+                <div id="cart-header">
+                    @if($count>0)
+                    <span>{{$count}}</span>
+                    @endif
+                </div>
+
+            </a>
+            <!-- end cart -->
+
             <div class="login dropdown">
                 <!-- <a href="#">Đăng nhập</a> -->
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7TvgBaM6ZAsPwj9vSPIYbrgptnGsQTKOTx92T_R1hdjIMwbwchEExCIdxVAdCAAVi74&usqp=CAU" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,13 +47,10 @@
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
             </div>
+
         </div>
 
-        <form action="" class="header-form-search d-flex align-items-center gap-3 none">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Tìm kiếm sản phẩm">
-            <i class="fas fa-times" onclick="hiddenSearchForm()" style="cursor: pointer;"></i>
-        </form>
+        <livewire:site.header-search />
 
     </div>
 </header>

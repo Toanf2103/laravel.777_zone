@@ -3,7 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Site\HomeController as HomeController;
 use App\Http\Controllers\Site\AuthController as AuthController;
+
 use App\Http\Controllers\Admin;
+
+use Livewire\Livewire;
+
+
 
 
 /*
@@ -17,18 +22,32 @@ use App\Http\Controllers\Admin;
 |
 */
 
-// Site
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', [HomeController::class, 'home'])->name('site.home');
-    Route::get('/category', [HomeController::class, 'category'])->name('site.catelory');
-    Route::get('/product', [HomeController::class, 'product'])->name('site.product');
-    Route::get('/cart', [HomeController::class, 'cart'])->name('site.cart');
-
-    // Auth
-    Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
-    Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
+//Site
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get(basename(base_path()).'/vendor/livewire/livewire/dist/livewire.js', $handle);
 });
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post(basename(base_path()).'/livewire/update', $handle);
+});
+
+
+Route::get('/', [HomeController::class, 'home'])->name('site.home');
+Route::get('/tim-kiem', [HomeController::class, 'search'])->name('site.search');
+
+Route::get('/cart', [HomeController::class, 'cart'])->name('site.cart');
+Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->name('site.category');
+Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
+
+Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
+
+
+//login user
+Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
+Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
+
+
 
 // Admin
 Route::group(['prefix' => 'admin'], function () {

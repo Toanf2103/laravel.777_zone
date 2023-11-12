@@ -13,9 +13,9 @@ class Category extends Model
 
     protected $fillable = ['name', 'slug', 'status'];
 
-    public function banners()
-    {
-        return $this->hasMany(Banners::class, 'category_id', 'id');
+
+    public function banners(){
+        return $this->hasMany(Banner::class,'category_id','id');
     }
 
     public function brands()
@@ -23,8 +23,15 @@ class Category extends Model
         return $this->hasManyThrough(Brand::class, BrandCategory::class, 'category_id', 'id', 'id', 'brand_id');
     }
 
+
     public function products()
     {
         return $this->hasManyThrough(Product::class, BrandCategory::class, 'category_id', 'brand_category_id', 'id', 'id');
     }
+
+    
+    
+    
+
+
 }
