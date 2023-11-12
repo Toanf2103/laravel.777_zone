@@ -1,0 +1,26 @@
+.slider .wrapper-icon {
+    padding: 1.5rem;
+    background-color: #2f3033;
+    border-radius: 999px;
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    /* Đặt top ở giữa theo chiều dọc */
+    /* Đặt left ở giữa theo chiều ngang */
+    transform: translate(-50%, -50%);
+}
+
+.slider .wrapper-icon:hover {
+    background-color: #5e5e60;
+
+}
+
+.slider .wrapper-icon.left-btn {
+    left: 5%;
+
+}
+
+.slider .wrapper-icon.right-btn {
+    right: 5%;
+
+}

@@ -6,6 +6,8 @@ use App\Http\Controllers\Site\AuthController as AuthController;
 
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use Livewire\Livewire;
+
 
 
 /*
@@ -19,10 +21,23 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 |
 */
 
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get(basename(base_path()).'/vendor/livewire/livewire/dist/livewire.js', $handle);
+});
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post(basename(base_path()).'/livewire/update', $handle);
+});
+
+
 Route::get('/', [HomeController::class, 'home'])->name('site.home');
-Route::get('/catelory', [HomeController::class, 'catelory'])->name('site.catelory');
-Route::get('/product', [HomeController::class, 'product'])->name('site.product');
+Route::get('/tim-kiem', [HomeController::class, 'search'])->name('site.search');
+
 Route::get('/cart', [HomeController::class, 'cart'])->name('site.cart');
+Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->name('site.category');
+Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
+
+Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
 
 //login user
