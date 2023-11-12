@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -12,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+
     }
 
     /**
@@ -20,5 +22,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        $views = ['site.pages.*', 'admin.pages.products.*'];
+        foreach ($views as $view) {
+            view()->composer($view, function ($view) {
+                $view->with([
+                    'listCategories' => Category::all()
+                ]);
+            });
+        }
     }
 }

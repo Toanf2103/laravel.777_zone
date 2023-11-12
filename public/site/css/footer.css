@@ -1,6 +1,12 @@
 /* footer */
 .my-5 {
     margin: 0 !important;
+    margin: 0 !important;
+    bottom: 0;
+    position: relative;
+    right: 0;
+    left: 0;
+
 }
 
 footer {
