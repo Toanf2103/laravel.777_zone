@@ -1,0 +1,8 @@
+tr[data-url] {
+    cursor: pointer;
+}
+
+th,
+td {
+    text-align: center;
+}

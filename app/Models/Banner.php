@@ -11,10 +11,10 @@ class Banner extends Model
 
     protected $table = "banners";
 
-    protected $fillable = ['category_id', 'image', 'link', 'status'];
+    protected $fillable = ['category_id', 'image', 'image_object_name', 'link', 'status'];
 
-    public function category(){
-        return $this->hasOne(Category::class,'id','category_id');
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
     }
-
 }

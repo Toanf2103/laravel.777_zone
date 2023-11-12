@@ -13,8 +13,8 @@ class ProductImage extends Model
 
     protected $fillable = ['product_id', 'link', 'type'];
 
-    public function product(){
-        return $this->hasOne(Product::class,'id','product_id');
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'id', 'product_id');
     }
-
 }

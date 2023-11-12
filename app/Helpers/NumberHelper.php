@@ -10,5 +10,4 @@ class NumberHelper
         return number_format($number, 0, ',', '.');
     }
 
-    
 }

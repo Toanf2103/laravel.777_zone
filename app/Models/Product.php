@@ -42,4 +42,6 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
+
 }
+

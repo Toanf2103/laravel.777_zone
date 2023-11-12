@@ -11,12 +11,13 @@ class Brand extends Model
 
     protected $table = "brands";
 
-    protected $fillable = ['name', 'slug', 'avatar', 'status'];
+    protected $fillable = ['name', 'slug', 'avatar', 'avatar_object_name', 'status'];
 
     public function brandCategories()
     {
         $this->hasMany(BrandCategory::class, 'brand_id', 'id');
     }
+
     public function products()
     {
         return $this->hasManyThrough(Product::class, BrandCategory::class, 'brand_id', 'brand_category_id', 'id', 'id');

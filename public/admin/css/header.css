@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
 :root {
     --width-sidebar: 250px;
     --color-border: #dee2e6;
@@ -9,10 +11,6 @@
     padding: 0;
     font-size: 16px;
     box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
 }
 
 ul {
@@ -35,7 +33,13 @@ a {
 
 body {
     background-color: #f4f6f9;
+    font-family: "Roboto", sans-serif;
+}
 
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* header */
@@ -45,16 +49,15 @@ body {
     border-bottom: 1px solid var(--color-border);
     margin-left: var(--width-sidebar);
     height: var(--height-header);
-
 }
 
 .nav-header ul li a {
     display: block;
-    padding: 1.3rem;
+    padding: 1rem;
 }
 
 .nav-header ul li a,
 .nav-header ul li i {
     color: rgba(0, 0, 0, 0.7);
-    font-size: 1.7rem;
+    font-size: 1rem;
 }
