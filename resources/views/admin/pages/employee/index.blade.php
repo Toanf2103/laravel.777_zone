@@ -1,15 +1,15 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Danh sách khách hàng - 777 Zone Admin')
-@section('title-content', 'Danh sách khách hàng')
+@section('title', 'Danh sách nhân viên - 777 Zone Admin')
+@section('title-content', 'Danh sách nhân viên')
 
 @section('css')
-<link rel="stylesheet" href="{{ url('public/admin/css/customer/index.css') }}">
+<link rel="stylesheet" href="{{ url('public/admin/css/employee/index.css') }}">
 @stop
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Khách hàng</li>
+<li class="breadcrumb-item active" aria-current="page">Nhân viên</li>
 @stop
 
 @section('content')
@@ -26,6 +26,13 @@
     </div>
     @endif
 
+    <div>
+        <a href="{{ route('admin.employees.create') }}" class="btn btn-success d-flex justify-content-center align-items-center gap-2 ms-auto" style="width: fit-content;">
+            <i class="fa-solid fa-plus"></i>
+            <span>Thêm mới</span>
+        </a>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-hover align-middle m-0">
             <thead class="table-secondary">
@@ -41,18 +48,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($customers as $customer)
+                @foreach($employees as $employee)
                 <tr>
-                    <th>{{ $customer->id }}</th>
+                    <th>{{ $employee->id }}</th>
                     <td>
-                        <img src="{{ $customer->avatar ? $customer->avatar : 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="" class="customer-avatar">
+                        <img src="{{ $employee->avatar ? $employee->avatar : 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png' }}" alt="" class="employee-avatar">
                     </td>
-                    <td>{{ $customer->full_name }}</td>
-                    <td>{{ $customer->phone_number }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ $customer['full_address'] }}</td>
+                    <td>{{ $employee->full_name }}</td>
+                    <td>{{ $employee->phone_number }}</td>
+                    <td>{{ $employee->email }}</td>
+                    <td>{{ $employee['full_address'] }}</td>
                     <td>
-                        @if($customer->status)
+                        @if($employee->status)
                         <span class='badge bg-success'>Hoạt động</span>
                         @else
                         <span class='badge bg-danger'>Bị cấm</span>
@@ -60,15 +67,18 @@
                     </td>
                     <td>
                         <div class='d-flex justify-content-center align-items-center gap-2'>
-                            @if($customer->status)
-                            <button class='btn btn-danger' onclick="togglePostStatus('{{ $customer->id }}', true)" title="Khóa tài khoản">
+                            @if($employee->status)
+                            <button class='btn btn-danger' onclick="togglePostStatus('{{ $employee->id }}', true)" title="Khóa tài khoản">
                                 <i class="fa-regular fa-lock"></i>
                             </button>
                             @else
-                            <button class='btn btn-success' onclick="togglePostStatus('{{ $customer->id }}', false)" title="Mở khóa tài khoản">
+                            <button class='btn btn-success' onclick="togglePostStatus('{{ $employee->id }}', false)" title="Mở khóa tài khoản">
                                 <i class="fa-regular fa-lock-open"></i>
                             </button>
                             @endif
+                            <button class='btn btn-primary' onclick="resetPassword('{{ $employee->id }}')" title="Đặt lại mật khẩu">
+                                <i class="fa-regular fa-arrow-rotate-left"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -77,7 +87,7 @@
         </table>
     </div>
 
-    {{ $customers->withQueryString()->links('pagination::bootstrap-5') }}
+    {{ $employees->withQueryString()->links('pagination::bootstrap-5') }}
 </div>
 @stop
 
@@ -95,7 +105,24 @@
             cancelButtonText: "Không bé ơi!",
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href = `${rootURL}/admin/customers/${id}/toggle-status`
+                location.href = `${rootURL}/admin/employees/${id}/toggle-status`
+            }
+        });
+    }
+
+    function resetPassword(id) {
+        Swal.fire({
+            title: "Bạn chắc chắn chứ?",
+            text: `Bạn có thực sự muốn đặt lại mật khẩu cho tài khoản này không!`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya sure, chắc chắn rồi!",
+            cancelButtonText: "Không bé ơi!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = `${rootURL}/admin/employees/${id}/reset-password`
             }
         });
     }

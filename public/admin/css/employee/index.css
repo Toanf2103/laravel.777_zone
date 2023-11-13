@@ -1,0 +1,12 @@
+th,
+td {
+    text-align: center;
+}
+
+.employee-avatar {
+    width: 80px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: #000;
+}

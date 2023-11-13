@@ -2,7 +2,7 @@
     <div class="head d-flex align-items-center justify-content-center">
         <div class="header-logo">
             <a href="{{route('site.home')}}">
-                <img src="https://cdn.discordapp.com/attachments/872448203583262763/1173244319432454325/777zone_logo.png?ex=65633feb&is=6550caeb&hm=8bfc6fea3f3ca71de17857a0765718acda586577148614186ede19b8bb8bc4fe&" alt="">
+                <img src="https://cdn.discordapp.com/attachments/872448203583262763/1173244319432454325/777zone_logo.png" alt="">
             </a>
         </div>
         <ul class="header-menu d-flex align-items-center justify-content-start">

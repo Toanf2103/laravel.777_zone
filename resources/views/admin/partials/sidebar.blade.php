@@ -99,15 +99,20 @@
                 <span>Bình luận</span>
             </a>
         </li>
-        <li class="">
-            <a href="#" class="d-flex align-items-center gap-2 ">
+        @if(auth()->guard('admin')->user()->role == 'admin')
+        <li class="@if(request()->is('admin/employees*')){{ 'active' }}@endif">
+            <a href="{{ route('admin.employees.index') }}" class="d-flex align-items-center gap-2 ">
                 <div class="icon-box">
-                    <!-- <i class="fa-sharp fa-solid fa-id-card"></i> -->
+                    @if(request()->is('admin/employees*'))
+                    <i class="fa-sharp fa-solid fa-id-card"></i>
+                    @else
                     <i class="fa-sharp fa-light fa-id-card"></i>
+                    @endif
                 </div>
                 <span>Nhân viên</span>
             </a>
         </li>
+        @endif
         <li>
             <a class="d-flex align-items-center gap-2" href="{{ route('admin.auth.logout') }}">
                 <div class="icon-box">
