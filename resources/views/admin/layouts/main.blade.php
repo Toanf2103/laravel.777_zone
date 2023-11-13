@@ -55,8 +55,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- End Bootstrap JS -->
 
+    <!-- Sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- End Sweetalert2 -->
+
     <!-- Main JS -->
-    <script src="{{ url('public/admin/js/main.js') }}"></script>
+    <script src="{{ url('public/admin/js/admin.js') }}"></script>
     <!-- End main JS -->
 
     @yield('js')
