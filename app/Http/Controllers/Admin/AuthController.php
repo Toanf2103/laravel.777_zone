@@ -23,7 +23,7 @@ class AuthController extends Controller
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Tài khoản của bạn đã bị cấm sử dụng!');
         }
-        if (Auth::guard('admin')->user()->role != 'admin') {
+        if (Auth::guard('admin')->user()->role === 'customer') {
             Auth::guard('admin')->logout();
             return redirect()->back()->with('error', 'Bạn không có quyền truy cập vào trang này!');
         }

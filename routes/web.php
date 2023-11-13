@@ -44,14 +44,10 @@ Route::post('/order', [HomeController::class, 'order'])->name('site.order');
 Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checkout');
 Route::get('/testsasd', [HomeController::class, 'testsasd']);
 
-
-
-//login user
+// Login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
-
-
 
 
 // Admin
@@ -102,6 +98,15 @@ Route::group(['prefix' => 'admin'], function () {
     // Customer
     Route::group(['prefix' => 'customers'], function () {
         Route::get('/', [Admin\CustomerController::class, 'index'])->name('admin.customers.index');
-        Route::get('/{customer}/toggleStatus', [Admin\CustomerController::class, 'toggleStatus'])->name('admin.customers.toggleStatus');
+        Route::get('/{customer}/toggle-status', [Admin\CustomerController::class, 'toggleStatus'])->name('admin.customers.toggleStatus');
+    });
+
+    // Employee
+    Route::group(['prefix' => 'employees'], function () {
+        Route::get('/', [Admin\EmployeeController::class, 'index'])->name('admin.employees.index');
+        Route::get('/create', [Admin\EmployeeController::class, 'create'])->name('admin.employees.create');
+        Route::post('/', [Admin\EmployeeController::class, 'store'])->name('admin.employees.store');
+        Route::get('/{employee}/toggle-status', [Admin\EmployeeController::class, 'toggleStatus'])->name('admin.employees.toggleStatus');
+        Route::get('/{employee}/reset-password', [Admin\EmployeeController::class, 'resetPassword'])->name('admin.employees.resetPassword');
     });
 });

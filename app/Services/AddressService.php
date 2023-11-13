@@ -2,60 +2,61 @@
 
 namespace App\Services;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
-use Google\Cloud\Storage\StorageClient;
-use Illuminate\Http\UploadedFile;
 
 class AddressService
 {
-    protected $URL_PROVICE = 'https://provinces.open-api.vn/api/p/';
+    protected $URL_PROVINCE = 'https://provinces.open-api.vn/api/p/';
     protected $URL_DISTRICT = 'https://provinces.open-api.vn/api/d/';
     protected $URL_WARDS = 'https://provinces.open-api.vn/api/w/';
 
+    public function getWardsById($id, $depth = 1)
+    {
+        $url = $this->URL_WARDS . $id . '?depth=' . $depth;
+        $data = $this->callApi($url);
 
-    public function __construct()
-    {
-    }
-    public function getWardsById($id,$depth=1)
-    {
-        $url = $this->URL_WARDS.$id.'?depth='.$depth;
-        $data = $this->callApi($url);
         return $data;
     }
-    public function getProviceById($id,$depth=1)
+
+    public function getProvinceById($id, $depth = 1)
     {
-        $url = $this->URL_PROVICE.$id.'?depth='.$depth;
+        $url = $this->URL_PROVINCE . $id . '?depth=' . $depth;
         $data = $this->callApi($url);
+
         return $data;
     }
-    public function getDistrictById($id,$depth=1){
-        $url = $this->URL_DISTRICT.$id.'?depth='.$depth;
+
+    public function getDistrictById($id, $depth = 1)
+    {
+        $url = $this->URL_DISTRICT . $id . '?depth=' . $depth;
         $data = $this->callApi($url);
+
         return $data;
     }
-    public function getDetailByWardsId($id){
+
+    public function getDetailByWardId($id)
+    {
         $wards = $this->getWardsById($id);
         $district = $this->getDistrictById($wards['district_code']);
-        $provice = $this->getProviceById($district['province_code']);
-        
+        $province = $this->getProvinceById($district['province_code']);
+
         $district['wards'] = $wards;
-        $provice['districts'] = $district;
-        return $provice;
+        $province['districts'] = $district;
+
+        return $province;
     }
 
-    function callApi($url){
+    public static function callApi($url)
+    {
         try {
-          
             $response = Http::get($url);
-            if($response->status()==200){
+            if ($response->status() == 200) {
                 $data = $response->json();
                 return $data;
             }
             return false;
-            
-           
-        } catch (\Exception $e) {
-            
+        } catch (Exception $e) {
             return false;
         }
     }

@@ -31,9 +31,9 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-            @php
-                    use App\Helpers\NumberHelper;
-                    @endphp
+                @php
+                use App\Helpers\NumberHelper;
+                @endphp
                 @foreach($listProduct as $product)
                 <tr>
                     <th scope="row">
@@ -42,12 +42,12 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ NumberHelper::format($product->price) }} đ</td>
                     <td>{{ $product->quantityCart }}</td>
-                    
+
                     <td>{{ NumberHelper::format($product->price*$product->quantityCart) }} đ</td>
 
                 </tr>
                 @endforeach
-                
+
 
 
             </tbody>
@@ -72,9 +72,9 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="city" class="form-label">Tỉnh thành:</label>
-                <select name="city" id="city" class="form-select" required>
-                    <option selected disable>Choose...</option>
+                <label for="province" class="form-label">Tỉnh thành:</label>
+                <select name="province" id="province" class="form-select" required>
+                    <option value="" disabled selected>---CHỌN TỈNH THÀNH---</option>
                 </select>
                 <div class="invalid-feedback">
                     Chọn tỉnh/thành
@@ -83,7 +83,7 @@
             <div class="mb-3">
                 <label for="district" class="form-label">Quận huyện:</label>
                 <select name="district" id="district" class="form-select" required>
-                    <option disable value="">Choose...</option>
+                    <option value="" disabled selected>---CHỌN QUẬN HUYỆN---</option>
                 </select>
                 <div class="invalid-feedback">
                     Chọn Quận/Huyện
@@ -92,7 +92,7 @@
             <div class="mb-3">
                 <label for="ward" class="form-label">Phường xã:</label>
                 <select name="ward" id="ward" class="form-select" required>
-                    <option disable value="">Choose...</option>
+                    <option value="" disabled selected>---CHỌN PHƯỜNG XÃ---</option>
                 </select>
                 <div class="invalid-feedback">
                     Chọn Phường/Xã
@@ -111,10 +111,10 @@
                 </select>
             </div>
             @foreach ($listProduct as $product)
-                <input type="hidden" name="products[]" value="{{$product->id }}" />
+            <input type="hidden" name="products[]" value="{{$product->id }}" />
             @endforeach
             <div class="mb-3" id="form-select-bank">
-                
+
             </div>
             <button class="cofirm-order" type="submit">
                 Đặt hàng
@@ -127,47 +127,11 @@
 
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="{{ url('public/assets/js/address.js') }}"></script>
 <script>
-    const host = "https://provinces.open-api.vn/api/";
-    var callAPI = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data, "city");
-            });
-    }
-    callAPI('https://provinces.open-api.vn/api/?depth=1');
-    var callApiDistrict = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.districts, "district");
-            });
-    }
-    var callApiWard = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.wards, "ward");
-            });
-    }
-
-    var renderData = (array, select) => {
-        let row = ' <option disable value="">Chọn</option>';
-        array.forEach(element => {
-            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
-        });
-        document.querySelector("#" + select).innerHTML = row
-    }
-
-    $("#city").change(() => {
-        callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
-    });
-    $("#district").change(() => {
-        callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
-    });
-    $("#ward").change(() => {})
+    renderAddress()
 </script>
-
 
 <script>
     (() => {
@@ -207,7 +171,7 @@
                 <div class="invalid-feedback">
                     Chọn cổng thanh toán
                 </div>`;
-        }else{
+        } else {
             document.getElementById('form-select-bank').innerHTML = '';
         }
     });
