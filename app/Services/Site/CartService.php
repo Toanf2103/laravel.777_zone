@@ -115,4 +115,14 @@ class CartService
             return false;
         }
     }
+
+    public function getQuatityProduct($id) {
+        $cart = $this->getCart();
+        $productCheck = array_search($id, array_column($cart, 'id'));
+        if($productCheck !==false){
+            return $cart[$productCheck]['quantity'];
+        }
+        return false;
+
+    }
 }

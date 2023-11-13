@@ -10,7 +10,7 @@
 
 @section('slider')
 <div style="overflow: hidden;">
-    <x-site.slider />
+    <x-site.slider :listBanner="$banners"/>
 </div>
 @stop
 

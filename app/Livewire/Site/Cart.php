@@ -99,6 +99,8 @@ class Cart extends Component
         }
     }
 
+    
+
     public function render()
     {
 

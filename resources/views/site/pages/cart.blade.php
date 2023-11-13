@@ -8,7 +8,7 @@
 @section('title-page')
 <div class="title-page">
     <div class="title-page-content d-flex align-items-center justify-content-between">
-        <a href="#"><i class="fa-solid fa-angle-left me-3"></i>Xem thêm sản phẩm</a>
+        <a href="{{ route('site.home') }}"><i class="fa-solid fa-angle-left me-3"></i>Xem thêm sản phẩm</a>
         <a>Giỏ hàng của bạn</a>
     </div>
 </div>
@@ -21,23 +21,13 @@
 
 @section('js')
 <script>
-   
-
-    // Show alert add product to cart
-    window.addEventListener('alertDeleteProductToCart', (e) => {
-        data = e.detail[0];
-        // console.log(data);
+    function showAlertWaringCart(e) {
+        e.preventDefault();
         Swal.fire({
-            title: `Xóa thành công`,
-            text: `Xóa thành công sản phẩm ra khỏi giỏ hàng`,
-            icon: "info"
+            title: "Vui lòng chọn sản phẩm",
+            text: "Chưa có sản phẩm nào được chọn",
+            icon: "warning"
         });
-        cartHeaderElm = document.getElementById('cart-header');
-        if (data.count > 0) {
-            cartHeaderElm.innerHTML = `<span>${data.count}</span>`;
-        } else {
-            cartHeaderElm.innerHTML = "";
-        }
-    })
+    }
 </script>
 @stop

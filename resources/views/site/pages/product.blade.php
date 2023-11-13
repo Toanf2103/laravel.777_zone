@@ -14,7 +14,8 @@ use App\Helpers\NumberHelper;
 <div class="row test">
     <div class="col-6">
         <div class="left-page">
-            <x-site.slider />
+            <x-site.slider :listBanner="$banners"/>
+
         </div>
     </div>
     <div class="col-6 p-2">

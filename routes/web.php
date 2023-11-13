@@ -38,14 +38,19 @@ Route::get('/tim-kiem', [HomeController::class, 'search'])->name('site.search');
 Route::get('/cart', [HomeController::class, 'cart'])->name('site.cart');
 Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->name('site.category');
 Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
-
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
+
+Route::post('/order', [HomeController::class, 'order'])->name('site.order');
+Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checkout');
+Route::get('/testsasd', [HomeController::class, 'testsasd']);
+
 
 
 //login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
+
 
 
 

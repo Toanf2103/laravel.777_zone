@@ -18,7 +18,7 @@
 </div>
 
 <div class="row slider">
-    <x-site.slider />
+    <x-site.slider :listBanner="$banners"/>
 </div>
 
 

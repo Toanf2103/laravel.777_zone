@@ -11,9 +11,11 @@ class Slider extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $listBanner;
+    public function __construct($listBanner)
     {
         //
+        $this->listBanner = $listBanner;
     }
 
     /**

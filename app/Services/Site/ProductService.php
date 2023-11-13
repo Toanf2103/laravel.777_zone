@@ -104,6 +104,17 @@ class ProductService
         }
     }
 
+    public function getOrderProductsById($listId){
+        $cartser = new CartService();
+        $listProduct = Product::whereIn('id', $listId)
+        ->where('status', true)
+        ->get();
+        foreach($listProduct as $key=>$product){
+            $listProduct[$key]['quantityCart'] = $cartser->getQuatityProduct( $listProduct[$key]->id);
+        }
+        return $listProduct;
+    }
+
     function sortProducts($listProduct, $type)
     {
         switch ($type) {
