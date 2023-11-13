@@ -66,6 +66,8 @@ class EmployeeController extends Controller
             'avatar' => 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png',
             'username' => $request->username,
             'password' => bcrypt('Admin@123'),
+            'province_id' => $request->province,
+            'district_id' => $request->district,
             'ward_id' => $request->ward,
             'address' => $request->address,
             'role' => 'employee',

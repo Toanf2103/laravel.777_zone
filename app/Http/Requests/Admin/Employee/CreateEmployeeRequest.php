@@ -26,6 +26,8 @@ class CreateEmployeeRequest extends FormRequest
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'email' => 'nullable|email|unique:accounts,email',
             'username' => 'required|unique:accounts,username',
+            'province' => 'required',
+            'district' => 'required',
             'ward' => 'required',
             'address' => 'required',
             'status' => 'required|in:0,1',
@@ -43,7 +45,9 @@ class CreateEmployeeRequest extends FormRequest
             'email.unique' => 'Địa chỉ email đã tồn tại',
             'username.required' => 'Vui lòng nhập username',
             'username.unique' => 'Username đã tồn tại',
-            'ward.required' => 'Vui lòng chọn địa chỉ',
+            'province.required' => 'Vui lòng chọn Tỉnh thành',
+            'district.required' => 'Vui lòng chọn Quận huyện',
+            'ward.required' => 'Vui lòng chọn Phường xã',
             'address.required' => 'Vui lòng nhập địa chỉ',
             'status' => 'Vui lòng chọn trạng thái'
         ];

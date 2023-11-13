@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $table = "accounts";
 
-    protected $fillable = ['full_name', 'phone_number', 'email', 'avatar', 'username', 'password', 'ward_id', 'address', 'role', 'status', 'google_id', 'verification_token', 'last_email_sent_at'];
+    protected $fillable = ['full_name', 'phone_number', 'email', 'avatar', 'username', 'password', 'province_id', 'district_id', 'ward_id', 'address', 'role', 'status', 'google_id', 'verification_token', 'last_email_sent_at'];
 
     protected $hidden = ['password', 'verification_token', 'last_email_sent_at'];
 
