@@ -1,12 +1,15 @@
 <aside>
-    <a href="#" class="logo-aside">
+    <a href="{{ route('admin.dashboard') }}" class="logo-aside">
         <h2>777 ZONE ADMIN</h2>
     </a>
     <ul class="d-flex flex-column mt-3 gap-1">
-        <li class="mb-3 pb-3 user-panel">
-            <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center gap-2">
-                <img class="avatar-radius" src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" alt="">
-                <span>Nguyễn Admin</span>
+        <li class="mb-3 pb-3 user-panel @if(request()->is('admin/personal*')){{ 'active' }}@endif">
+            <a href="{{ route('admin.auth.personal') }}" class="d-flex align-items-center gap-2">
+                @php
+                $user = auth()->guard('admin')->user()
+                @endphp
+                <img class="avatar-radius" src="{{ $user->avatar }}" alt="">
+                <span>{{ $user->full_name }}</span>
             </a>
         </li>
         <li class="@if(request()->is('admin')){{ 'active' }}@endif">

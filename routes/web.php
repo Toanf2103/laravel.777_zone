@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', [Admin\AuthController::class, 'login'])->name('admin.auth.login');
     Route::post('/login', [Admin\AuthController::class, 'handleLogin'])->name('admin.auth.login');
     Route::get('/logout', [Admin\AuthController::class, 'logout'])->name('admin.auth.logout');
+    Route::get('/personal', [Admin\AuthController::class, 'personal'])->name('admin.auth.personal');
+    Route::put('/personal/update', [Admin\AuthController::class, 'personalUpdate'])->name('admin.auth.personal.update');
+    Route::post('/change-password', [Admin\AuthController::class, 'changePassword'])->name('admin.auth.changePassword');
 
     // Post
     Route::group(['prefix' => 'banners'], function () {

@@ -13,17 +13,23 @@ const getListDistricts = provinceId =>
 const getListWards = districtId =>
   fetchData(`${HOST}d/${districtId}?depth=2`).then(data => data.wards)
 
-const getFullByWardId = async wardId => {
-  const [ward, district, province] = await Promise.all([
+const getFullAddress = async (provinceId, districtId, wardId, type = 'array') => {
+  const [province, district, ward] = await Promise.all([
+    fetchData(`${HOST}p/${provinceId}`),
+    fetchData(`${HOST}d/${districtId}`),
     fetchData(`${HOST}w/${wardId}`),
-    fetchData(`${HOST}d/${ward.district_code}`),
-    fetchData(`${HOST}p/${district.province_code}`),
   ])
 
-  district.wards = ward
-  province.districts = district
+  delete district.wards
+  delete province.districts
+  district.ward = ward
+  province.district = district
 
-  return province
+  if (type === 'string') {
+    return `${province.district.ward.name}, ${province.district.name}, ${province.name}`
+  } else if (type === 'array') {
+    return province
+  }
 }
 
 const renderOptions = async (selectElement, data, selectedId, selectName) => {
@@ -37,10 +43,10 @@ const createOptionHTML = (item, selectedId) => {
   return `<option value="${item.code}" ${selected}>${item.name}</option>`
 }
 
-const renderAddress = async () => {
-  const provinceSelect = document.querySelector('#province')
-  const districtSelect = document.querySelector('#district')
-  const wardSelect = document.querySelector('#ward')
+const renderAddress = async (provinceSelector, districtSelector, wardSelector) => {
+  const provinceSelect = document.querySelector(provinceSelector)
+  const districtSelect = document.querySelector(districtSelector)
+  const wardSelect = document.querySelector(wardSelector)
 
   // Render provinces
   const provinces = await getListProvinces()

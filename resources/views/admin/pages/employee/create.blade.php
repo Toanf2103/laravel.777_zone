@@ -128,6 +128,6 @@
 <script src="{{ url('public/assets/js/address.js') }}"></script>
 
 <script>
-    renderAddress()
+    renderAddress('#province', '#district', '#ward')
 </script>
 @stop

@@ -42,6 +42,7 @@
                     <th>Họ và tên</th>
                     <th>Số điện thoại</th>
                     <th>Email</th>
+                    <th>Username</th>
                     <th>Địa chỉ</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
@@ -57,6 +58,7 @@
                     <td>{{ $employee->full_name }}</td>
                     <td>{{ $employee->phone_number }}</td>
                     <td>{{ $employee->email }}</td>
+                    <td>{{ $employee->username }}</td>
                     <td>{{ $employee['full_address'] }}</td>
                     <td>
                         @if($employee->status)
