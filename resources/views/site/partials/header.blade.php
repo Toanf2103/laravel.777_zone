@@ -39,13 +39,16 @@
             <!-- end cart -->
 
             <div class="login dropdown">
-                <!-- <a href="#">Đăng nhập</a> -->
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF7TvgBaM6ZAsPwj9vSPIYbrgptnGsQTKOTx92T_R1hdjIMwbwchEExCIdxVAdCAAVi74&usqp=CAU" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                @auth('user')
+                <img src="{{ auth()->guard('user')->user()->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">{{ auth()->guard('user')->user()->full_name }}</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" href="{{route('site.auth.logout')}}">logout</a></li>
                 </ul>
+                @else
+                <a data-bs-toggle="modal" data-bs-target="#login-model">Đăng nhập</a>
+                @endauth
             </div>
 
         </div>
@@ -57,3 +60,14 @@
 <div class="bg-overlay none" id="bg-overlay">
 
 </div>
+@unless(auth('user')->check())
+<div class="modal fade" id="login-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content login">
+
+            <livewire:site.login />
+
+        </div>
+    </div>
+</div>
+@endunless

@@ -1,8 +1,7 @@
 @php
 use App\Helpers\NumberHelper
 @endphp
-<form action="{{ route('site.order') }}" method="POST">
-    @csrf
+<form action="{{ route('site.order') }}" method="GET">
     <div class="cart-wrapper-page">
         <div class="cart-page-header d-flex align-items-center justify-content-between gap-3">
             <div class="cart-header-choose d-flex align-items-center">
@@ -32,7 +31,9 @@ use App\Helpers\NumberHelper
                     </a>
                     <div class="cart-info-price d-flex align-items-center gap-5">
                         <p class="text-price">{{NumberHelper::format($cartItem['product']->price*$cartItem['quantity'])}} ₫</p>
-                        <p class="delete-confirm" data-confirm="{{ $cartItem['id'] }}"><i class="fa-light fa-trash-can me-3"></i></p>
+                        <p type="button" class="delete-confirm" data-confirm="{{ $cartItem['id'] }}">
+                            <i class="fa-light fa-trash-can me-3"></i>
+                        </p>
                     </div>
 
                 </div>
@@ -40,10 +41,8 @@ use App\Helpers\NumberHelper
                     <span wire:click="decrementQuantity({{$cartItem['id']}})">-</span>
                     <input class="active" type="number" value="{{ $cartItem['quantity'] }}">
                     <span wire:click="incrementQuantity({{$cartItem['id']}})">+</span>
-
                 </div>
             </div>
-
             @endforeach
             @endif
         </div>
@@ -64,7 +63,7 @@ use App\Helpers\NumberHelper
     document.addEventListener('livewire:initialized', function(e) {
 
         component = @this;
-        
+
         const btnCofirmDeleteAll = document.getElementById('delete-confirm');
         btnCofirmDeleteAll.addEventListener('click', (e) => {
             if (btnCofirmDeleteAll.getAttribute('data-confirm') > 0) {
@@ -92,7 +91,7 @@ use App\Helpers\NumberHelper
             }
 
         });
-       
+
         const deleteProducts = document.querySelectorAll('.delete-confirm')
 
         deleteProducts.forEach(function(element) {

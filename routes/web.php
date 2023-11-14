@@ -5,8 +5,9 @@ use App\Http\Controllers\Site\HomeController as HomeController;
 use App\Http\Controllers\Site\AuthController as AuthController;
 
 use App\Http\Controllers\Admin;
-
+use App\Http\Controllers\Site\GoogleController;
 use Livewire\Livewire;
+use App\Models\User;
 
 
 
@@ -21,6 +22,11 @@ use Livewire\Livewire;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+// Route::get('/Test-ac', function () {
+//     User::create(['id'=>'nv1','username' => 'nv','password'=>bcrypt('nv'),'role' => 'nv','name' =>'nv']);
+// });
 
 //Site
 Livewire::setScriptRoute(function ($handle) {
@@ -40,7 +46,7 @@ Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->nam
 Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
-Route::post('/order', [HomeController::class, 'order'])->name('site.order');
+Route::get('/order', [HomeController::class, 'order'])->name('site.order');
 Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checkout');
 Route::get('/testsasd', [HomeController::class, 'testsasd']);
 
@@ -48,6 +54,11 @@ Route::get('/testsasd', [HomeController::class, 'testsasd']);
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
+
+// Google
+Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('site.auth.redirectToGoogle');
+Route::get('/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 
 
 // Admin

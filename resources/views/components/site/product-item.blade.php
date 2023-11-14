@@ -5,7 +5,7 @@ use App\Helpers\NumberHelper;
     @if(count($product->productImages)==0)
         <img src="https://fptshop.com.vn/Uploads/Originals/2023/9/9/638298600173027154_dell-inspiron-15-n3530-bac-1.jpg" alt="">
     @else
-        <img src="{{ $product->productImages->get(0)->link }}" alt="">
+        <img src="{{ $product->productImages->get(0)->link }} " alt="">
     @endif
     <h3 class="prodcut-item-name mt-5 mb-3">{{ $product->name }}</h3>
     <span class="prodcut-item-price mb-3">

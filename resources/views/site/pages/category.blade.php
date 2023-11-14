@@ -40,7 +40,6 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li class="{{ request('order') == 'date' ? 'active' : '' }}" >
                         <a href="{{ request()->fullUrlWithQuery(['order' => 'date']) }}"><i class="fa-regular fa-check me-3"></i><span>Mới ra mắt</span></a>
-                        
                     </li>
                     <!-- <li >
                     <i class="fa-regular fa-check me-3"></i>Bán chạy
@@ -84,6 +83,9 @@
     const liActiveElm = document.getElementById('ft-sort').querySelector('li.active span');
     const textFtSortt = document.getElementById('text-ft-sort');
     // console.log(liActiveElm);
-    textFtSortt.innerHTML = 'Xếp theo: ' + liActiveElm.innerHTML;
+    if(liActiveElm){
+
+        textFtSortt.innerHTML = 'Xếp theo: ' + liActiveElm.innerHTML;
+    }
 </script>
 @stop

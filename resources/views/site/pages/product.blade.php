@@ -41,6 +41,7 @@ use App\Helpers\NumberHelper;
                         <span>Mua ngay</span>
                     </button>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -62,6 +63,8 @@ $product->description = str_replace('data-src="','src="',$product->description)
                 </button>
             </div>
         </div>
+
+
         <div class="comment-product-wrapper item-content-more">
             <h2>Đánh giá sản phẩm</h2>
             <div class="comment-product-content">
