@@ -86,3 +86,21 @@
     height: unset;
     width: unset;
 }
+
+.pagination .page-item .page-link {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: none;
+}
+
+.page-item.active .page-link {
+    background-color: rgb(238, 77, 45);
+    color: white;
+}
+
+.pagination .page-item:not(.active) .page-link:hover {
+    background-color: #ddd;
+}
