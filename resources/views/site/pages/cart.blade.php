@@ -18,7 +18,6 @@
 <livewire:site.cart />
 @stop
 
-
 @section('js')
 <script>
     function showAlertWaringCart(e) {

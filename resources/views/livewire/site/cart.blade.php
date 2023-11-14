@@ -1,7 +1,7 @@
 @php
 use App\Helpers\NumberHelper
 @endphp
-<form action="{{ route('site.order') }}" method="GET">
+<form action="{{ route('site.order') }}" method="GET" id="cart-cpn">
     <div class="cart-wrapper-page">
         <div class="cart-page-header d-flex align-items-center justify-content-between gap-3">
             <div class="cart-header-choose d-flex align-items-center">
@@ -58,11 +58,12 @@ use App\Helpers\NumberHelper
             </div>
         </div>
     </div>
-</form>
-<script>
+    <script>
+       
+    
     document.addEventListener('livewire:initialized', function(e) {
-
-        component = @this;
+        
+        component = window.Livewire.find(document.getElementById('cart-cpn').getAttribute('wire:id'));
 
         const btnCofirmDeleteAll = document.getElementById('delete-confirm');
         btnCofirmDeleteAll.addEventListener('click', (e) => {
@@ -125,4 +126,7 @@ use App\Helpers\NumberHelper
         });
 
     });
-</script>
+    </script>;
+    
+
+</form>
