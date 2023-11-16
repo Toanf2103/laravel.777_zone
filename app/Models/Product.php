@@ -35,11 +35,11 @@ class Product extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'comment_id', 'id');
+        return $this->hasMany(Comment::class, 'product_id', 'id');
     }
 
     public function orderDetails()
     {
-        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+        return $this->hasMany(OrderDetail::class, 'product_id', 'id');
     }
 }

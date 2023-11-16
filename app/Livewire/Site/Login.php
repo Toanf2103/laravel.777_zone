@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Site;
+
 use Livewire\Attributes\Rule;
 use App\Services\Site\AuthService;
 use Livewire\Component;
@@ -60,17 +61,17 @@ class Login extends Component
     public function register()
     {
         // dd($this->usernameRegister);
-        if ($this->usernameRegister == null || $this->nameRegister==null || $this->passwordRegister == null || $this->confirmPasswordRegister == null) {
+        if ($this->usernameRegister == null || $this->nameRegister == null || $this->passwordRegister == null || $this->confirmPasswordRegister == null) {
             $this->showAlret("Vui lòng nhập đầy đủ thông tin", 'Nhập đầy đủ thông tin', 'error');
-        }else if($this->passwordRegister !== $this->confirmPasswordRegister){
+        } else if ($this->passwordRegister !== $this->confirmPasswordRegister) {
             $this->showAlret("Mật khẩu xác nhận không chính xác", 'Mật khẩu xác nhận không chính xác', 'error');
-        }else{
+        } else {
             $authSer = new AuthService();
-            $rs = $authSer->register($this->usernameRegister,$this->passwordRegister,$this->nameRegister);
-            if($rs['status'] == 'error'){
+            $rs = $authSer->register($this->usernameRegister, $this->passwordRegister, $this->nameRegister);
+            if ($rs['status'] == 'error') {
                 $this->showAlret('Có lỗi', $rs['message'], 'error');
-            }else{
-                $this->dispatch('reloadPage', ['timeDelay' => 2,'message'=>'Tạo tài khoản thành công!']);
+            } else {
+                $this->dispatch('reloadPage', ['timeDelay' => 2, 'message' => 'Tạo tài khoản thành công!']);
             }
         }
     }

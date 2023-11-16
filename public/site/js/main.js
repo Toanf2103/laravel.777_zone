@@ -43,7 +43,6 @@ function hiddenSearchForm() {
 // Show alert login
 window.addEventListener('alertLogin', e => {
   data = e.detail[0]
-  // console.log(data);
   Swal.fire({
     title: data.title,
     text: data.mess,
@@ -59,7 +58,7 @@ window.addEventListener('reloadPage', e => {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: data.timeDelay*1000 ?? 1000,
+      timer: data.timeDelay * 1000 ?? 1000,
       timerProgressBar: true,
       didOpen: toast => {
         toast.onmouseenter = Swal.stopTimer
@@ -70,50 +69,49 @@ window.addEventListener('reloadPage', e => {
       icon: 'success',
       title: data.message ?? 'Đăng nhập thành công!',
     })
-    
   }
   setTimeout(() => {
     location.reload()
-  }, data.timeDelay*1000 ?? 1000)
+  }, data.timeDelay * 1000 ?? 1000)
 })
 
 // Auth google
 function receiveDataFromGoogleLoginWindow(data) {
-  timer = 1500;
+  timer = 1500
   if (data.status === 'success') {
     const Toast = Swal.mixin({
       toast: true,
-      position: "top-end",
+      position: 'top-end',
       showConfirmButton: false,
       timer: timer,
       timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      }
-    });
+      didOpen: toast => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
     Toast.fire({
-      icon: "success",
-      title: data.message
-    });
+      icon: 'success',
+      title: data.message,
+    })
     setTimeout(() => {
       location.reload()
     }, timer)
-  }else{
+  } else {
     const Toast = Swal.mixin({
       toast: true,
-      position: "top-end",
+      position: 'top-end',
       showConfirmButton: false,
       timer: timer,
       timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      }
-    });
+      didOpen: toast => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
     Toast.fire({
-      icon: "error",
-      title: data.message
-    });
+      icon: 'error',
+      title: data.message,
+    })
   }
 }
