@@ -40,6 +40,12 @@ class ProductComment extends Component
         $this->replyingId = $commentId;
     }
 
+    public function loadDataComments()
+    {
+        $commentService = new CommentService();
+        $this->comments = $commentService->getAll($this->product->id);
+    }
+
     public function sendComment(CommentService $commentService)
     {
         if (!$this->userId) {
@@ -49,7 +55,7 @@ class ProductComment extends Component
 
         if ($this->commentContent) {
             $commentService->create($this->product->id, $this->userId, $this->commentContent, null);
-            $this->comments = $commentService->getAll($this->product->id);
+            $this->loadDataComments();
         }
 
         $this->commentContent = '';
@@ -64,7 +70,7 @@ class ProductComment extends Component
 
         if ($this->commentReplyContent) {
             $commentService->create($this->product->id, $this->userId, $this->commentReplyContent, $commentId);
-            $this->comments = $commentService->getAll($this->product->id);
+            $this->loadDataComments();
         }
 
         $this->commentReplyContent = '';
@@ -85,8 +91,8 @@ class ProductComment extends Component
             return;
         }
 
-        $commentService->delete($commentId);
-        $this->comments = $commentService->getAll($this->product->id);
+        $commentService->delete($commentId, $this->product->id);
+        $this->loadDataComments();
     }
 
     public function render()

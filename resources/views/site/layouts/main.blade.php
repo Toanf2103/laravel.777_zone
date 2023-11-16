@@ -51,6 +51,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- End bootstrap JS -->
 
+    <!-- Pusher -->
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <!-- End pusher -->
+
     <!-- main JS -->
     <script src="{{ url('public/site/js/main.js') }}"></script>
     <!-- End main JS -->

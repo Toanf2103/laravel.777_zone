@@ -93,20 +93,4 @@ $product->description = str_replace('data-src="','src="',$product->description)
         }
     })
 </script>
-
-<!-- Pusher -->
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-<script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('390fbd50c1be84dab3ee', {
-        cluster: 'ap1'
-    });
-
-    var channel = pusher.subscribe('product-{{ $product->id }}');
-    channel.bind('has-new-comment', function(data) {
-        alert(JSON.stringify(data));
-    });
-</script>
 @stop

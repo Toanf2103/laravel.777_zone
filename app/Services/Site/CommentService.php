@@ -2,6 +2,7 @@
 
 namespace App\Services\Site;
 
+use App\Events\Site\PostCommentEvent;
 use App\Models\Comment;
 
 class CommentService
@@ -19,13 +20,17 @@ class CommentService
         Comment::create([
             'user_id' => $userId,
             'product_id' => $productId,
-            'content' => $content,
+            'content' => str()->ucfirst($content),
             'reply_id' => $replyId
         ]);
+
+        event(new PostCommentEvent($productId));
     }
 
-    public function delete($commentId)
+    public function delete($commentId, $productId)
     {
         Comment::find($commentId)->delete();
+
+        event(new PostCommentEvent($productId));
     }
 }

@@ -74,24 +74,40 @@ use App\Helpers\DateHelper
     </form>
 </div>
 
+@section('js')
 <script>
-    document.addEventListener('showConfirmDeleteComment', (e) => {
+    document.addEventListener('livewire:initialized', function(e) {
         const component = window.Livewire.find(document.querySelector('.comment-product-wrapper').getAttribute('wire:id'));
-        const commentId = e.detail[0].commentId
 
-        Swal.fire({
-            title: "Bạn chắc chứ",
-            text: "Bạn có chắc muốn xóa bình luận này không?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ya sure, chắc chắn rồi",
-            cancelButtonText: "Không bé ơi"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                component.deleteComment(commentId)
-            }
+        // Event confirm delete
+        document.addEventListener('showConfirmDeleteComment', (e) => {
+            const commentId = e.detail[0].commentId
+
+            Swal.fire({
+                title: "Bạn chắc chứ",
+                text: "Bạn có chắc muốn xóa bình luận này không?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya sure, chắc chắn rồi",
+                cancelButtonText: "Không bé ơi"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    component.deleteComment(commentId)
+                }
+            });
+        })
+
+        // Event pusher
+        Pusher.logToConsole = false;
+        var pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
+            cluster: 'ap1'
+        });
+        var channel = pusher.subscribe('product-{{ $product->id }}');
+        channel.bind('comment-update', function(data) {
+            component.loadDataComments()
         });
     })
 </script>
+@stop
