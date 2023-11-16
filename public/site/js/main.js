@@ -39,3 +39,81 @@ function hiddenSearchForm() {
   headerFormElm.classList.add('none')
   bgOverlay.classList.add('none')
 }
+
+// Show alert login
+window.addEventListener('alertLogin', e => {
+  data = e.detail[0]
+  // console.log(data);
+  Swal.fire({
+    title: data.title,
+    text: data.mess,
+    icon: data.icon,
+  })
+})
+
+// reload page
+window.addEventListener('reloadPage', e => {
+  data = e.detail[0]
+  if (data.timeDelay) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: data.timeDelay*1000 ?? 1000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.onmouseenter = Swal.stopTimer
+        toast.onmouseleave = Swal.resumeTimer
+      },
+    })
+    Toast.fire({
+      icon: 'success',
+      title: data.message ?? 'Đăng nhập thành công!',
+    })
+    
+  }
+  setTimeout(() => {
+    location.reload()
+  }, data.timeDelay*1000 ?? 1000)
+})
+
+// Auth google
+function receiveDataFromGoogleLoginWindow(data) {
+  timer = 1500;
+  if (data.status === 'success') {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: timer,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: data.message
+    });
+    setTimeout(() => {
+      location.reload()
+    }, timer)
+  }else{
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: timer,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "error",
+      title: data.message
+    });
+  }
+}

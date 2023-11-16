@@ -16,6 +16,8 @@
 </div>
 @stop
 
+
+
 @section('content')
 <div class="wrapper-order" style="color:#000;background-color:transparent;">
     <div class="desc-order">
@@ -59,7 +61,7 @@
             @csrf
             <div class="mb-3 ">
                 <label for="name-user" class="form-label">Họ và tên: </label>
-                <input required name="username" type="text" class="form-control" id="name-user" placeholder="Nhập họ tên...">
+                <input required value="{{ old('username') }}" name="username" type="text" class="form-control" id="name-user" placeholder="Nhập họ tên...">
                 <div class="invalid-feedback">
                     Nhập họ tên
                 </div>
@@ -73,7 +75,7 @@
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">Tỉnh thành:</label>
-                <select name="province" id="province" class="form-select" required>
+                <select name="provinced" id="province" class="form-select" required>
                     <option value="" disabled selected>---CHỌN TỈNH THÀNH---</option>
                 </select>
                 <div class="invalid-feedback">
@@ -122,6 +124,16 @@
         </form>
     </div>
 </div>
+@if(session('error'))
+<h1>{{ session('error') }}</h1>
+<script>
+    Swal.fire({
+        title: "Có lỗi?",
+        text: "{{ session('error') }}",
+        icon: "error"
+    });
+</script>
+@endif
 
 @stop
 
@@ -177,3 +189,4 @@
     });
 </script>
 @stop
+

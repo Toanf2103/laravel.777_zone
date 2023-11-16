@@ -14,6 +14,10 @@ class Cart extends Component
     public $checkList = [];
     public $checkAll = false;
 
+    public function test(){
+        dd(1);
+    }
+
     public function incrementQuantity($id)
     {
         $cartSer = new CartService();

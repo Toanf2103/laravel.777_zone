@@ -10,8 +10,10 @@ use App\Models\Category;
 use App\Services\AddressService;
 use App\Services\Site\CartService;
 use App\Services\Site\ProductService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -29,11 +31,11 @@ class HomeController extends Controller
 
         return view('site.pages.home', compact('banners'));
     }
-    public function testsasd(){
-        $add = new AddressService();
-        $data = $add->getDetailByWardsId(2440);
-        dd($data);
-    }
+    // public function testsasd(){
+    //     $add = new AddressService();
+    //     $data = $add->getDetailByWardsId(2440);
+    //     dd($data);
+    // }
 
     public function search(Request $request)
     {
@@ -82,7 +84,7 @@ class HomeController extends Controller
             ->getProductByCategoryBrandPages($brandCategory, $quantityProduct, $request->get('order') ?? null);
         $banners = $category->banners->where('status', true)->pluck('image')->toArray();
 
-        return view('site.pages.category', compact('category', 'brand', 'listProduct','banners'));
+        return view('site.pages.category', compact('category', 'brand', 'listProduct', 'banners'));
     }
 
     function sortProducts($listProduct, $type)
@@ -118,11 +120,35 @@ class HomeController extends Controller
         // foreach($listProduct as $key=>$product){
         //     $listProduct[$key]['ee'] = ;
         // }
-        
-        return view('site.pages.order',compact('listProduct'));
+
+        return view('site.pages.order', compact('listProduct'));
     }
 
-    public function checkout(Request $request){
+    public function checkout(Request $request)
+    {
+
+        $validator =  Validator::make($request->all(),[
+            'username' => 'required',
+            'phone-number' => 'required',
+            'province' => 'required',
+            'district' => 'required',
+            'ward' => 'required',
+            'type-pay' => 'required|in:momo,vnay,cod',
+            'products' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            // Handle validation failure
+            // dd(1);
+            return redirect()->back()->with('error','Có lỗi !')->withInput();
+        }
+        // dd(1);
+        
+
+
+
+
         $rq = $request->all();
         dd($rq);
         return view('site.pages.order');
