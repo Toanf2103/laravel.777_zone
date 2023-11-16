@@ -38,9 +38,9 @@ class ProductService
             if($status !== null){
                 $prod = $prod->where('status',$status);
             }
-            return $prod;
+            return $prod->first();
         }catch (Exception $e){
-            return abort(404);
+            return false;
         }
     }
 
@@ -128,4 +128,6 @@ class ProductService
                 return $listProduct;
         }
     }
+
+    
 }

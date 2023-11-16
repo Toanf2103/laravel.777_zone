@@ -48,7 +48,10 @@ Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('
 
 Route::get('/order', [HomeController::class, 'order'])->name('site.order');
 Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checkout');
-Route::get('/testsasd', [HomeController::class, 'testsasd']);
+
+
+//checkout order
+Route::get('/vnpayCheckoutDone', [HomeController::class, 'vnpayCheckoutDone'])->name('site.vnpay.checkoutDone');
 
 // Login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');

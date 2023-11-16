@@ -46,6 +46,7 @@
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                     <li><a class="dropdown-item" href="{{route('site.auth.logout')}}">logout</a></li>
                 </ul>
+                
                 @else
                 <a data-bs-toggle="modal" data-bs-target="#login-model">Đăng nhập</a>
                 @endauth

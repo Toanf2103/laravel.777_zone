@@ -75,7 +75,7 @@
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">Tỉnh thành:</label>
-                <select name="provinced" id="province" class="form-select" required>
+                <select name="province" id="province" class="form-select" required>
                     <option value="" disabled selected>---CHỌN TỈNH THÀNH---</option>
                 </select>
                 <div class="invalid-feedback">
@@ -166,27 +166,6 @@
     })()
 </script>
 
-<script>
-    const typepayElm = document.getElementById('type-pay');
-    typepayElm.addEventListener('change', (e) => {
-        const typepay = typepayElm.value;
-        if (typepay === 'vnpay') {
-            document.getElementById('form-select-bank').innerHTML = `<label for="type-pay" class="form-label">Chọn ngân hàng</label>
-                <select name="bankcode" id="type-pay" class="form-select" required >
-                    <option selected disabled value="">Chọn</option>
-                    <option value="NCB">Ngan hang NCB</option>
-                    <option value="VISA">VISA</option>
-                    <option value="MASTERCARD">MASTERCARD</option>
-                    <option value="JCB">JCB</option>
-                    <option value="EXIMBANK">Ngan hang EximBank</option>
-                </select>
-                <div class="invalid-feedback">
-                    Chọn cổng thanh toán
-                </div>`;
-        } else {
-            document.getElementById('form-select-bank').innerHTML = '';
-        }
-    });
-</script>
+
 @stop
 

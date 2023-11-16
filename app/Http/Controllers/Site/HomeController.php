@@ -7,20 +7,26 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\BrandCategory;
 use App\Models\Category;
-use App\Services\AddressService;
 use App\Services\Site\CartService;
 use App\Services\Site\ProductService;
-use Exception;
+use App\Services\Site\VnpayService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
     protected $prodSer;
-    public function __construct(ProductService $prodSer)
+    protected $cartService;
+
+    public function __construct(ProductService $prodSer,CartService $cartService)
     {
+        $this->middleware('checkUser');
+
         $this->prodSer = $prodSer;
+        $this->cartService = $cartService;
+
     }
 
     public function home()
@@ -115,6 +121,7 @@ class HomeController extends Controller
 
     public function order(Request $request)
     {
+        
         $rq = $request->all();
         $listProduct = $this->prodSer->getOrderProductsById($rq['prod']);
         // foreach($listProduct as $key=>$product){
@@ -126,14 +133,15 @@ class HomeController extends Controller
 
     public function checkout(Request $request)
     {
-
+        // $t = $request->all();
+        // dd($t);
         $validator =  Validator::make($request->all(),[
             'username' => 'required',
             'phone-number' => 'required',
             'province' => 'required',
             'district' => 'required',
             'ward' => 'required',
-            'type-pay' => 'required|in:momo,vnay,cod',
+            'type-pay' => 'required|in:momo,vnpay,cod',
             'products' => 'required',
 
         ]);
@@ -143,14 +151,36 @@ class HomeController extends Controller
             // dd(1);
             return redirect()->back()->with('error','Có lỗi !')->withInput();
         }
-        // dd(1);
         
+        $listProduct =[];
+        foreach($request['products'] as $product) {
 
+            $prod = $this->prodSer->findProductById($product,true);
+            $quantityCart = $this->cartService->getQuatityProduct($product);
+            if($prod === false || $quantityCart==false || $prod->quantity < $quantityCart ){
+                return redirect()->route('site.cart');
+            }
+            $prod['quantityCart'] = $quantityCart;
+            $listProduct[] = $prod;
+        }
+        switch($request['type-pay']){
+            case 'momo':
+                return;
+            case 'vnpay':
+                $vnpaySer = new VnpayService();
+                $urlCheckout = $vnpaySer->handleCheckout($request->all(),$listProduct);
+                if($urlCheckout === false){
+                    return redirect()->back()->with('error','Có lỗi !')->withInput();
+                }
+                return redirect()->to($urlCheckout);
+            case 'cod':
+                return;
+            default :
+                return redirect()->route('cart');
+        }
 
-
-
-        $rq = $request->all();
-        dd($rq);
-        return view('site.pages.order');
+    }
+    public function vnpayCheckoutDone(Request $request){
+        dd($request->all());
     }
 }
