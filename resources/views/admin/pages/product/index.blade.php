@@ -103,9 +103,7 @@ use App\Helpers\NumberHelper;
                 <tr data-url="{{ route('admin.products.edit', ['product' => $product->id]) }}">
                     <th>{{ $product->id }}</th>
                     <td>
-                        @if($product->productImages->count() > 0)
-                        <img src="{{ $product->productImages->get(0)->link }}" alt="" class="product-image">
-                        @endif
+                        <img src="{{ $product->productImages->get(0)->link ?? '' }}" alt="" class="product-image">
                     </td>
                     <td class="product-name">{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>

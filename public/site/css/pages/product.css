@@ -1,225 +1,237 @@
 .left-page,
 .right-page {
-    padding: 2rem;
-    /* background-color: red; */
-    min-height: 50vh;
+  padding: 2rem;
+  /* background-color: red; */
+  min-height: 50vh;
+}
+
+.left-page {
+  position: sticky;
+  top: 90px;
 }
 
 .slider .wrapper-icon.right-btn {
-    right: -4% !important;
+  right: -4% !important;
 }
 
-.carousel-item img {
-    min-height: 70vh;
+.carousel-inner {
+  border-radius: 5px;
+  padding: 2rem;
+  background-color: #fff;
 }
 
 .product-name {
-    font-size: 4.5rem;
-    font-weight: 600;
+  font-size: 4.5rem;
+  font-weight: 600;
 }
 
 .product-price {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 .product-specs {
-    background-color: #2f3033;
+  background-color: #2f3033;
 }
 
 th,
 td {
-    padding: 1.5rem 2rem;
-    font-size: 1.4rem;
+  padding: 1.5rem 2rem;
+  font-size: 1.4rem;
 }
 
-tr+tr {
-    border-top: 1px solid #414141;
+tr + tr {
+  border-top: 1px solid #414141;
 }
 
 tr td:first-child {
-    text-wrap: nowrap;
-
+  text-wrap: nowrap;
 }
 
 .action {
-    padding: 2rem 3rem;
-    border-radius: 1.2rem;
+  padding: 2rem 3rem;
+  border-radius: 1.2rem;
 }
 
 .action span {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .content-more {
-    background-color: #d0d6db;
+  background-color: #d0d6db;
 }
 
 .content-more .item-content-more {
-    max-width: 1200px;
-    min-width: 1024px;
-    /* height: 100%; */
-    margin: 0rem auto;
-    color: #000;
-    border-radius: 0.4rem;
-    background-color: #fff;
-
+  max-width: 1200px;
+  min-width: 1024px;
+  /* height: 100%; */
+  margin: 0rem auto;
+  color: #000;
+  border-radius: 0.4rem;
+  background-color: #fff;
 }
 
 .content-more-wrapper {
-
-    margin-bottom: 0;
-    padding: 3rem 0;
-
+  margin-bottom: 0;
+  padding: 3rem 0;
 }
 
 .content-more .descr {
-    padding: 2rem;
+  padding: 2rem;
 
-    overflow-y: hidden;
-    height: 50vh;
-    overflow-x: hidden;
-    position: relative;
-    margin-bottom: 2rem;
+  overflow-y: hidden;
+  height: 50vh;
+  overflow-x: hidden;
+  position: relative;
+  margin-bottom: 2rem;
 }
 
 .content-more .descr .view-more {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 2rem;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), color-stop(100%, #fff), to(rgba(0, 0, 0, 0)));
-    background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: -1rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 2rem;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(255, 255, 255, 0)),
+    color-stop(100%, #fff),
+    to(rgba(0, 0, 0, 0))
+  );
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -1rem;
 }
 
 .content-more .descr img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 .content-more .descr .view-more button {
-    padding: 1rem;
-    border-radius: 0.4rem;
-    border: solid 1px #7987a1;
-    transition: all ease-in-out 0.1s;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  border: solid 1px #7987a1;
+  transition: all ease-in-out 0.1s;
 }
 
 .content-more .descr .view-more button:hover {
-    filter: brightness(80%);
+  filter: brightness(80%);
 }
 
 .content-more .descr.active {
-    height: fit-content;
+  height: fit-content;
 }
 
 .content-more .descr.active .view-more {
-    display: none;
+  display: none;
 }
 
 .comment-product-wrapper {
-    background-color: #fff;
-    border-radius: 0.4rem;
-    padding-bottom: 2rem;
+  background-color: #fff;
+  border-radius: 0.4rem;
+  padding-bottom: 2rem;
 }
 
 .content-more-wrapper h2 {
-    padding: 2rem;
-    border-bottom: 1px solid #edeeef;
+  padding: 2rem;
+  border-bottom: 1px solid #edeeef;
 }
 
 .comment-product-content {
-    padding: 2rem;
+  padding: 1.5rem 2rem;
 }
 
 .comment-product-content p {
-    margin: 0;
+  margin: 0;
 }
 
 .comment-item .avatar img {
-    aspect-ratio: 1/1;
-    width: 5rem;
-    border-radius: 999px;
+  aspect-ratio: 1/1;
+  width: 4rem;
+  border-radius: 50%;
+  background-color: #000;
 }
 
 .comment-item-content .comment-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .comment-item-content .comment-time {
-    color: #939ca3;
-    font-size: 1.5rem;
+  color: #939ca3;
+  font-size: 1.5rem;
 }
 
 .comment-item-content .comment-time i {
-    font-size: 0.5rem;
+  font-size: 0.5rem;
 }
 
-.comment-item-content .comment-time p {
-    color: #0664f9;
-    transition: all linear 0.3s;
-    cursor: pointer;
-    border-bottom: 1px solid transparent;
-
+.comment-item-content .comment-time button {
+  color: #0664f9;
+  transition: all linear 0.3s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid transparent;
 }
 
-.comment-item-content .comment-time p:hover {
-    border-bottom: 1px solid #0664f9;
+.comment-item-content .comment-time button:hover {
+  border-bottom: 1px solid #0664f9;
 }
 
 .comment-replay {
-    margin-left: 5rem;
+  margin-left: 5rem;
 }
 
 .comment-replay .comment-item-content {
-    border: 1px solid #e1e4e6;
-    border-radius: 0.8rem;
-    background: #f8f9fa;
-    padding: 1rem;
+  border: 1px solid #e1e4e6;
+  border-radius: 0.8rem;
+  background: #f8f9fa;
+  padding: 1rem;
 }
 
 .content-more-wrapper .add-comment {
-    padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .form-comment {
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .form-comment textarea {
-    width: 100%;
-    padding: 0.3rem 2rem;
-    overflow-y: scroll;
-    word-wrap: break-word;
-    height: 10vh;
-    font-size: 1.7rem;
-
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  word-wrap: break-word;
+  height: 10vh;
+  font-size: 1.7rem;
 }
 
 .title-comment {
-    margin-left: 2rem;
-    font-size: 3rem;
-    font-weight: bold;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 3rem;
+  font-weight: bold;
 }
 
 .form-comment button {
-    padding: 0.5rem 2rem;
-    font-size: 1.8rem;
-    border-radius: 0.4rem;
-    color: #fff;
-    background-color: #cb1c22;
-    outline: none;
-    border: none;
+  padding: 0.5rem 2rem;
+  font-size: 1.8rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  background-color: rgb(238, 77, 45);
+  outline: none;
+  border: none;
 }
 
 .form-comment button:hover {
-    filter: brightness(90%);
-    outline: none;
+  filter: brightness(90%);
+  outline: none;
 }
 
 .form-comment.send-replay {
-    margin-left: 8rem;
-
+  margin-left: 3rem;
+  padding-right: 0;
 }

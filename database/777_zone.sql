@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 13, 2023 lúc 01:57 PM
+-- Thời gian đã tạo: Th10 14, 2023 lúc 05:48 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -53,8 +53,8 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `full_name`, `phone_number`, `email`, `avatar`, `username`, `password`, `province_id`, `district_id`, `ward_id`, `address`, `role`, `status`, `google_id`, `verification_token`, `last_email_sent_at`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyễn Admin', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/1.png', 'admin', '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'admin', 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Nguyễn Nhân viên', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png', 'nhanvien', '$2y$12$KK6Qn.YhFXhgcbcdoMBiXOActOiVU4wngFI/2PoSqbADS/M2rahBe', 48, 492, 20227, 'nhà', 'employee', 1, NULL, NULL, NULL, '2023-05-14 12:07:46', '2023-11-13 05:25:01'),
+(1, 'Nguyễn Admin', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/admin-default.png', 'admin', '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'admin', 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Nguyễn Nhân Viên', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png', 'nhanvien', '$2y$12$XxD1RIoVu2Ut1t4ruyFjhul.gWPgggByIr4SSVOI9cavj7zrYDshy', 48, 492, 20227, 'nhà', 'employee', 1, NULL, NULL, NULL, '2023-05-14 12:07:46', '2023-11-14 01:15:25'),
 (3, 'Đặng Văn Hoài Tú', '0123456789', 'dangtu9520@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/3.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2021-12-29 15:21:25', '2022-01-02 00:38:25'),
 (4, 'Nguyễn Đắc Toàn', '0123456789', 'toan@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/4.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2022-01-14 14:31:17', '2022-01-14 14:45:38'),
 (5, 'Lưu Văn Tùng', '0123456789', 'tung@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/5.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-05-22 08:59:04', '2023-05-22 08:59:04'),
