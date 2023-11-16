@@ -43,7 +43,7 @@
                 <tr data-url="{{ route('admin.banners.edit', ['banner' => $banner->id]) }}">
                     <th>{{ $banner->id }}</th>
                     <td>
-                        <img src="{{ $banner->image }}" alt="" class="banner-image">
+                        <img src="{{ $banner->image ?? '' }}" alt="" class="banner-image">
                     </td>
                     <td>
                         {{ $banner->category_id ? "Danh mục / ".$banner->category->name : 'Trang chủ' }}

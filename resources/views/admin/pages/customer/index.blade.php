@@ -45,7 +45,7 @@
                 <tr>
                     <th>{{ $customer->id }}</th>
                     <td>
-                        <img src="{{ $customer->avatar ? $customer->avatar : 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="" class="customer-avatar">
+                        <img src="{{ $customer->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="" class="customer-avatar">
                     </td>
                     <td>{{ $customer->full_name }}</td>
                     <td>{{ $customer->phone_number }}</td>

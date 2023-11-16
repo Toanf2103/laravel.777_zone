@@ -43,7 +43,7 @@
                 <tr data-url="{{ route('admin.brands.edit', ['brand' => $brand->id]) }}">
                     <th>{{ $brand->id }}</th>
                     <td>
-                        <img src="{{ $brand->avatar }}" alt="" class="brand-image">
+                        <img src="{{ $brand->avatar ?? '' }}" alt="" class="brand-image">
                     </td>
                     <td>{{ $brand->name }}</td>
                     <td>{{ $brand->products->count() }}</td>
