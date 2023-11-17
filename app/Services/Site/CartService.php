@@ -53,6 +53,7 @@ class CartService
 
     public function deleteListProduct($listId)
     {
+        // dd($listId);
         $cart = $this->getCart();
         foreach ($listId as $id) {
             $productCheck = array_search($id, array_column($cart, 'id'));
@@ -62,10 +63,10 @@ class CartService
                 $cart = array_values($cart);
             }
         }
+        // dd($cart);
         Session::put('cart', $cart);
         Session::save();
         return true;
-
     }
 
     public function destroyCart()
@@ -98,31 +99,30 @@ class CartService
 
     public function checkCart($cart)
     {
-        $check = false;
         foreach ($cart as $key => $item) {
-            if (Product::where('id', $item['id'])->where('status', false)->first()) {
-                $check = true;
+            $product = Product::where('id', $item['id'])->first();
+            if ($product->status == false) {
                 unset($cart[$key]);
             }
+            if ($product->quantity < $cart[$key]['quantity']) {
+
+                $cart[$key]['quantity'] = $product->quantity;
+            }
         }
-        // Làm mới chỉ mục mảng sau khi loại bỏ phần tử
-        if ($check === false) {
-            return true;
-        } else {
-            $cart = array_values($cart);
-            Session::put('cart', $cart);
-            Session::save();
-            return false;
-        }
+
+        $cart = array_values($cart);
+        Session::put('cart', $cart);
+        Session::save();
+        return false;
     }
 
-    public function getQuatityProduct($id) {
+    public function getQuatityProduct($id)
+    {
         $cart = $this->getCart();
         $productCheck = array_search($id, array_column($cart, 'id'));
-        if($productCheck !==false){
+        if ($productCheck !== false) {
             return $cart[$productCheck]['quantity'];
         }
         return false;
-
     }
 }

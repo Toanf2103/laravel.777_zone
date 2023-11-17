@@ -8,6 +8,8 @@ use App\Models\Brand;
 use App\Models\BrandCategory;
 use App\Models\Category;
 use App\Services\Site\CartService;
+use App\Services\Site\MomoService;
+use App\Services\Site\OrderService;
 use App\Services\Site\ProductService;
 use App\Services\Site\VnpayService;
 use Illuminate\Http\Request;
@@ -20,13 +22,12 @@ class HomeController extends Controller
     protected $prodSer;
     protected $cartService;
 
-    public function __construct(ProductService $prodSer,CartService $cartService)
+    public function __construct(ProductService $prodSer, CartService $cartService)
     {
         $this->middleware('checkUser');
 
         $this->prodSer = $prodSer;
         $this->cartService = $cartService;
-
     }
 
     public function home()
@@ -121,21 +122,16 @@ class HomeController extends Controller
 
     public function order(Request $request)
     {
-        
+
         $rq = $request->all();
         $listProduct = $this->prodSer->getOrderProductsById($rq['prod']);
-        // foreach($listProduct as $key=>$product){
-        //     $listProduct[$key]['ee'] = ;
-        // }
-
         return view('site.pages.order', compact('listProduct'));
     }
 
     public function checkout(Request $request)
     {
-        // $t = $request->all();
-        // dd($t);
-        $validator =  Validator::make($request->all(),[
+
+        $validator =  Validator::make($request->all(), [
             'username' => 'required',
             'phone-number' => 'required',
             'province' => 'required',
@@ -149,38 +145,83 @@ class HomeController extends Controller
         if ($validator->fails()) {
             // Handle validation failure
             // dd(1);
-            return redirect()->back()->with('error','Có lỗi !')->withInput();
+            return redirect()->back()->with('error', 'Có lỗi !')->withInput();
         }
-        
-        $listProduct =[];
-        foreach($request['products'] as $product) {
 
-            $prod = $this->prodSer->findProductById($product,true);
+        $orderServ = new OrderService();
+
+        $listProduct = [];
+        foreach ($request['products'] as $product) {
+
+            $prod = $this->prodSer->findProductById($product, true);
             $quantityCart = $this->cartService->getQuatityProduct($product);
-            if($prod === false || $quantityCart==false || $prod->quantity < $quantityCart ){
-                return redirect()->route('site.cart');
+            if ($prod === false || $quantityCart == false || $prod->quantity < $quantityCart) {
+                return redirect()->route('site.cart')->with('error', 'Sản phẩm bạn đặt đã hết hàng!');
             }
             $prod['quantityCart'] = $quantityCart;
             $listProduct[] = $prod;
         }
-        switch($request['type-pay']){
-            case 'momo':
-                return;
+        // dd($request->all());
+        $order = $orderServ->create($request->all(), $listProduct);
+        $totalPrice = 0;
+        $totalPrice = $totalPrice + $order->ship_fee;
+        foreach ($listProduct as $product) {
+            $totalPrice += $product->price * $product->quantityCart;
+        }
+        switch ($request['type-pay']) {
+            case 'cod':
+                return redirect()->route('site.cart')->with('arlet', 'Đặt hàng thành công');
             case 'vnpay':
                 $vnpaySer = new VnpayService();
-                $urlCheckout = $vnpaySer->handleCheckout($request->all(),$listProduct);
-                if($urlCheckout === false){
-                    return redirect()->back()->with('error','Có lỗi !')->withInput();
+                $urlCheckout = $vnpaySer->vnpayCheckout($order, $totalPrice);
+                if ($urlCheckout === false) {
+                    return redirect()->back()->with('error', 'Có lỗi !')->withInput();
                 }
                 return redirect()->to($urlCheckout);
-            case 'cod':
-                return;
-            default :
-                return redirect()->route('cart');
-        }
+            case 'momo':
+                $momoSer = new MomoService();
+                $urlCheckout = $momoSer->momoCheckout($order,$totalPrice);
+                if ($urlCheckout === false) {
+                    return redirect()->back()->with('error', 'Có lỗi momo!')->withInput();
+                }
+                return redirect()->to($urlCheckout);
 
+            default:
+                return redirect()->route('site.cart');
+        }
     }
-    public function vnpayCheckoutDone(Request $request){
-        dd($request->all());
+    public function vnpayCheckoutDone(Request $request)
+    {
+        $orderServ = new OrderService();
+
+        $data = $request->all();
+        if ($data['vnp_TransactionStatus'] === "00"  && $data['vnp_ResponseCode'] === "00") {
+            $order = $orderServ->getOrderById($data['order_id']);
+            $order->status = 'waiting';
+            $order->pay_status = true;
+            $order->save();
+            // dd('1');
+
+            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
+            return redirect()->route('site.cart')->with('alert', 'Đặt hàng thành công');
+        }
+        // dd('2');
+
+        return redirect()->route('site.cart')->with('error', 'Có lỗi trong quá trình thanh toán');
+    }
+    public function momoCheckoutDone(Request $request){
+        $orderServ = new OrderService();
+        $data = $request->all();
+        if($data['resultCode'] === "0"){
+            $order = $orderServ->getOrderById($data['order_id']);
+            $order->status = 'waiting';
+            $order->pay_status = true;
+            $order->save();
+            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
+            
+            return redirect()->route('site.cart')->with('alert', 'Đặt hàng thành công');
+        }
+        return redirect()->route('site.cart')->with('error', 'Có lỗi trong quá trình thanh toán');
+
     }
 }

@@ -5,7 +5,20 @@
 <link rel="stylesheet" href="{{ url('public/site/css/pages/cart.css') }}">
 @stop
 
+@php
+    $checkError = false;
+    if(session('error')){
+        $checkError = session('error');
+    }
+
+    $checkAlert = false;
+    if(session('alert')){
+        $checkAlert = session('alert');
+    }
+@endphp
+
 @section('title-page')
+
 <div class="title-page">
     <div class="title-page-content d-flex align-items-center justify-content-between">
         <a href="{{ route('site.home') }}"><i class="fa-solid fa-angle-left me-3"></i>Xem thêm sản phẩm</a>
@@ -15,10 +28,17 @@
 @stop
 
 @section('content')
+
 <livewire:site.cart />
+
+
 @stop
 
+
+
 @section('js')
+
+
 <script>
     function showAlertWaringCart(e) {
         e.preventDefault();
@@ -29,4 +49,19 @@
         });
     }
 </script>
+
+@if($checkError)
+    <script>
+            alertCustom({  message : '{{ $checkError }}', type : 'error', duration : 1500 })
+    </script>
+
+@endif
+
+@if($checkAlert)
+    <script>
+            alertCustom({  message : '{{ $checkAlert }}', type : 'success', duration : 1500 })
+    </script>
+
+@endif
+
 @stop

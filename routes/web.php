@@ -52,6 +52,7 @@ Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checko
 
 //checkout order
 Route::get('/vnpayCheckoutDone', [HomeController::class, 'vnpayCheckoutDone'])->name('site.vnpay.checkoutDone');
+Route::get('/momoCheckoutDone', [HomeController::class, 'momoCheckoutDone'])->name('site.vnpay.momoCheckoutDone');
 
 // Login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');

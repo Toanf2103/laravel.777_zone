@@ -2,6 +2,8 @@
 
 namespace App\Services\Site;
 
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\Auth;
@@ -9,53 +11,21 @@ use Illuminate\Support\Facades\Auth;
 class VnpayService
 {
 
-    public function handleCheckout($params, $listProduct)
-    {
-        $userId = null;
 
-        if (Auth::guard('user')->check()) {
-            $userId = Auth::guard('user')->user()->id;
-        }
 
-        $totalPrice = 0;
-        $prod =[];
-        foreach ($listProduct as $product) {
-            $totalPrice += $product->price * $product->quantityCart;
-            $prod[]=["id"=>$product->id,"quantity"=>$product->quantityCart];
-        }
-        
-        $data = [
-            "province" => $params['province'],
-            "district" => $params['district'],
-            "ward" => $params['ward'],
-            "address-user" => $params['address-user'],
-            "username" => $params['username'],
-            "phone-number" => $params['phone-number'],
-            "products" => $prod,
-            "id_user"=>$userId
-
-        ];
-
-        return $this->vnpayCheckout($totalPrice,$params,$userId);
-    }
-
-    function vnpayCheckout($totalPrice,$params,$userId)
+    public function vnpayCheckout($order, $totalPrice)
     {
         // dd($params);
+        $order->pay_id = time() . "";
+        $order->save();
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('site.vnpay.checkoutDone',[
-            
-            "address-user" => "123",
-            "username" => $params['username'],
-            "phone-number" => $params['phone-number'],
-            "products" => $params['products'],
-            "id_user"=>$userId
-
+        $vnp_Returnurl = route('site.vnpay.checkoutDone', [
+            'order_id' => $order->id
         ]);
         $vnp_TmnCode = "N0KTZXQZ"; //Mã website tại VNPAY 
         $vnp_HashSecret = "GSUHLGEINQESDRWPSVDRBLZITGBMDYKA"; //Chuỗi bí mật
 
-        $vnp_TxnRef = time() . ""; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = $order->pay_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "Thanh toán đơn hàng tại 777_Zone";
         $vnp_OrderType = "billpayment";
         $vnp_Amount = $totalPrice;
@@ -105,7 +75,7 @@ class VnpayService
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
-        dd($vnp_Url);
+        // dd($vnp_Url);
 
         return $vnp_Url;
     }

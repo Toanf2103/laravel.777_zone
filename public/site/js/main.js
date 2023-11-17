@@ -115,3 +115,22 @@ function receiveDataFromGoogleLoginWindow(data) {
     })
   }
 }
+
+function alertCustom({  message = '', type = 'success', duration = 1500 }) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: duration,
+    timerProgressBar: true,
+    didOpen: toast => {
+      toast.onmouseenter = Swal.stopTimer
+      toast.onmouseleave = Swal.resumeTimer
+    },
+  })
+  Toast.fire({
+    icon: type,
+    title: message,
+  })
+}
+
