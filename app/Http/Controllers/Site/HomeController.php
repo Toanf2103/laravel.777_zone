@@ -8,14 +8,11 @@ use App\Models\Brand;
 use App\Models\BrandCategory;
 use App\Models\Category;
 use App\Services\Site\CartService;
-use App\Services\Site\MomoService;
-use App\Services\Site\OrderService;
 use App\Services\Site\ProductService;
-use App\Services\Site\VnpayService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+
+
 
 class HomeController extends Controller
 {
@@ -38,11 +35,7 @@ class HomeController extends Controller
 
         return view('site.pages.home', compact('banners'));
     }
-    // public function testsasd(){
-    //     $add = new AddressService();
-    //     $data = $add->getDetailByWardsId(2440);
-    //     dd($data);
-    // }
+   
 
     public function search(Request $request)
     {
@@ -53,8 +46,7 @@ class HomeController extends Controller
         array_push($htrSearch, $request->get('key'));
         Session::put('historyKeySearchs', $htrSearch);
         Session::save();
-        // $rs = Session::get('historyKeySearchs');
-        // dd($rs);
+    
 
 
         return view('site.pages.search', compact('listProduct'));
@@ -120,108 +112,5 @@ class HomeController extends Controller
         return view('site.pages.cart');
     }
 
-    public function order(Request $request)
-    {
-
-        $rq = $request->all();
-        $listProduct = $this->prodSer->getOrderProductsById($rq['prod']);
-        return view('site.pages.order', compact('listProduct'));
-    }
-
-    public function checkout(Request $request)
-    {
-
-        $validator =  Validator::make($request->all(), [
-            'username' => 'required',
-            'phone-number' => 'required',
-            'province' => 'required',
-            'district' => 'required',
-            'ward' => 'required',
-            'type-pay' => 'required|in:momo,vnpay,cod',
-            'products' => 'required',
-
-        ]);
-
-        if ($validator->fails()) {
-            // Handle validation failure
-            // dd(1);
-            return redirect()->back()->with('error', 'Có lỗi !')->withInput();
-        }
-
-        $orderServ = new OrderService();
-
-        $listProduct = [];
-        foreach ($request['products'] as $product) {
-
-            $prod = $this->prodSer->findProductById($product, true);
-            $quantityCart = $this->cartService->getQuatityProduct($product);
-            if ($prod === false || $quantityCart == false || $prod->quantity < $quantityCart) {
-                return redirect()->route('site.cart')->with('error', 'Sản phẩm bạn đặt đã hết hàng!');
-            }
-            $prod['quantityCart'] = $quantityCart;
-            $listProduct[] = $prod;
-        }
-        // dd($request->all());
-        $order = $orderServ->create($request->all(), $listProduct);
-        $totalPrice = 0;
-        $totalPrice = $totalPrice + $order->ship_fee;
-        foreach ($listProduct as $product) {
-            $totalPrice += $product->price * $product->quantityCart;
-        }
-        switch ($request['type-pay']) {
-            case 'cod':
-                return redirect()->route('site.cart')->with('arlet', 'Đặt hàng thành công');
-            case 'vnpay':
-                $vnpaySer = new VnpayService();
-                $urlCheckout = $vnpaySer->vnpayCheckout($order, $totalPrice);
-                if ($urlCheckout === false) {
-                    return redirect()->back()->with('error', 'Có lỗi !')->withInput();
-                }
-                return redirect()->to($urlCheckout);
-            case 'momo':
-                $momoSer = new MomoService();
-                $urlCheckout = $momoSer->momoCheckout($order,$totalPrice);
-                if ($urlCheckout === false) {
-                    return redirect()->back()->with('error', 'Có lỗi momo!')->withInput();
-                }
-                return redirect()->to($urlCheckout);
-
-            default:
-                return redirect()->route('site.cart');
-        }
-    }
-    public function vnpayCheckoutDone(Request $request)
-    {
-        $orderServ = new OrderService();
-
-        $data = $request->all();
-        if ($data['vnp_TransactionStatus'] === "00"  && $data['vnp_ResponseCode'] === "00") {
-            $order = $orderServ->getOrderById($data['order_id']);
-            $order->status = 'waiting';
-            $order->pay_status = true;
-            $order->save();
-            // dd('1');
-
-            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
-            return redirect()->route('site.cart')->with('alert', 'Đặt hàng thành công');
-        }
-        // dd('2');
-
-        return redirect()->route('site.cart')->with('error', 'Có lỗi trong quá trình thanh toán');
-    }
-    public function momoCheckoutDone(Request $request){
-        $orderServ = new OrderService();
-        $data = $request->all();
-        if($data['resultCode'] === "0"){
-            $order = $orderServ->getOrderById($data['order_id']);
-            $order->status = 'waiting';
-            $order->pay_status = true;
-            $order->save();
-            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
-            
-            return redirect()->route('site.cart')->with('alert', 'Đặt hàng thành công');
-        }
-        return redirect()->route('site.cart')->with('error', 'Có lỗi trong quá trình thanh toán');
-
-    }
+    
 }

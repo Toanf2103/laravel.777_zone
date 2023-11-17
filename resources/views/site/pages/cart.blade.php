@@ -57,11 +57,6 @@
 
 @endif
 
-@if($checkAlert)
-    <script>
-            alertCustom({  message : '{{ $checkAlert }}', type : 'success', duration : 1500 })
-    </script>
 
-@endif
 
 @stop

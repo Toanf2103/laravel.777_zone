@@ -6,6 +6,7 @@ use App\Http\Controllers\Site\AuthController as AuthController;
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\Site\GoogleController;
+use App\Http\Controllers\Site\OrderController;
 use Livewire\Livewire;
 use App\Models\User;
 
@@ -46,13 +47,17 @@ Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->nam
 Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
-Route::get('/order', [HomeController::class, 'order'])->name('site.order');
-Route::post('/checkout', [HomeController::class, 'checkout'])->name('site.checkout');
+Route::get('/order', [OrderController::class, 'order'])->name('site.order');
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('site.checkout');
 
 
 //checkout order
-Route::get('/vnpayCheckoutDone', [HomeController::class, 'vnpayCheckoutDone'])->name('site.vnpay.checkoutDone');
-Route::get('/momoCheckoutDone', [HomeController::class, 'momoCheckoutDone'])->name('site.vnpay.momoCheckoutDone');
+Route::get('/vnpayCheckoutDone', [OrderController::class, 'vnpayCheckoutDone'])->name('site.vnpay.checkoutDone');
+Route::get('/momoCheckoutDone', [OrderController::class, 'momoCheckoutDone'])->name('site.vnpay.momoCheckoutDone');
+Route::get('/pdfOrder/{orderId}', [OrderController::class, 'pdfOrder'])->name('site.pdfOrder');
+Route::get('/showBillOrder/{orderId}', [OrderController::class, 'showBillOrder'])->name('site.showBillOrder');
+
+
 
 // Login user
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
