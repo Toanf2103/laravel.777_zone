@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2023 lúc 05:48 AM
+-- Thời gian đã tạo: Th10 18, 2023 lúc 02:15 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -53,15 +53,15 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `full_name`, `phone_number`, `email`, `avatar`, `username`, `password`, `province_id`, `district_id`, `ward_id`, `address`, `role`, `status`, `google_id`, `verification_token`, `last_email_sent_at`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyễn Admin', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/admin-default.png', 'admin', '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'admin', 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Nguyễn Nhân Viên', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png', 'nhanvien', '$2y$12$XxD1RIoVu2Ut1t4ruyFjhul.gWPgggByIr4SSVOI9cavj7zrYDshy', 48, 492, 20227, 'nhà', 'employee', 1, NULL, NULL, NULL, '2023-05-14 12:07:46', '2023-11-14 01:15:25'),
-(3, 'Đặng Văn Hoài Tú', '0123456789', 'dangtu9520@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/3.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2021-12-29 15:21:25', '2022-01-02 00:38:25'),
-(4, 'Nguyễn Đắc Toàn', '0123456789', 'toan@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/4.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2022-01-14 14:31:17', '2022-01-14 14:45:38'),
-(5, 'Lưu Văn Tùng', '0123456789', 'tung@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/5.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-05-22 08:59:04', '2023-05-22 08:59:04'),
-(6, 'Lê Văn Tài', '0123456789', 'tai@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/6.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:00:28', '2023-11-07 16:00:28'),
-(7, 'Hồ Thị Ái Thi', '0123456789', 'thi@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/7.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:00:28', '2023-11-07 16:00:28'),
-(8, 'Bùi Thanh Tường', '0123456789', 'tuong@gmail.com', NULL, NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:03:52', '2023-11-13 05:17:24'),
-(9, 'Nguyễn Văn Anh Tuấn', '0123456789', 'tuan@gmail.com', NULL, NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, 'nhà', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:03:52', '2023-11-13 04:17:11');
+(1, 'Nguyễn Admin', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/admin-default.png', 'admin', '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'admin', 1, NULL, NULL, NULL, '0000-00-00 00:00:00', '2023-11-18 07:19:27'),
+(2, 'Nguyễn Nhân Viên', '0123456789', NULL, 'https://storage.googleapis.com/laravel-img.appspot.com/user/employee-default.png', 'nhanvien', '$2y$12$XxD1RIoVu2Ut1t4ruyFjhul.gWPgggByIr4SSVOI9cavj7zrYDshy', 48, 492, 20227, '48 Cao Thắng', 'employee', 1, NULL, NULL, NULL, '2023-05-14 12:07:46', '2023-11-14 01:15:25'),
+(3, 'Đặng Văn Hoài Tú', '0123456789', 'tudang9520@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/3.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2021-12-29 15:21:25', '2022-01-02 00:38:25'),
+(4, 'Nguyễn Đắc Toàn', '0123456789', 'toan@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/4.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2022-01-14 14:31:17', '2022-01-14 14:45:38'),
+(5, 'Lưu Văn Tùng', '0123456789', 'tung@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/5.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2023-05-22 08:59:04', '2023-05-22 08:59:04'),
+(6, 'Lê Văn Tài', '0123456789', 'tai@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/6.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:00:28', '2023-11-07 16:00:28'),
+(7, 'Hồ Thị Ái Thi', '0123456789', 'thi@gmail.com', 'https://storage.googleapis.com/laravel-img.appspot.com/user/7.jpg', NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:00:28', '2023-11-07 16:00:28'),
+(8, 'Bùi Thanh Tường', '0123456789', 'tuong@gmail.com', NULL, NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:03:52', '2023-11-13 05:17:24'),
+(9, 'Nguyễn Văn Anh Tuấn', '0123456789', 'tuan@gmail.com', NULL, NULL, '$2y$12$96la0c7aoA.7t9KtW1GyW.QCpyMoh.PPkDoGvGTkPxsFcQgaAyeyW', 48, 492, 20227, '48 Cao Thắng', 'customer', 1, NULL, NULL, NULL, '2023-11-07 16:03:52', '2023-11-17 09:04:38');
 
 -- --------------------------------------------------------
 
@@ -203,11 +203,24 @@ CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `reply_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `product_id`, `content`, `reply_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 14, 'Sản phẩm này còn không ạ?', NULL, '2023-11-16 11:48:08', '2023-11-16 11:48:08'),
+(2, 2, 14, 'Còn bạn nhé!', 1, '2023-11-16 12:30:33', '2023-11-16 12:30:33'),
+(3, 1, 14, 'Bạn có mua không mà hỏi?', 1, '2023-11-17 09:08:04', '2023-11-17 09:08:04'),
+(4, 4, 16, 'Sản phẩm này còn không ạ?', NULL, '2023-11-17 09:08:35', '2023-11-17 09:08:35'),
+(5, 2, 16, 'Bạn có mua không?', 4, '2023-11-18 08:07:48', '2023-11-18 08:07:48'),
+(6, 4, 16, 'Không ạ', 4, '2023-11-17 09:09:01', '2023-11-17 09:09:01'),
+(7, 2, 16, '😭😭😭', 4, '2023-11-17 09:21:04', '2023-11-17 09:21:04');
 
 -- --------------------------------------------------------
 
@@ -229,7 +242,7 @@ CREATE TABLE `orders` (
   `pay_status` tinyint(1) NOT NULL DEFAULT 0,
   `ship_fee` double NOT NULL,
   `note` text DEFAULT NULL,
-  `status` enum('waiting','approved','shipping','completed','cancel') NOT NULL DEFAULT 'waiting',
+  `status` enum('creating','waiting','approved','shipping','completed','cancel') NOT NULL DEFAULT 'creating',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -1789,7 +1802,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`

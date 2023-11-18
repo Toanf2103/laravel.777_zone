@@ -23,6 +23,11 @@ class Comment extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function commentParent()
+    {
+        return $this->hasOne(Comment::class, 'id', 'reply_id');
+    }
+
     public function replies()
     {
         return $this->hasMany(Comment::class, 'reply_id', 'id');

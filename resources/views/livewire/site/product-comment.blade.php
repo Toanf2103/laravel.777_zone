@@ -74,7 +74,6 @@ use App\Helpers\DateHelper
     </form>
 </div>
 
-@section('js')
 <script>
     document.addEventListener('livewire:initialized', function(e) {
         const component = window.Livewire.find(document.querySelector('.comment-product-wrapper').getAttribute('wire:id'));
@@ -106,8 +105,9 @@ use App\Helpers\DateHelper
         });
         var channel = pusher.subscribe('product-{{ $product->id }}');
         channel.bind('comment-update', function(data) {
-            component.loadDataComments()
+            if (data.userSend != '{{ $userId }}') {
+                component.reRender()
+            }
         });
     })
 </script>
-@stop

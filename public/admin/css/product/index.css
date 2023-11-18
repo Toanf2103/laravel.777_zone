@@ -1,18 +1,14 @@
-tr[data-url] {
-    cursor: pointer;
-}
-
 th,
 td {
-    text-align: center;
+  text-align: center;
 }
 
 .product-image {
-    width: 80px;
-    border-radius: 5px;
+  width: 80px;
+  border-radius: 5px;
 }
 
 .product-name {
-    min-width: 200px;
-    text-align: left;
+  min-width: 200px;
+  text-align: left;
 }

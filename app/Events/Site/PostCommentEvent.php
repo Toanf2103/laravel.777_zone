@@ -14,14 +14,18 @@ class PostCommentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $productId;
+    private $commentId;
+    private $productId;
+    public $userSend;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($productId)
+    public function __construct($productId, $commentId, $userSend)
     {
         $this->productId = $productId;
+        $this->commentId = $commentId;
+        $this->userSend = $userSend;
     }
 
     /**
@@ -33,6 +37,7 @@ class PostCommentEvent implements ShouldBroadcast
     {
         return [
             new Channel("product-{$this->productId}"),
+            new Channel("comment-{$this->commentId}")
         ];
     }
 

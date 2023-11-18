@@ -59,6 +59,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- End Sweetalert2 -->
 
+    <!-- Pusher -->
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <!-- End pusher -->
+
     <!-- Main JS -->
     <script src="{{ url('public/admin/js/admin.js') }}"></script>
     <!-- End main JS -->

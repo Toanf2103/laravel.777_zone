@@ -11,19 +11,23 @@ class ProductComment extends Component
 {
     public $product;
     public $userId;
-    public $comments;
     public $replyingId;
     public $commentContent;
     public $commentReplyContent;
 
-    public function mount(Product $product, CommentService $commentService)
+    public function mount(Product $product)
     {
         if (Auth::guard('user')->check()) {
             $this->userId = Auth::guard('user')->user()->id;
         }
 
         $this->product = $product;
-        $this->comments = $commentService->getAll($product->id);
+    }
+
+    public function reRender()
+    {
+        // Gọi hàm này cho zui, chủ yếu để chạy hàm render()
+        return;
     }
 
     public function showAlert($title, $message, $type)
@@ -33,17 +37,13 @@ class ProductComment extends Component
             'mess' => $message,
             'icon' => $type
         ]);
+
+        $this->skipRender();
     }
 
     public function replying($commentId)
     {
         $this->replyingId = $commentId;
-    }
-
-    public function loadDataComments()
-    {
-        $commentService = new CommentService();
-        $this->comments = $commentService->getAll($this->product->id);
     }
 
     public function sendComment(CommentService $commentService)
@@ -55,7 +55,6 @@ class ProductComment extends Component
 
         if ($this->commentContent) {
             $commentService->create($this->product->id, $this->userId, $this->commentContent, null);
-            $this->loadDataComments();
         }
 
         $this->commentContent = '';
@@ -70,7 +69,6 @@ class ProductComment extends Component
 
         if ($this->commentReplyContent) {
             $commentService->create($this->product->id, $this->userId, $this->commentReplyContent, $commentId);
-            $this->loadDataComments();
         }
 
         $this->commentReplyContent = '';
@@ -82,6 +80,8 @@ class ProductComment extends Component
         $this->dispatch('showConfirmDeleteComment', [
             'commentId' => $commentId
         ]);
+
+        $this->skipRender();
     }
 
     public function deleteComment($commentId, CommentService $commentService)
@@ -91,13 +91,15 @@ class ProductComment extends Component
             return;
         }
 
-        $commentService->delete($commentId, $this->product->id);
-        $this->loadDataComments();
+        $commentService->delete($commentId);
     }
 
     public function render()
     {
-        $this->comments = $this->comments->sortByDesc('id');
-        return view('livewire.site.product-comment');
+        $commentService = new CommentService();
+
+        return view('livewire.site.product-comment', [
+            'comments' => $commentService->getAll($this->product->id)
+        ]);
     }
 }

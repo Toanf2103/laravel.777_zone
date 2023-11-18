@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Site\HomeController as HomeController;
-use App\Http\Controllers\Site\AuthController as AuthController;
+use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\GoogleController;
 
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\Site\GoogleController;
 use Livewire\Livewire;
-use App\Models\User;
 
 
 
@@ -113,6 +112,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'customers'], function () {
         Route::get('/', [Admin\CustomerController::class, 'index'])->name('admin.customers.index');
         Route::get('/{customer}/toggle-status', [Admin\CustomerController::class, 'toggleStatus'])->name('admin.customers.toggleStatus');
+    });
+
+    // Comment
+    Route::group(['prefix' => 'comments'], function () {
+        Route::get('/', [Admin\CommentController::class, 'index'])->name('admin.comments.index');
+        Route::get('/{comment}/show', [Admin\CommentController::class, 'show'])->name('admin.comments.show');
+        Route::get('/{comment}/delete', [Admin\CommentController::class, 'delete'])->name('admin.comments.delete');
+        Route::get('/{userId}/delete-all-comment-by-user', [Admin\CommentController::class, 'deleteAllCommentByUser'])->name('admin.comments.deleteAllCommentByUser');
     });
 
     // Employee

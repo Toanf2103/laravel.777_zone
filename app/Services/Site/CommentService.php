@@ -15,22 +15,28 @@ class CommentService
             ->get();
     }
 
+    public function getById($commentId)
+    {
+        return Comment::find($commentId);
+    }
+
     public function create($productId, $userId, $content, $replyId)
     {
         Comment::create([
             'user_id' => $userId,
             'product_id' => $productId,
-            'content' => str()->ucfirst($content),
+            'content' => str()->ucfirst(trim($content)),
             'reply_id' => $replyId
         ]);
 
-        event(new PostCommentEvent($productId));
+        event(new PostCommentEvent($productId, $replyId, $userId));
     }
 
-    public function delete($commentId, $productId)
+    public function delete($commentId)
     {
-        Comment::find($commentId)->delete();
+        $comment = Comment::find($commentId);
+        $comment->delete();
 
-        event(new PostCommentEvent($productId));
+        event(new PostCommentEvent($comment->product->id, $comment->reply_id ?? $comment->id, $comment->user->id));
     }
 }

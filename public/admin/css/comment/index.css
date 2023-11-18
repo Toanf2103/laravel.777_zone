@@ -1,0 +1,15 @@
+th,
+td {
+  text-align: center;
+}
+
+.product-image {
+  height: 80px;
+  border-radius: 5px;
+}
+
+.user-avatar {
+  height: 50px;
+  border-radius: 50%;
+  background-color: #000;
+}

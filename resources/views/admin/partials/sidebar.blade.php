@@ -93,11 +93,14 @@
                 <span>Đơn hàng</span>
             </a>
         </li>
-        <li class="">
-            <a href="#" class="d-flex align-items-center gap-2 ">
+        <li class="@if(request()->is('admin/comments*')){{ 'active' }}@endif">
+            <a href="{{ route('admin.comments.index') }}" class="d-flex align-items-center gap-2 ">
                 <div class="icon-box">
-                    <!-- <i class="fa-sharp fa-solid fa-message-lines"></i> -->
+                    @if(request()->is('admin/comments*'))
+                    <i class="fa-sharp fa-solid fa-message-lines"></i>
+                    @else
                     <i class="fa-sharp fa-light fa-message-lines"></i>
+                    @endif
                 </div>
                 <span>Bình luận</span>
             </a>

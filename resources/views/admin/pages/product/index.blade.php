@@ -96,11 +96,12 @@ use App\Helpers\NumberHelper;
                     <th>Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Trạng thái</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($products as $product)
-                <tr data-url="{{ route('admin.products.edit', ['product' => $product->id]) }}">
+                <tr>
                     <th>{{ $product->id }}</th>
                     <td>
                         <img src="{{ $product->productImages->get(0)->link ?? '' }}" alt="" class="product-image">
@@ -117,6 +118,16 @@ use App\Helpers\NumberHelper;
                         <span class='badge bg-secondary'>Ẩn</span>
                         @endif
                     </td>
+                    <td>
+                        <div class='d-flex justify-content-center align-items-center gap-2'>
+                            <a href="{{ route('admin.products.edit', ['product' => $product->id]) }}" class='btn btn-primary' title="Cập nhật thông tin sản phẩm">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                            <a href="{{ route('admin.comments.index') }}?product={{ $product->id }}" class='btn btn-primary' title="Xem bình luận">
+                                <i class="fa-regular fa-message-lines"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
                 @endforeach
 
@@ -130,12 +141,4 @@ use App\Helpers\NumberHelper;
 @stop
 
 @section('js')
-<script>
-    const listTr = document.querySelectorAll('table tr[data-url]')
-    listTr.forEach((tr) => {
-        tr.onclick = () => {
-            location.href = tr.dataset.url
-        }
-    })
-</script>
 @stop
