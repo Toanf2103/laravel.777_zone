@@ -22,12 +22,19 @@ use App\Helpers\NumberHelper
 
             <div class="d-flex align-items-center justify-content-between gap-3">
                 <div class="cart-header-choose d-flex align-items-center">
+                    @if($cartItem['product']->quantity >0)
                     <input type="checkbox" wire:model.live="checkList" value="{{ $cartItem['id'] }}" name="prod[]">
+                    @else
+                    <input type="checkbox" disabled>
+                    @endif
                 </div>
                 <div class="cart-info-product d-flex align-items-center me-5">
                     <img class="cart-info-img" src="{{ $cartItem['product']->productImages->get(0)->link }}" alt="">
                     <a href="{{ route('site.product',['productSlug'=>$cartItem['product']->slug]) }}" class="cart-info-name">
                         {{ $cartItem['product']->name }}
+                        @if($cartItem['product']->quantity==0)
+                        <span>(Hết hàng)</span>
+                        @endif
                     </a>
                     <div class="cart-info-price d-flex align-items-center gap-5">
                         <p class="text-price">{{NumberHelper::format($cartItem['product']->price*$cartItem['quantity'])}} ₫</p>
@@ -38,9 +45,15 @@ use App\Helpers\NumberHelper
 
                 </div>
                 <div class="cart-count-product">
+                    @if($cartItem['product']->quantity >0)
                     <span wire:click="decrementQuantity({{$cartItem['id']}})">-</span>
-                    <input class="active" type="number" value="{{ $cartItem['quantity'] }}">
+                    <input class="active" type="text" value="{{ $cartItem['quantity'] }}" disabled>
                     <span wire:click="incrementQuantity({{$cartItem['id']}})">+</span>
+                    @else
+                    <span >-</span>
+                    <input class="active" type="text" value="{{ $cartItem['quantity'] }}" disabled>
+                    <span >+</span>
+                    @endif
                 </div>
             </div>
             @endforeach
@@ -59,74 +72,72 @@ use App\Helpers\NumberHelper
         </div>
     </div>
     <script>
-       
-    
-    document.addEventListener('livewire:initialized', function(e) {
-        
-        component = window.Livewire.find(document.getElementById('cart-cpn').getAttribute('wire:id'));
+        document.addEventListener('livewire:initialized', function(e) {
 
-        const btnCofirmDeleteAll = document.getElementById('delete-confirm');
-        btnCofirmDeleteAll.addEventListener('click', (e) => {
-            if (btnCofirmDeleteAll.getAttribute('data-confirm') > 0) {
-                Swal.fire({
-                    title: "Xác nhận xóa?",
-                    text: "Bạn có muốn xóa các sản phẩm được chọn ra khỏi giỏ hàng",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Xác nhận",
-                    cancelButtonText: "Hủy"
+            component = window.Livewire.find(document.getElementById('cart-cpn').getAttribute('wire:id'));
 
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        component.deleteListProduct();
-                        Swal.fire({
-                            title: "Xóa thành công!",
-                            text: "Bạn đã xóa thành công sản phẩm ra khỏi giỏ hàng.",
-                            icon: "success"
-                        });
+            const btnCofirmDeleteAll = document.getElementById('delete-confirm');
+            btnCofirmDeleteAll.addEventListener('click', (e) => {
+                if (btnCofirmDeleteAll.getAttribute('data-confirm') > 0) {
+                    Swal.fire({
+                        title: "Xác nhận xóa?",
+                        text: "Bạn có muốn xóa các sản phẩm được chọn ra khỏi giỏ hàng",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Xác nhận",
+                        cancelButtonText: "Hủy"
 
-                    }
-                });
-            }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            component.deleteListProduct();
+                            Swal.fire({
+                                title: "Xóa thành công!",
+                                text: "Bạn đã xóa thành công sản phẩm ra khỏi giỏ hàng.",
+                                icon: "success"
+                            });
+
+                        }
+                    });
+                }
+
+            });
+
+            const deleteProducts = document.querySelectorAll('.delete-confirm')
+
+            deleteProducts.forEach(function(element) {
+                element.addEventListener('click', (e) => {
+
+                    Swal.fire({
+                        title: "Xác nhận xóa?",
+                        text: "Bạn có muốn xóa sản phẩm ra khỏi giỏ hàng",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Xác nhận",
+                        cancelButtonText: "Hủy"
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const idProd = element.getAttribute('data-confirm');
+                            component.deleteProduct(idProd);
+                            Swal.fire({
+                                title: "Xóa thành công!",
+                                text: "Bạn đã xóa thành công sản phẩm ra khỏi giỏ hàng.",
+                                icon: "success"
+                            });
+
+                        }
+                    });
+
+
+                })
+            });
 
         });
-
-        const deleteProducts = document.querySelectorAll('.delete-confirm')
-
-        deleteProducts.forEach(function(element) {
-            element.addEventListener('click', (e) => {
-
-                Swal.fire({
-                    title: "Xác nhận xóa?",
-                    text: "Bạn có muốn xóa sản phẩm ra khỏi giỏ hàng",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Xác nhận",
-                    cancelButtonText: "Hủy"
-
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const idProd = element.getAttribute('data-confirm');
-                        component.deleteProduct(idProd);
-                        Swal.fire({
-                            title: "Xóa thành công!",
-                            text: "Bạn đã xóa thành công sản phẩm ra khỏi giỏ hàng.",
-                            icon: "success"
-                        });
-
-                    }
-                });
-
-
-            })
-        });
-
-    });
     </script>;
-    
+
 
 </form>

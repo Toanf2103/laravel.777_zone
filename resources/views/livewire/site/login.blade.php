@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="form">
+        <form class="form" wire:submit="checkLogin">
             <div class="input-group">
                 <label>Tài khoản</label>
                 <input type="text" wire:model="username" placeholder="" autocomplete="off">
@@ -41,8 +41,8 @@
             <div class="forgot">
                 <a rel="noopener noreferrer" href="#">Quên mật khẩu ?</a>
             </div>
-            <button class="sign" wire:click="checkLogin">Đăng nhập</button>
-        </div>
+            <button class="sign" >Đăng nhập</button>
+        </form>
         <div class="social-message">
             <div class="line"></div>
             <p class="message">Đăng nhập với</p>
@@ -101,7 +101,7 @@
                 </div>
             </div>
         </div>
-        <div class="form">
+        <form class="form" wire:submit="register">
             <div class="input-group">
                 <label>Tài khoản</label>
                 <input type="text" name="username" id="username-register" wire:model="usernameRegister" autocomplete="off">
@@ -133,8 +133,8 @@
             <div class="forgot">
                 <!-- <a rel="noopener noreferrer" href="#">Quên mật khẩu ?</a> -->
             </div>
-            <button class="sign" id="btn-register-click" wire:click="register">Đăng ký</button>
-        </div>
+            <button class="sign" id="btn-register-click">Đăng ký</button>
+        </form>
         <div class="social-message">
             <div class="line"></div>
             <p class="message">Đăng ký bằng</p>

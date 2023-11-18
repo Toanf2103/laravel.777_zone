@@ -32,6 +32,11 @@ use App\Helpers\NumberHelper;
                 </table>
             </div>
             <div class="row mt-4">
+                @if($product->quantity==0)
+                <div>
+                    <p>Hết hàng</p>
+                </div>
+                @else
                 <div class="col-6">
                     <livewire:site.button-add-cart :product="$product" />
                 </div>
@@ -41,6 +46,7 @@ use App\Helpers\NumberHelper;
                         <span>Mua ngay</span>
                     </button>
                 </div>
+                @endif
 
             </div>
         </div>
@@ -67,6 +73,8 @@ $product->description = str_replace('data-src="','src="',$product->description)
         <livewire:site.product-comment :product="$product" />
     </div>
 </div>
+
+
 @stop
 
 @section('js')
@@ -75,22 +83,5 @@ $product->description = str_replace('data-src="','src="',$product->description)
         const descrElm = document.getElementById('descr');
         descrElm.classList.toggle('active');
     }
-
-    // Show alert add product to cart
-    window.addEventListener('alertProductToCart', (e) => {
-        data = e.detail[0];
-        // console.log(data);
-        Swal.fire({
-            title: `Thêm thành công`,
-            text: `Thêm sản phẩm ${data.productAdd} vào giỏ hàng thành công!`,
-            icon: "success"
-        });
-        cartHeaderElm = document.getElementById('cart-header');
-        if (data.count > 0) {
-            cartHeaderElm.innerHTML = `<span>${data.count}</span>`;
-        } else {
-            cartHeaderElm.innerHTML = "";
-        }
-    })
 </script>
 @stop

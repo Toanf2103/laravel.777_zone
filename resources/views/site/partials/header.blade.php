@@ -45,6 +45,7 @@
                     <li><a class="dropdown-item" href="#">{{ auth()->guard('user')->user()->full_name }}</a></li>
                     <li><a class="dropdown-item" href="{{route('site.auth.logout')}}">Đăng xuất</a></li>
                 </ul>
+                
                 @else
                 <a data-bs-toggle="modal" data-bs-target="#login-model">Đăng nhập</a>
                 @endauth

@@ -21,9 +21,14 @@ class Cart extends Component
     public function incrementQuantity($id)
     {
         $cartSer = new CartService();
+        $productCheck = array_search($id, array_column($this->cart, 'id'));
+
+        if($this->cart[$productCheck]['product']['quantity'] < $this->cart[$productCheck]['quantity'] +1){
+            $this->skipRender();
+            return;
+        }
 
         if ($cartSer->updateQuantity($id, 1)) {
-            $productCheck = array_search($id, array_column($this->cart, 'id'));
             $this->cart[$productCheck]['quantity'] += 1;
         } else {
             $this->dispatch('refresh');

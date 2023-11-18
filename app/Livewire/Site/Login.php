@@ -50,7 +50,7 @@ class Login extends Component
             $authSer = new AuthService();
             $rs = $authSer->checkLogin($this->username, $this->password);
             if ($rs['status'] == 'success') {
-                $this->dispatch('reloadPage', ['timeDelay' => 2]);
+                $this->dispatch('reloadPage', ['timeDelay' => 1]);
             } else {
                 $this->showAlret('Sai thông tin đăng nhập', $rs['message'], 'error');
             }
@@ -71,7 +71,7 @@ class Login extends Component
             if ($rs['status'] == 'error') {
                 $this->showAlret('Có lỗi', $rs['message'], 'error');
             } else {
-                $this->dispatch('reloadPage', ['timeDelay' => 2, 'message' => 'Tạo tài khoản thành công!']);
+                $this->dispatch('reloadPage', ['timeDelay' => 1, 'message' => 'Tạo tài khoản thành công!']);
             }
         }
     }

@@ -18,18 +18,22 @@ class ButtonAddCart extends Component
         // $carServ->destroyCart();
 
         $checkAdd = $carServ->addProduct($this->product);
-        if($checkAdd){
+        // dd($checkAdd);
+        if ($checkAdd) {
+            // dd(1);
             $this->dispatch('alertProductToCart', [
                 'productAdd' => $this->product->name,
                 'count' => $carServ->getCountCart()
             ]);
         }
         // dd($carServ->getCart());
-        
+        // return;
     }
+
 
     public function render()
     {
+        
         return view('livewire.site.button-add-cart');
     }
 }

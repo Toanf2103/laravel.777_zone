@@ -31,16 +31,21 @@
     <!-- End sweetalert2 JS -->
 
 
+
     @yield('css')
 </head>
 
 <body>
     @include('site/partials/header')
+
     @yield('slider')
+
     @yield('title-page')
+
     <div class="content">
         @yield('content')
     </div>
+
     @yield('content-more')
 
     @include('site/partials/footer')
@@ -55,10 +60,10 @@
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <!-- End pusher -->
 
+
     <!-- main JS -->
     <script src="{{ url('public/site/js/main.js') }}"></script>
     <!-- End main JS -->
-
     @yield('js')
 </body>
 

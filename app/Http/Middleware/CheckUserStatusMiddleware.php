@@ -28,6 +28,7 @@ class CheckUserStatusMiddleware
                 Auth::guard('user')->logout();
             }
         }
+        
         return $next($request);
     }
 }
