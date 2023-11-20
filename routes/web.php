@@ -48,6 +48,10 @@ Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'cate
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
 Route::get('/order', [OrderController::class, 'order'])->name('site.order');
+Route::get('/orderMenu', [OrderController::class, 'orderMenu'])->name('site.order.menu');
+Route::get('/testOrder', [OrderController::class, 'testOrder']);
+
+
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('site.checkout');
 
 

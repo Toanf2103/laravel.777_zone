@@ -3,28 +3,38 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Services\AddressService;
 use Illuminate\Http\Request;
 use App\Services\Site\OrderService;
 use App\Services\Site\ProductService;
 
 use App\Services\Site\CartService;
+use App\Services\Site\MailService;
 use App\Services\Site\VnpayService;
 use App\Services\Site\MomoService;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade\PDF;
-
-
+use Exception;
 
 class OrderController extends Controller
 {
     protected $prodSer;
     protected $cartService;
-    public function __construct(ProductService $prodSer, CartService $cartService)
+    protected $mailService;
+
+    public function __construct(ProductService $prodSer, CartService $cartService, MailService $mailService)
     {
         $this->middleware('checkUser');
 
         $this->prodSer = $prodSer;
         $this->cartService = $cartService;
+        $this->mailService = $mailService;
+    }
+    public function testOrder()
+    {
+        $se = new AddressService();
+        $se->getNameAdress(11140);
     }
     public function order(Request $request)
     {
@@ -32,6 +42,21 @@ class OrderController extends Controller
         $rq = $request->all();
         $listProduct = $this->prodSer->getOrderProductsById($rq['prod']);
         return view('site.pages.order', compact('listProduct'));
+    }
+
+    public function orderMenu(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'type' => 'in:waiting,approved,shipping,completed,cancel,creating'
+            ]);
+        } catch (Exception $e) {
+            return redirect()->route('site.order.menu');
+        }
+
+        $type = $request->get('type') ?? 'waiting';
+        $orders = Order::where('status', $type)->get();
+        return view('site.pages.orderMenu', compact('orders'));
     }
 
     public function checkout(Request $request)
@@ -78,6 +103,11 @@ class OrderController extends Controller
             case 'cod':
                 $order->status = 'waiting';
                 $order->save();
+                $listProduct = $order->orderDetails->pluck('product_id');
+                // dd($listProduct);
+                $this->cartService->deleteListProduct($listProduct);
+                $this->mailService->sendMailOrder($order);
+
                 return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('arlet', 'Đặt hàng thành công');
             case 'vnpay':
                 $vnpaySer = new VnpayService();
@@ -109,6 +139,7 @@ class OrderController extends Controller
             $order->pay_status = true;
             $order->save();
             // dd('1');
+            $this->mailService->sendMailOrder($order);
 
             $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
             return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('alert', 'Đặt hàng thành công');
@@ -127,6 +158,7 @@ class OrderController extends Controller
             $order->pay_status = true;
             $order->save();
             $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
+            $this->mailService->sendMailOrder($order);
 
             return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('alert', 'Đặt hàng thành công');
         }
@@ -136,6 +168,8 @@ class OrderController extends Controller
     {
         $orderSer =  new OrderService();
         $order = $orderSer->getOrderById($orderId);
+       
+
         return view('site.pages.showBillOrder', compact('order'));
     }
     public function pdfOrder($orderId)

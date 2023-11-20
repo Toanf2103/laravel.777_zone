@@ -21,7 +21,6 @@ class HomeController extends Controller
 
     public function __construct(ProductService $prodSer, CartService $cartService)
     {
-        $this->middleware('checkUser');
 
         $this->prodSer = $prodSer;
         $this->cartService = $cartService;

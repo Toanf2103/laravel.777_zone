@@ -46,7 +46,13 @@ class AddressService
 
         return $province;
     }
-
+    public function getNameAdress($id)
+    {
+        $wards = $this->getWardsById($id);
+        $district = $this->getDistrictById($wards['district_code']);
+        $province = $this->getProvinceById($district['province_code']);
+        return $wards['name'] . ' - ' .$district['name'].' - '.$province['name'];
+    }
     public static function callApi($url)
     {
         try {
