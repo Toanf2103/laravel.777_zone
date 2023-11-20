@@ -110,7 +110,7 @@ class ProductService
         ->where('status', true)
         ->get();
         foreach($listProduct as $key=>$product){
-            $listProduct[$key]['quantityCart'] = $cartser->getQuatityProduct( $listProduct[$key]->id);
+            $listProduct[$key]['quantityCart'] = $cartser->getQuatityProduct($listProduct[$key]->id);
         }
         return $listProduct;
     }

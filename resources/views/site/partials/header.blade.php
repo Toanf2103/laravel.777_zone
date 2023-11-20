@@ -43,6 +43,8 @@
                 <img src="{{ auth()->guard('user')->user()->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">{{ auth()->guard('user')->user()->full_name }}</a></li>
+                    <li><a class="dropdown-item" href="{{route('site.order.menu')}}">Đơn hàng của bạn</a></li>
+
                     <li><a class="dropdown-item" href="{{route('site.auth.logout')}}">Đăng xuất</a></li>
                 </ul>
                 

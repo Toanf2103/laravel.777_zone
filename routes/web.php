@@ -9,9 +9,7 @@ use App\Http\Controllers\Site\GoogleController;
 use App\Http\Controllers\Site\OrderController;
 
 use App\Http\Controllers\Admin;
-
-
-
+use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +46,7 @@ Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'cate
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
 Route::get('/order', [OrderController::class, 'order'])->name('site.order');
-Route::get('/orderMenu', [OrderController::class, 'orderMenu'])->name('site.order.menu');
+Route::get('/orderMenu', [OrderController::class, 'orderMenu'])->middleware('user')->name('site.order.menu');
 Route::get('/testOrder', [OrderController::class, 'testOrder']);
 
 

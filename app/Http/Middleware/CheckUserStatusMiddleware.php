@@ -17,6 +17,7 @@ class CheckUserStatusMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // dd(1);
         if (Auth::guard('user')->check()) {
             // Lấy người dùng hiện tại đã đăng nhập
             $user = Auth::guard('user')->user();
@@ -28,7 +29,8 @@ class CheckUserStatusMiddleware
                 Auth::guard('user')->logout();
             }
         }
-        
+
+        // dd($next($request));
         return $next($request);
     }
 }

@@ -16,6 +16,7 @@ use App\Services\Site\MomoService;
 use Illuminate\Support\Facades\Validator;
 use Barryvdh\DomPDF\Facade\PDF;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -25,7 +26,6 @@ class OrderController extends Controller
 
     public function __construct(ProductService $prodSer, CartService $cartService, MailService $mailService)
     {
-        $this->middleware('checkUser');
 
         $this->prodSer = $prodSer;
         $this->cartService = $cartService;
@@ -46,6 +46,7 @@ class OrderController extends Controller
 
     public function orderMenu(Request $request)
     {
+
         try {
             $validated = $request->validate([
                 'type' => 'in:waiting,approved,shipping,completed,cancel,creating'
@@ -55,7 +56,10 @@ class OrderController extends Controller
         }
 
         $type = $request->get('type') ?? 'waiting';
-        $orders = Order::where('status', $type)->get();
+        $user = Auth::guard('user')->user();
+        // dd($user);
+        $orders = Order::where('status', $type)->where('user_id',$user->id)->get();
+        // dd($orders);
         return view('site.pages.orderMenu', compact('orders'));
     }
 
