@@ -29,11 +29,15 @@
     padding: 1rem 1.5rem;
 }
 .order-wrapper .order-title{
-    text-align: end;
     font-size: 2rem;
     font-weight: bold;
     border-bottom: 2px solid #f0f0f0;
     padding: 2rem 0;
+
+}
+.order-title  a{
+    color: #000;
+    font-size: 2rem;
 
 }
 

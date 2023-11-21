@@ -37,16 +37,20 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class, 'order_id', 'id');
     }
-    public function totalPrice(){
+
+    public function totalPrice()
+    {
         $orderDetails = $this->orderDetails;
         $total = 0;
-        foreach($orderDetails as $order){
-            $total+= $order->price*$order->quantity;
+        foreach ($orderDetails as $order) {
+            $total += $order->price * $order->quantity;
         }
-        $total+=$this->ship_fee;
+        $total += $this->ship_fee;
         return $total;
     }
-    public function nameAddress(){
+    
+    public function nameAddress()
+    {
         $adrS = new AddressService();
         return $adrS->getNameAdress($this->ward_id);
     }

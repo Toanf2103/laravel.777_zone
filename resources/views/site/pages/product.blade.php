@@ -40,12 +40,12 @@ use App\Helpers\NumberHelper;
                 <div class="col-6">
                     <livewire:site.button-add-cart :product="$product" />
                 </div>
-                <div class="col-6">
+                <a href="{{ route('site.buyNow',['idProduct'=>$product->id]) }}" class="col-6">
                     <button class="action">
                         <i class="fa-regular fa-cart-shopping"></i>
                         <span>Mua ngay</span>
                     </button>
-                </div>
+                </a>
                 @endif
 
             </div>

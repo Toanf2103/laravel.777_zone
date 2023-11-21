@@ -94,6 +94,7 @@
     text-decoration: none;
     transition: background-color .3s;
     border: none;
+    font-size: 1.5rem;
 }
 
 .page-item.active .page-link {

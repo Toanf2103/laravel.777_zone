@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Services\AddressService;
 use Illuminate\Http\Request;
 use App\Services\Site\OrderService;
 use App\Services\Site\ProductService;
@@ -31,11 +30,7 @@ class OrderController extends Controller
         $this->cartService = $cartService;
         $this->mailService = $mailService;
     }
-    public function testOrder()
-    {
-        $se = new AddressService();
-        $se->getNameAdress(11140);
-    }
+
     public function order(Request $request)
     {
 
@@ -58,7 +53,7 @@ class OrderController extends Controller
         $type = $request->get('type') ?? 'waiting';
         $user = Auth::guard('user')->user();
         // dd($user);
-        $orders = Order::where('status', $type)->where('user_id',$user->id)->get();
+        $orders = Order::where('status', $type)->where('user_id', $user->id)->get();
         // dd($orders);
         return view('site.pages.orderMenu', compact('orders'));
     }
@@ -78,8 +73,6 @@ class OrderController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // Handle validation failure
-            // dd(1);
             return redirect()->back()->with('error', 'Có lỗi !')->withInput();
         }
 
@@ -96,21 +89,27 @@ class OrderController extends Controller
             $prod['quantityCart'] = $quantityCart;
             $listProduct[] = $prod;
         }
-        // dd($request->all());
+
+        //Tạo đơn hàng
         $order = $orderServ->create($request->all(), $listProduct);
-        $totalPrice = 0;
-        $totalPrice = $totalPrice + $order->ship_fee;
-        foreach ($listProduct as $product) {
-            $totalPrice += $product->price * $product->quantityCart;
-        }
+        $totalPrice = $order->totalPrice();
+
         switch ($request['type-pay']) {
             case 'cod':
+                //Chuyển trạng thái đơn hàng
                 $order->status = 'waiting';
                 $order->save();
-                $listProduct = $order->orderDetails->pluck('product_id');
-                // dd($listProduct);
-                $this->cartService->deleteListProduct($listProduct);
+                //Gửi email hóa đơn về
                 $this->mailService->sendMailOrder($order);
+
+                //Trừ số lượng của sản phẩm khi đặt hàng thành công
+                $this->prodSer->minusQuantity($order);
+
+                //Xóa sản phẩm ra khỏi giỏ hàng
+                $listProduct = $order->orderDetails->pluck('product_id');
+                $this->cartService->deleteListProduct($listProduct);
+
+
 
                 return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('arlet', 'Đặt hàng thành công');
             case 'vnpay':
@@ -138,17 +137,25 @@ class OrderController extends Controller
 
         $data = $request->all();
         if ($data['vnp_TransactionStatus'] === "00"  && $data['vnp_ResponseCode'] === "00") {
+
+            //Lấy đơn hàng thông qua id được trả về
             $order = $orderServ->getOrderById($data['order_id']);
+
+            //Chuyển trạng thái đơn hàng
             $order->status = 'waiting';
             $order->pay_status = true;
             $order->save();
-            // dd('1');
+
+            //Gửi email hóa đơn về
             $this->mailService->sendMailOrder($order);
 
+            //Trừ số lượng của sản phẩm khi đặt hàng thành công
+            $this->prodSer->minusQuantity($order);
+
+            //Xóa sản phẩm ra khỏi giỏ hàng
             $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
             return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('alert', 'Đặt hàng thành công');
         }
-        // dd('2');
 
         return redirect()->route('site.cart')->with('error', 'Có lỗi trong quá trình thanh toán');
     }
@@ -157,12 +164,23 @@ class OrderController extends Controller
         $orderServ = new OrderService();
         $data = $request->all();
         if ($data['resultCode'] === "0") {
+
+            //Lấy đơn hàng thông qua id được trả về
             $order = $orderServ->getOrderById($data['order_id']);
+
+            //Chuyển trạng thái đơn hàng
             $order->status = 'waiting';
             $order->pay_status = true;
             $order->save();
-            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
+
+            //Gửi email hóa đơn về
             $this->mailService->sendMailOrder($order);
+
+            //Trừ số lượng của sản phẩm khi đặt hàng thành công
+            $this->prodSer->minusQuantity($order);
+
+            //Xóa sản phẩm ra khỏi giỏ hàng
+            $check = $this->cartService->deleteListProduct($order->orderDetails->pluck('product_id'));
 
             return redirect()->route('site.showBillOrder', ['orderId' => $order->id])->with('alert', 'Đặt hàng thành công');
         }
@@ -172,7 +190,7 @@ class OrderController extends Controller
     {
         $orderSer =  new OrderService();
         $order = $orderSer->getOrderById($orderId);
-       
+
 
         return view('site.pages.showBillOrder', compact('order'));
     }
@@ -182,5 +200,12 @@ class OrderController extends Controller
         $order = $orderSer->getOrderById($orderId);
         $pdf = PDF::loadView('site.partials.billPdf', compact('order'))->setPaper('a4');
         return $pdf->stream('example.pdf');
+    }
+
+    public function buyNow($idProduct)
+    {
+        $product = $this->prodSer->findProductById($idProduct);
+        $this->cartService->addProduct($product);
+        return redirect()->route('site.cart');
     }
 }

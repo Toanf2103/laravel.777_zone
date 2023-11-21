@@ -28,38 +28,40 @@ class ProductService
         }
     }
 
-    public function getProductBySlug($slug){
+    public function getProductBySlug($slug)
+    {
         return Product::where('slug', $slug)->first();
     }
 
-    public function findProductById($productId,$status = null){
-        try{
-            $prod = Product::where('id',$productId);
-            if($status !== null){
-                $prod = $prod->where('status',$status);
+    public function findProductById($productId, $status = null)
+    {
+        try {
+            $prod = Product::where('id', $productId);
+            if ($status !== null) {
+                $prod = $prod->where('status', $status);
             }
             return $prod->first();
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
     }
 
-    public function findProductsByName($keyword, $pagination = null,$sort=null){
-        try{
+    public function findProductsByName($keyword, $pagination = null, $sort = null)
+    {
+        try {
             $listProduct = Product::query();
 
             if ($keyword) {
                 $listProduct->where('name', 'like', "%$keyword%");
             }
-            if($sort){
-                $listProduct = $this->sortProducts($listProduct,$sort);
+            if ($sort) {
+                $listProduct = $this->sortProducts($listProduct, $sort);
             }
-            if($pagination){
-                $listProduct= $listProduct->paginate($pagination);
+            if ($pagination) {
+                $listProduct = $listProduct->paginate($pagination);
             }
             return $listProduct;
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return abort(404);
         }
     }
@@ -104,12 +106,13 @@ class ProductService
         }
     }
 
-    public function getOrderProductsById($listId){
+    public function getOrderProductsById($listId)
+    {
         $cartser = new CartService();
         $listProduct = Product::whereIn('id', $listId)
-        ->where('status', true)
-        ->get();
-        foreach($listProduct as $key=>$product){
+            ->where('status', true)
+            ->get();
+        foreach ($listProduct as $key => $product) {
             $listProduct[$key]['quantityCart'] = $cartser->getQuatityProduct($listProduct[$key]->id);
         }
         return $listProduct;
@@ -129,5 +132,14 @@ class ProductService
         }
     }
 
-    
+    public function minusQuantity($order)
+    {
+        $orders = $order->orderDetails;
+        foreach ($orders as $prod) {
+            $product = $prod->product;
+            $product->quantity = $product->quantity - $prod->quantity;
+            $product->save();
+        }
+        return true;
+    }
 }

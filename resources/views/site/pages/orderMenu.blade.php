@@ -31,11 +31,7 @@
             Hoàn thành
         </span>
     </a>
-    <a href="{{ route('site.order.menu',['type'=>'creating']) }}" class="nav-header-items d-flex align-items-center justify-content-center {{ request('type')=='creating' ? 'active' : '' }}">
-        <span>
-            Đang chờ thanh toán
-        </span>
-    </a>
+
     <a href="{{ route('site.order.menu',['type'=>'cancel']) }}" class="nav-header-items d-flex align-items-center justify-content-center {{ request('type')=='cancel' ? 'active' : '' }}">
         <span>
             Đã hủy
@@ -51,20 +47,21 @@
 @section('content')
 @foreach($orders as $order)
 <div class="order-wrapper">
-    <div class="order-title">
+    <div class="order-title d-flex align-items-center justify-content-between">
+        <a href="{{route('site.showBillOrder',['orderId'=>$order->id])}}" target="_blank">Xem chi tiết</a>
         <span>Chờ xác nhận</span>
     </div>
     @foreach($order->orderDetails as $orderDetail)
     <div class="order-content d-flex align-items-center gap-5">
         <div class="order-content-img">
-            <img src="https://fptshop.com.vn/Uploads/Originals/2022/11/30/638054090260153672_ip-14-tim-1.jpg" alt="">
+            <img src="{{ $orderDetail->product->productImages->get(0)->link }}" alt="">
         </div>
         <div class="order-content-info">
             <a href="#">{{$orderDetail->product->name}}</a>
             <p>x{{$orderDetail->quantity}}</p>
         </div>
         <div class="order-contetn-price">
-            <p class="price">{{ NumberHelper::format($orderDetail->price)}}d</p>
+            <p class="price">{{ NumberHelper::format($orderDetail->price)}}đ</p>
         </div>
     </div>
     @endforeach
@@ -76,7 +73,7 @@
                 <p>Tổng tiền: </p>
             </div>
             <div class="col-6">
-                <p class="price">{{ NumberHelper::format($order->totalPrice() - $order->ship_fee) }}</p>
+                <p class="price">{{ NumberHelper::format($order->totalPrice() - $order->ship_fee) }}đ</p>
             </div>
         </div>
     </div>
@@ -88,7 +85,7 @@
                 <p>Phí vận chuyển: </p>
             </div>
             <div class="col-6">
-                <p class="price">{{ NumberHelper::format($order->ship_fee) }}</p>
+                <p class="price">{{ NumberHelper::format($order->ship_fee) }}đ</p>
             </div>
         </div>
     </div>
@@ -100,7 +97,7 @@
                 <p>Tổng cộng: </p>
             </div>
             <div class="col-6">
-                <p class="price">{{ NumberHelper::format($order->totalPrice()) }}</p>
+                <p class="price">{{ NumberHelper::format($order->totalPrice()) }}đ</p>
             </div>
         </div>
     </div>

@@ -60,22 +60,22 @@
         <form action="{{ route('site.checkout') }}" method="POST" class="needs-validation" novalidate>
             @csrf
             <div class="mb-3 ">
-                <label for="name-user" class="form-label">Họ và tên: </label>
-                <input required value="{{ old('username') }}" name="username" type="text" class="form-control" id="name-user" placeholder="Nhập họ tên...">
+                <label for="name-user" class="form-label">Họ và tên:</label>
+                <input required value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->full_name:null}}" name="username" type="text" class="form-control" id="name-user" placeholder="Nhập họ tên...">
                 <div class="invalid-feedback">
                     Nhập họ tên
                 </div>
             </div>
             <div class="mb-3">
                 <label for="phone-number-user" class="form-label">Số điện thoại: </label>
-                <input required name="phone-number" type="tel" pattern="[0-9]{10}" class="form-control" id="phone-number-user" placeholder="Nhập số điện thoại...">
+                <input required name="phone-number" value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->phone_number:null}}" type="tel" pattern="[0-9]{10}" class="form-control" id="phone-number-user" placeholder="Nhập số điện thoại...">
                 <div class="invalid-feedback">
                     Nhập số điện thoại
                 </div>
             </div>
             <div class="mb-3">
                 <label for="province" class="form-label">Tỉnh thành:</label>
-                <select name="province" id="province" class="form-select" required>
+                <select name="province" id="province" class="form-select" required data-id="{{Auth::guard('user')->check()? Auth::guard('user')->user()->province_id:null}}">
                     <option value="" disabled selected>---CHỌN TỈNH THÀNH---</option>
                 </select>
                 <div class="invalid-feedback">
@@ -84,7 +84,7 @@
             </div>
             <div class="mb-3">
                 <label for="district" class="form-label">Quận huyện:</label>
-                <select name="district" id="district" class="form-select" required>
+                <select name="district" id="district" class="form-select" required data-id="{{Auth::guard('user')->check()? Auth::guard('user')->user()->district_id:null}}">
                     <option value="" disabled selected>---CHỌN QUẬN HUYỆN---</option>
                 </select>
                 <div class="invalid-feedback">
@@ -93,7 +93,7 @@
             </div>
             <div class="mb-3">
                 <label for="ward" class="form-label">Phường xã:</label>
-                <select name="ward" id="ward" class="form-select" required>
+                <select name="ward" id="ward" class="form-select" required data-id="{{Auth::guard('user')->check()? Auth::guard('user')->user()->ward_id:null}}">
                     <option value="" disabled selected>---CHỌN PHƯỜNG XÃ---</option>
                 </select>
                 <div class="invalid-feedback">

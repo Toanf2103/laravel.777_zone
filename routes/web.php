@@ -45,6 +45,8 @@ Route::get('/category/{categorySlug}', [HomeController::class, 'category'])->nam
 Route::get('/category/{categorySlug}/{brandSlug}', [HomeController::class, 'categoryBrand'])->name('site.category.brand');
 Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('site.product');
 
+
+Route::get('/mua-ngay/{idProduct}', [OrderController::class, 'buyNow'])->name('site.buyNow');
 Route::get('/order', [OrderController::class, 'order'])->name('site.order');
 Route::get('/orderMenu', [OrderController::class, 'orderMenu'])->middleware('user')->name('site.order.menu');
 Route::get('/testOrder', [OrderController::class, 'testOrder']);
@@ -65,6 +67,15 @@ Route::get('/showBillOrder/{orderId}', [OrderController::class, 'showBillOrder']
 Route::post('/login', [AuthController::class, 'login'])->name('site.auth.login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('site.auth.logout');
 Route::post('/register', [AuthController::class, 'register'])->name('site.auth.register');
+
+Route::group(['prefix' => 'profile', 'middleware' => 'user'], function () {
+
+    Route::get('/edit', [AuthController::class, 'editProfile'])->name('site.auth.edit');
+    Route::post('/edit', [AuthController::class, 'changeInfo'])->name('site.auth.changeInfo');
+
+    Route::get('/change-pass', [AuthController::class, 'changePassView'])->name('site.auth.pass');
+    Route::post('/', [AuthController::class, 'changePass'])->name('site.auth.changePass');
+});
 
 // Google
 Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('site.auth.redirectToGoogle');
