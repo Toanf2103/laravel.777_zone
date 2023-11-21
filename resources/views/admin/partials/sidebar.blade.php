@@ -12,7 +12,7 @@
                 <span>{{ $user->full_name }}</span>
             </a>
         </li>
-        <li class="@if(request()->is('admin')){{ 'active' }}@endif">
+        <!-- <li class="@if(request()->is('admin')){{ 'active' }}@endif">
             <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center gap-2">
                 <div class="icon-box">
                     @if(request()->is('admin'))
@@ -23,7 +23,7 @@
                 </div>
                 <span>Dashboard</span>
             </a>
-        </li>
+        </li> -->
         <li class="@if(request()->is('admin/banners*')){{ 'active' }}@endif">
             <a href="{{ route('admin.banners.index') }}" class="d-flex align-items-center gap-2 ">
                 <div class="icon-box">
@@ -84,11 +84,14 @@
                 <span>Khách hàng</span>
             </a>
         </li>
-        <li class="">
-            <a href="#" class="d-flex align-items-center gap-2 ">
+        <li class="@if(request()->is('admin/orders*')){{ 'active' }}@endif">
+            <a href="{{ route('admin.orders.index') }}" class="d-flex align-items-center gap-2 ">
                 <div class="icon-box">
-                    <!-- <i class="fa-sharp fa-solid fa-clipboard-list-check"></i> -->
+                    @if(request()->is('admin/orders*'))
+                    <i class="fa-sharp fa-solid fa-clipboard-list-check"></i>
+                    @else
                     <i class="fa-sharp fa-light fa-clipboard-list-check"></i>
+                    @endif
                 </div>
                 <span>Đơn hàng</span>
             </a>

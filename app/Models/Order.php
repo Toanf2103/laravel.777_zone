@@ -49,7 +49,7 @@ class Order extends Model
         $total += $this->ship_fee;
         return $total;
     }
-    
+
     public function nameAddress()
     {
         $adrS = new AddressService();

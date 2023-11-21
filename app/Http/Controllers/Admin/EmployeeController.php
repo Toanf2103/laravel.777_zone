@@ -37,8 +37,10 @@ class EmployeeController extends Controller
         $employees = User::where('role', 'employee')->orderBy('id', 'desc')->paginate(20);
 
         foreach ($employees as $index => $employee) {
-            $address = $this->addressService->getDetailByWardId($employee->ward_id);
-            $employees[$index]['full_address'] = "{$employee->address}, {$address['districts']['wards']['name']}, {$address['districts']['name']}, {$address['name']}";
+            if ($employee->ward_id) {
+                $address = $this->addressService->getDetailByWardId($employee->ward_id);
+                $employees[$index]['full_address'] = "{$employee->address}, {$address['districts']['wards']['name']}, {$address['districts']['name']}, {$address['name']}";
+            }
         }
 
         return view('admin.pages.employee.index', compact('employees'));

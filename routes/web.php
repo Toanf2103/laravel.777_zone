@@ -157,4 +157,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/{employee}/toggle-status', [Admin\EmployeeController::class, 'toggleStatus'])->name('admin.employees.toggleStatus');
         Route::get('/{employee}/reset-password', [Admin\EmployeeController::class, 'resetPassword'])->name('admin.employees.resetPassword');
     });
+
+    // Order
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', [Admin\OrderController::class, 'index'])->name('admin.orders.index');
+        Route::get('/{order}/show', [Admin\OrderController::class, 'show'])->name('admin.orders.show');
+        Route::get('/{order}/change-status/{status}', [Admin\OrderController::class, 'changeStatus'])->name('admin.orders.changeStatus');
+    });
 });

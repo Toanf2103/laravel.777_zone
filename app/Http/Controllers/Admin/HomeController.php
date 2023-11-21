@@ -14,6 +14,6 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('admin.pages.dashboard');
+        return redirect()->route('admin.banners.index');
     }
 }

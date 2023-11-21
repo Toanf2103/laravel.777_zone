@@ -6,8 +6,7 @@
     <meta name="root-url" data-index="{{ URL::to('/'); }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - 777 Zone</title>
-
-    <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/872448203583262763/1173497880250691715/777zone_logo_sqare_144.png" type="image/x-icon">
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/872448203583262763/1176545650700194002/777zone_logo_sqare_144.png">
 
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,8 +30,6 @@
     <!-- sweetalert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- End sweetalert2 JS -->
-
-
 
     @yield('css')
 </head>
