@@ -12,21 +12,7 @@ class Order extends Model
 
     protected $table = "orders";
 
-    protected $fillable = [
-        'user_id',
-        'name',
-        'phone_number',
-        'province_id',
-        'district_id',
-        'ward_id',
-        'address',
-        'pay_method',
-        'pay_id',
-        'pay_status',
-        'ship_fee',
-        'note',
-        'status'
-    ];
+    protected $fillable = ['user_id', 'name', 'phone_number', 'email', 'province_id', 'district_id', 'ward_id', 'address', 'pay_method', 'pay_id', 'pay_status', 'ship_fee', 'note', 'status'];
 
     public function user()
     {
@@ -48,7 +34,7 @@ class Order extends Model
         $total += $this->ship_fee;
         return $total;
     }
-    
+
     public function nameAddress()
     {
         $adrS = new AddressService();

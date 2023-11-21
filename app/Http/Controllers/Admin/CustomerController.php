@@ -23,8 +23,10 @@ class CustomerController extends Controller
         $customers = User::where('role', 'customer')->orderBy('id', 'desc')->paginate(20);
 
         foreach ($customers as $index => $customer) {
-            $address = $this->addressService->getDetailByWardId($customer->ward_id);
-            $customers[$index]['full_address'] = "{$customer->address}, {$address['districts']['wards']['name']}, {$address['districts']['name']}, {$address['name']}";
+            if ($customer->ward_id) {
+                $address = $this->addressService->getDetailByWardId($customer->ward_id);
+                $customers[$index]['full_address'] = "{$customer->address}, {$address['districts']['wards']['name']}, {$address['districts']['name']}, {$address['name']}";
+            }
         }
 
         return view('admin.pages.customer.index', compact('customers'));

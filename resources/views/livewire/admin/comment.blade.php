@@ -7,7 +7,7 @@ use App\Helpers\DateHelper
     <div class="d-flex flex-column gap-3">
         <div class="comment-item d-flex align-items-start justify-content-start gap-3">
             <div class="avatar">
-                <img src="{{ $comment->user->avatar }}" alt="{{ $comment->user->full_name }}">
+                <img src="{{ $comment->user->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="{{ $comment->user->full_name }}">
             </div>
             <div class="comment-item-content">
                 <div class="comment-name">
@@ -29,7 +29,7 @@ use App\Helpers\DateHelper
         @foreach($comment->replies as $commentReply)
         <div class="comment-item d-flex align-items-start justify-content-start gap-3 comment-replay">
             <div class="avatar">
-                <img src="{{ $commentReply->user->avatar }}" alt="{{ $commentReply->user->full_name }}">
+                <img src="{{ $commentReply->user->avatar ?? 'https://storage.googleapis.com/laravel-img.appspot.com/user/customer-default.png' }}" alt="{{ $commentReply->user->full_name }}">
             </div>
             <div class="comment-item-content">
                 <div class="comment-name">
