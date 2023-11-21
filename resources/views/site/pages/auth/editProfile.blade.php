@@ -33,7 +33,7 @@
         </a>
         <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
             <div class="wrapper-icon">
-                <i class="fa-sharp fa-solid fa-lock"></i>
+                <i class="fa-sharp fa-solid fa-image"></i>
             </div>
             <div class="d-flex align-items-center">
                 <p>Đổi avatar</p>
@@ -79,7 +79,7 @@
 
             <div class="mb-4">
                 <label for="" class="form-label">Địa chỉ</label>
-                <input type="text"  name="address" value="{{ $user->address }}" class="form-control" id="" placeholder="Địa chỉ">
+                <input type="text" name="address" value="{{ $user->address }}" class="form-control" id="" placeholder="Địa chỉ">
                 @if ($errors->has('address'))
                 <small class="text-danger">{{ $errors->first('address') }}</small>
                 @endif
@@ -112,9 +112,9 @@
                     Chọn Phường/Xã
                 </div>
             </div>
-            
+
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success">Lưu</button>
+                <button type="submit" class="btn btn-success" id="submit" disabled>Lưu</button>
             </div>
         </form>
 
@@ -126,6 +126,18 @@
 @stop
 
 @section('js')
+
+<script>
+    const inputElms = document.querySelectorAll('input');
+    const btnSubmit = document.getElementById('submit');
+
+    inputElms.forEach(function(elm) {
+        elm.addEventListener('change', (e) => {
+            btnSubmit.disabled = false;
+        });
+    });
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="{{ url('public/assets/js/address.js') }}"></script>
 <script>

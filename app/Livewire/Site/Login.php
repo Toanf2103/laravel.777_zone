@@ -104,7 +104,7 @@ class Login extends Component
     {
         if ($this->emailForgot == '' || $this->emailForgot == null) {
             $this->showAlret('Email trống', 'Vui lòng nhập email!', 'warning');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
         $userService = new UserService();
@@ -116,7 +116,7 @@ class Login extends Component
             return;
         } else {
             $this->showAlret('Email không đúng!', 'Email không khớp với bất kì tài khoản nào', 'error');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
     }
@@ -127,7 +127,7 @@ class Login extends Component
         $userService = new UserService();
         if ($this->verification == null || $this->verification == '') {
             $this->showAlret('Mã xác nhận trống', 'Vui lòng nhập mã xác nhận', 'warning');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
         $check = $userService->checkVerificationToken($this->emailForgot,$this->verification);
@@ -135,7 +135,7 @@ class Login extends Component
 
         if($check['status'] == 'error') {
             $this->showAlret($check['message'], 'Vui lòng thử lại', 'error');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
         if($check['status'] == 'success') {
@@ -151,12 +151,12 @@ class Login extends Component
         // dd($this->newPass);
         if($this->newPass == '' || $this->newPass == null || $this->newPassConfirm=='' || $this->newPassConfirm==null){
             $this->showAlret('Mật khẩu trống', 'Vui lòng nhập đầy đủ', 'error');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
         if($this->newPass != $this->newPassConfirm){
             $this->showAlret('Mật khẩu xác nhận không trùng khớp', 'Mật khẩu xác nhận không trùng khớp', 'error');
-            $this->skipRender();
+            // $this->skipRender();
             return;
         }
         $userSer = new UserService();

@@ -32,13 +32,13 @@
         </a>
         <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
             <div class="wrapper-icon">
-                <i class="fa-sharp fa-solid fa-lock"></i>
+                <i class="fa-sharp fa-solid fa-image"></i>
             </div>
             <div class="d-flex align-items-center">
                 <p>Đổi avatar</p>
             </div>
         </a>
-        
+
     </div>
     <div class="col-8 left">
         <h1 class="title-profile">
@@ -71,7 +71,7 @@
                 @endif
             </div>
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success">Lưu</button>
+                <button type="submit" class="btn btn-success" disabled id="submit">Lưu</button>
             </div>
         </form>
 
@@ -83,12 +83,23 @@
 @stop
 
 @section('js')
+<script>
+    const inputElms = document.querySelectorAll('input');
+    const btnSubmit = document.getElementById('submit');
+
+    inputElms.forEach(function(elm) {
+        elm.addEventListener('change', (e) => {
+            btnSubmit.disabled = false;
+        });
+    });
+</script>
+
 @if(session('alert'))
 <script>
     alertCustom({
-        message:"{{ session('alert')['message'] }}",
-        type:"{{ session('alert')['status'] }}",
-        duration:5000
+        message: "{{ session('alert')['message'] }}",
+        type: "{{ session('alert')['status'] }}",
+        duration: 5000
     });
 </script>
 @endif

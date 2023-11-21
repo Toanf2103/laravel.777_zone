@@ -204,6 +204,7 @@ header .login img {
 
     display: block;
     max-height: 4rem;
+    aspect-ratio: 1/1;
     border-radius: 999px;
 }
 
@@ -429,6 +430,11 @@ header .cart-header span {
 
 .form-container .forgot a {
     font-size: 1.4rem;
+    cursor: pointer;
+
+}
+.form-container .forgot a:hover{
+    color: #ee4d2d;
 }
 
 .form-container .sign {

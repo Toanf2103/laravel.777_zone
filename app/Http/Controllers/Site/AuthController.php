@@ -7,7 +7,9 @@ use App\Http\Requests\Site\ChangeAvatarRequest;
 use App\Http\Requests\Site\ChangeInfoRequest;
 use App\Http\Requests\Site\ChangePassRequest;
 use App\Models\User;
+use App\Services\FirebaseStorageService;
 use App\Services\Site\AuthService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDO;
@@ -59,10 +61,10 @@ class AuthController extends Controller
         if ($rq->province) {
             $user->province_id = $rq->province;
         }
-        if($user->email===null){
+        if ($user->email === null) {
             $user->email = $rq->email;
         }
-        if($rq->address){
+        if ($rq->address) {
             $user->address = $rq->address;
         }
 
@@ -81,27 +83,39 @@ class AuthController extends Controller
         // dd(1);
         // dd($rq->current_pass);
         $user = User::where('id', Auth::guard('user')->user()->id)->first();
-        if(!password_verify($rq->current_pass,$user->password)){
-            return redirect()->back()->with('alert',['status' => 'error','message'=>'Sai mật khẩu!'] );
-
+        if (!password_verify($rq->current_pass, $user->password)) {
+            return redirect()->back()->with('alert', ['status' => 'error', 'message' => 'Sai mật khẩu!']);
         }
         if ($rq->new_pass !== $rq->cofirm_new_pass) {
-            return redirect()->back()->with('alert', ['status' => 'error','message'=>'Mật khẩu xác nhận không đúng!']);
+            return redirect()->back()->with('alert', ['status' => 'error', 'message' => 'Mật khẩu xác nhận không đúng!']);
         }
 
-    //    dd(1);
+        //    dd(1);
         $user->password = bcrypt($rq->new_pass);
         $user->save();
-        return redirect()->back()->with('alert', ['status' => 'success','message'=>'Đổi mật khẩu thành công']);
+        return redirect()->back()->with('alert', ['status' => 'success', 'message' => 'Đổi mật khẩu thành công']);
+    }
+    public function avatar()
+    {
+        $user = User::where('id', Auth::guard('user')->user()->id)->first();
+        return view('site.pages.auth.changeAvatar', compact('user'));
+    }
 
-    }
-    public function avatar(){
-        $user = Auth::guard('user')->user();
-        return view('site.pages.auth.changeAvatar',compact('user'));
-    }
+    public function changeAvatar(ChangeAvatarRequest $rq)
+    {
+        // dd(1);
+        try {
+            $firbaseSer = new FirebaseStorageService();
+            $user = User::where('id', Auth::guard('user')->user()->id)->first();
 
-    public function changeAvatar(ChangeAvatarRequest $rq){
-        dd(1);
+
+            $avatar = $firbaseSer->uploadImage($rq['avatar'], $user->id, 'user');
+            // dd($avatar);
+            $user->avatar = $avatar['full_url'];
+            $user->save(); 
+            return redirect()->route('site.auth.avatar')->with('alert', ['status' => 'success', 'message' => 'Đổi avatar thành công']);
+        } catch (Exception $e) {
+            return redirect()->route('site.auth.avatar')->with('alert', ['status' => 'danger', 'message' => 'Có lỗi! thử lại sau']);
+        }
     }
-   
 }

@@ -53,7 +53,7 @@ class OrderController extends Controller
         $type = $request->get('type') ?? 'waiting';
         $user = Auth::guard('user')->user();
         // dd($user);
-        $orders = Order::where('status', $type)->where('user_id', $user->id)->get();
+        $orders = Order::where('status', $type)->where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
         // dd($orders);
         return view('site.pages.orderMenu', compact('orders'));
     }

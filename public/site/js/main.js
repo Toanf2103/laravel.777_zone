@@ -134,3 +134,14 @@ function alertCustom({  message = '', type = 'success', duration = 1500 }) {
   })
 }
 
+function toggleShowPassword(elm){
+  const inputElm = elm.parentNode.querySelector('input');
+  inputElm.type = inputElm.type=='password' ? 'text' : 'password';
+  if(inputElm.type=='password'){
+    elm.querySelector('i').classList = "fa-regular fa-eye";
+  }else{
+    elm.querySelector('i').classList = "fa-regular fa-eye-slash";
+
+  }
+}
+

@@ -32,7 +32,7 @@
         </a>
         <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
             <div class="wrapper-icon">
-                <i class="fa-sharp fa-solid fa-lock"></i>
+                <i class="fa-sharp fa-solid fa-image"></i>
             </div>
             <div class="d-flex align-items-center">
                 <p>Đổi avatar</p>
@@ -44,7 +44,7 @@
         <h1 class="title-profile">
             Đổi avatar
         </h1>
-        <form action="{{ route('site.auth.changeAvatar') }}" method="POST">
+        <form action="{{ route('site.auth.changeAvatar') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!--Avatar-->
             <div>
@@ -57,6 +57,9 @@
                         <input type="file" accept="image/*" name="avatar" class="form-control d-none" id="avatar" />
                     </div>
                     <button id="submit" type="submit" class="btn btn-success" disabled>Lưu</button>
+                    @if ($errors->has('avatar'))
+                    <small class="text-danger">{{ $errors->first('avatar') }}</small>
+                    @endif
                 </div>
             </div>
         </form>

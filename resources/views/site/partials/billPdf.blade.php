@@ -94,8 +94,12 @@ use App\Helpers\NumberHelper;
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px">Phí ship:</th>
-                        <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px"><span>{{ NumberHelper::format($order->ship_fee) }}<span>₫</span></span></td>
+                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px">Tổng giá:</th>
+                        <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px"><span>{{ NumberHelper::format($order->totalPrice()-$order->ship_fee) }}<span>₫</span></span></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left">Phí ship:</th>
+                        <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left"><span>{{ NumberHelper::format($order->ship_fee) }}<span>₫</span></span></td>
                     </tr>
 
                     <tr>
@@ -110,6 +114,9 @@ use App\Helpers\NumberHelper;
             </table>
             <p class="text-title">Địa chỉ thanh toán</p>
             <address style="padding:12px;color:#636363;border:1px solid #e5e5e5">
+                @if($order->address !== null)
+                {{$order->address}},
+                @endif
                 {{ $order->nameAddress() }}
                 <br>
                 <span>SDT: {{ $order->phone_number }}</span>
