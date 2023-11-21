@@ -2,7 +2,8 @@ body {
 
     background-color: #f0f0f0;
 }
-p{
+
+p {
     margin: 0;
 }
 
@@ -10,37 +11,48 @@ p{
     background-color: transparent;
     color: #000;
 }
-.right,.left{
+
+.right,
+.left {
     background-color: #fff;
 }
-.row>*{
+
+.row>* {
     padding: 0;
 }
-.left{
+
+.left {
     padding: 2rem;
 }
-.nav-item{
+
+.nav-item {
     padding: 2rem 2rem;
     cursor: pointer;
     color: #000;
 }
-.nav-item:hover{
+
+.nav-item:hover {
     background-color: #efe8e8;
 }
-.title-profile{
+
+.title-profile {
     border-bottom: 2px solid #efe8e8;
     text-align: left;
     font-size: 2rem;
     font-weight: 400;
     padding: 1rem 0rem;
 }
-form{
+
+form {
     margin-top: 2rem;
 }
-form .form-control,form .form-select{
+
+form .form-control,
+form .form-select {
     font-size: 2rem;
 }
-.btn{
+
+.btn {
     font-size: 2rem;
 
 }

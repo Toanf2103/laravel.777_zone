@@ -8,43 +8,56 @@
     /* Cột 1 chiếm 70%, cột 2 chiếm 30% */
     grid-gap: 1rem;
 }
-.desc-order, .desc-info{
+
+.desc-order,
+.desc-info {
     background-color: #fff;
     width: 100%;
     padding: 1.5rem 0;
     height: fit-content;
 }
-.order-img-product{
+
+.order-img-product {
     display: block;
     max-width: 5rem;
 }
-table{
+
+table {
     text-align: center;
 }
-thead{
+
+thead {
     border-bottom: 3px solid #f0f0f0;
 }
-tbody tr,th{
+
+tbody tr,
+th {
     padding: 1rem !important;
     border-bottom: 1px solid #f0f0f0;
 
 }
-thead th{
+
+thead th {
     font-size: 2rem;
 }
-.desc-info form{
+
+.desc-info form {
     margin: 1rem;
 }
-.desc-info form .form-label{
+
+.desc-info form .form-label {
     color: #000;
     font-weight: 500;
     font-size: 2rem;
 }
-.desc-info form input.form-control,.desc-info form select{
+
+.desc-info form input.form-control,
+.desc-info form select {
     font-size: 1.5rem !important;
     border-radius: 0.8rem;
 }
-button.cofirm-order{
+
+button.cofirm-order {
     display: flex;
     align-items: center;
     justify-content: center;

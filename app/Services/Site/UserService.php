@@ -3,6 +3,7 @@
 namespace App\Services\Site;
 
 use App\Models\User;
+use App\Services\FirebaseStorageService;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -14,15 +15,20 @@ class UserService
     public function createWithSocial($data)
     {
         try {
+            $firebaseServ = new FirebaseStorageService();
+            // dd($data);
+
             $newUser = User::create(
                 [
                     'email' => $data['email'],
                     'role' => 'customer',
                     'full_name' => $data['name'],
-                    'avatar' => $data['avatar'],
                     'google_id' => $data['google_id']
                 ]
             );
+            $imgFireBase = $firebaseServ->uploadImageByLink($data['avatar'],$newUser->id,'user');
+            $newUser->avatar = $imgFireBase['full_url'];
+            $newUser->save();
             return $newUser;
         } catch (Exception $e) {
             return false;

@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'login')
+@section('title', 'Đăng nhập')
 
 @section('css')
     <link rel="stylesheet" href="{{ url('public/site/css/pages/auth/login.css') }}">

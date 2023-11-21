@@ -16,6 +16,7 @@ class Order extends Model
         'user_id',
         'name',
         'phone_number',
+        'email',
         'province_id',
         'district_id',
         'ward_id',

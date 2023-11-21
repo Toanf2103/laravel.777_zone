@@ -64,6 +64,7 @@ class OrderController extends Controller
         $validator =  Validator::make($request->all(), [
             'username' => 'required',
             'phone-number' => 'required',
+            'email' => 'nullable|email',
             'province' => 'required',
             'district' => 'required',
             'ward' => 'required',
@@ -75,6 +76,7 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('error', 'Có lỗi !')->withInput();
         }
+        // dd(1);
 
         $orderServ = new OrderService();
 
@@ -191,7 +193,7 @@ class OrderController extends Controller
         $orderSer =  new OrderService();
         $order = $orderSer->getOrderById($orderId);
 
-
+        // dd($order);
         return view('site.pages.showBillOrder', compact('order'));
     }
     public function pdfOrder($orderId)

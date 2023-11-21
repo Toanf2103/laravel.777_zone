@@ -14,10 +14,10 @@ $id = preg_replace('/[^A-Za-z]/', '', $id);
                 </div>
             </div>
             @endforeach
-            <div class="wrapper-icon left-btn" data-bs-target="#{{$id}}" data-bs-slide="next">
+            <div class="wrapper-icon left-btn" data-bs-target="#{{$id}}" data-bs-slide="prev">
                 <i class="fa-light fa-arrow-left"></i>
             </div>
-            <div class="wrapper-icon right-btn" data-bs-target="#{{$id}}" data-bs-slide="prev">
+            <div class="wrapper-icon right-btn" data-bs-target="#{{$id}}" data-bs-slide="next">
                 <i class="fa-light fa-arrow-right"></i>
             </div>
         </div>

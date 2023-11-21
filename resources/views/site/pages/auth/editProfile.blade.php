@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'cart')
+@section('title', 'Đổi thông tin cá nhân')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/profile.css') }}">
@@ -29,6 +29,14 @@
             </div>
             <div class="d-flex align-items-center">
                 <p>Đổi mật khẩu</p>
+            </div>
+        </a>
+        <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
+            <div class="wrapper-icon">
+                <i class="fa-sharp fa-solid fa-lock"></i>
+            </div>
+            <div class="d-flex align-items-center">
+                <p>Đổi avatar</p>
             </div>
         </a>
 
@@ -68,6 +76,15 @@
                 <small class="text-danger">{{ $errors->first('phone_number') }}</small>
                 @endif
             </div>
+
+            <div class="mb-4">
+                <label for="" class="form-label">Địa chỉ</label>
+                <input type="text"  name="address" value="{{ $user->address }}" class="form-control" id="" placeholder="Địa chỉ">
+                @if ($errors->has('address'))
+                <small class="text-danger">{{ $errors->first('address') }}</small>
+                @endif
+            </div>
+
             <div class="mb-4">
                 <label for="province" class="form-label">Tỉnh thành:</label>
                 <select name="province" id="province" class="form-select" data-id="{{ $user->province_id }}">
@@ -95,6 +112,7 @@
                     Chọn Phường/Xã
                 </div>
             </div>
+            
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success">Lưu</button>
             </div>

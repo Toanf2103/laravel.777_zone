@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\ChangeAvatarRequest;
 use App\Http\Requests\Site\ChangeInfoRequest;
 use App\Http\Requests\Site\ChangePassRequest;
 use App\Models\User;
@@ -61,6 +62,9 @@ class AuthController extends Controller
         if($user->email===null){
             $user->email = $rq->email;
         }
+        if($rq->address){
+            $user->address = $rq->address;
+        }
 
         $user->save();
         // dd(1);
@@ -91,6 +95,13 @@ class AuthController extends Controller
         return redirect()->back()->with('alert', ['status' => 'success','message'=>'Đổi mật khẩu thành công']);
 
     }
+    public function avatar(){
+        $user = Auth::guard('user')->user();
+        return view('site.pages.auth.changeAvatar',compact('user'));
+    }
 
+    public function changeAvatar(ChangeAvatarRequest $rq){
+        dd(1);
+    }
    
 }

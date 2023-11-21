@@ -38,6 +38,26 @@ class FirebaseStorageService
         ];
     }
 
+
+    public function uploadImageByLink($linkImg, $imageName, $destinationPath)
+    {
+        $bucket = $this->storage->bucket($this->bucketName);
+
+        // Lấy phần mở rộng của tệp từ đường dẫn trực tiếp (link)
+        $extension = 'jpg';
+
+        $objectName = "$destinationPath/$imageName." . $extension;
+        $bucket->upload(file_get_contents($linkImg), ['name' => $objectName]);
+        
+        $object = $bucket->object($objectName);
+        $object->update(['acl' => []], ['predefinedAcl' => 'publicRead']);
+
+        return [
+            'full_url' => "https://storage.googleapis.com/{$this->bucketName}/{$objectName}",
+            'short_url' => $objectName
+        ];
+    }
+
     public function uploadManyImages(array $files, $destinationPath)
     {
         $uploadedFiles = [];

@@ -116,7 +116,7 @@
         </table>
         <p class="text-title">Địa chỉ thanh toán</p>
         <address style="padding:12px;color:#636363;border:1px solid #e5e5e5">
-            {{ $order->nameAddress() }} <br><span>SDT: </span> <a href="tel:0523919941" style="color:#96588a;font-weight:normal;text-decoration:underline" target="_blank">{{ $order->phone_number }}</a> </address>
+            {{$order->address.','}} {{ $order->nameAddress() }} <br><span>SDT: </span> <a href="tel:0523919941" style="color:#96588a;font-weight:normal;text-decoration:underline" target="_blank">{{ $order->phone_number }}</a> </address>
         <p style="margin:0 0 16px">Thanks for using <a href="{{ route('site.home') }}" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://hadoantv.com&amp;source=gmail&amp;ust=1700284851543000&amp;usg=AOvVaw1ML-heXRj7p-uYTwDDQgHm">777-Zone.com</a>!</p>
 
     </div>

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Site;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class ChangeAvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,18 +22,16 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required',
-            'phone-number' => 'required',
-            'province' => 'required',
-            'district' => 'required',
-            'ward' => 'required',
-            'type-pay' => 'required|in:momo,vnay,cod',
-            'products' => 'required',
-            'address' => 'required'
+            'avatar' => 'required|image|max:2048',
         ];
     }
-    public function messages()
+
+    public function messages(): array
     {
-        
+        return [
+            'avatar.required' => 'Chọn avatar',
+            'avatar.image' => 'Phải là hình ảnh',
+            'avatar.max' => 'Không vượt quá 2048kb',
+        ];
     }
 }

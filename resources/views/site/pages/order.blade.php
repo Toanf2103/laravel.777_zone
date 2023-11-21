@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'cart')
+@section('title', 'Đặt hàng')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/cart.css') }}">
@@ -74,6 +74,13 @@
                 </div>
             </div>
             <div class="mb-3">
+                <label for="email" class="form-label">Nhập email: </label>
+                <input name="email" value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->email:null}}" type="email" class="form-control" id="phone-number-user" placeholder="Nhập số điện thoại...">
+                <div class="invalid-feedback">
+                    Nhập email phải có định dạng @
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="province" class="form-label">Tỉnh thành:</label>
                 <select name="province" id="province" class="form-select" required data-id="{{Auth::guard('user')->check()? Auth::guard('user')->user()->province_id:null}}">
                     <option value="" disabled selected>---CHỌN TỈNH THÀNH---</option>
@@ -102,7 +109,10 @@
             </div>
             <div class="mb-3">
                 <label for="address-user" class="form-label">Địa chỉ: </label>
-                <input type="text" name="address-user" class="form-control" id="address-user" placeholder="Nhập địa chỉ...">
+                <input type="text" required value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->address:null}}" name="address-user" class="form-control" id="address-user" placeholder="Nhập địa chỉ...">
+                <div class="invalid-feedback">
+                    Nhập địa chỉ
+                </div>
             </div>
             <div class="mb-3">
                 <label for="type-pay" class="form-label">Chọn phương thức thanh toán</label>
@@ -168,4 +178,3 @@
 
 
 @stop
-

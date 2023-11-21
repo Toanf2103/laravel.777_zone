@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="root-url" data-index="{{ URL::to('/'); }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - Toanf-messi</title>
+    <title>@yield('title') - 777 Zone</title>
 
     <link rel="shortcut icon" href="https://cdn.discordapp.com/attachments/872448203583262763/1173497880250691715/777zone_logo_sqare_144.png" type="image/x-icon">
 

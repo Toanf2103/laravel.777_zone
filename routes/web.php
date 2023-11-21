@@ -75,6 +75,10 @@ Route::group(['prefix' => 'profile', 'middleware' => 'user'], function () {
 
     Route::get('/change-pass', [AuthController::class, 'changePassView'])->name('site.auth.pass');
     Route::post('/', [AuthController::class, 'changePass'])->name('site.auth.changePass');
+
+    Route::get('/avatar', [AuthController::class, 'avatar'])->name('site.auth.avatar');
+    Route::post('/avatar-change', [AuthController::class, 'changeAvatar'])->name('site.auth.changeAvatar');
+
 });
 
 // Google

@@ -268,7 +268,8 @@ header .cart-header span {
 .form-container {
     width: 100%;
     border-radius: 0.75rem;
-    background-color: var(--color-bg);;
+    background-color: var(--color-bg);
+    ;
     padding: 2rem;
     color: rgba(243, 244, 246, 1);
 }
@@ -302,7 +303,9 @@ header .cart-header span {
     border-radius: 0.375rem;
     border: 1px solid var(--color-bg-header);
     outline: 0;
-    background-color: var(--color-bg-header);;;
+    background-color: var(--color-bg-header);
+    ;
+    ;
     padding: 0.75rem 1rem;
     color: rgba(243, 244, 246, 1);
 }
@@ -333,7 +336,7 @@ header .cart-header span {
     font-weight: 600;
 }
 
-.sign:hover{
+.sign:hover {
     filter: brightness(.9);
 }
 
@@ -452,13 +455,13 @@ header .cart-header span {
     font-size: 1.75rem;
 }
 
-.form-container .input-group-pass{
+.form-container .input-group-pass {
     width: 100%;
     position: relative;
     font-size: 2rem;
 }
 
-.icon-toogle-pass{
+.icon-toogle-pass {
     position: absolute;
     top: 0;
     right: 0;
@@ -467,7 +470,7 @@ header .cart-header span {
     display: flex;
     align-items: center;
     justify-content: end;
-    padding: 0 1rem;   
+    padding: 0 1rem;
 }
 
 .forgot a,

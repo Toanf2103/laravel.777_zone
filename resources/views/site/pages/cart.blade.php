@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'cart')
+@section('title', 'Giỏ hàng')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/cart.css') }}">

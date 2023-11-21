@@ -1,5 +1,4 @@
-
-.wrapper-pdf{
+.wrapper-pdf {
     width: 100%;
     margin: 0 auto;
     border: 1px solid gray;
@@ -9,10 +8,12 @@
     font-family: 'DejaVu Sans', sans-serif !important;
     /* max-height: 30vh; */
 }
-.wrapper-pdf>*{
+
+.wrapper-pdf>* {
     font-family: 'DejaVu Sans', sans-serif !important;
 
 }
+
 .header-pdf {
     background-color: #96588a;
     color: #fff;
@@ -35,10 +36,12 @@
 .container-pdf table {
     margin-top: 20px;
 }
+
 .wrapper-pdf {
     color: #000;
 }
-.wrapper-pdf a{
+
+.wrapper-pdf a {
     color: #96588a;
 
 }

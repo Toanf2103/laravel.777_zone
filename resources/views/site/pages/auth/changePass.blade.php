@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'cart')
+@section('title', 'Đổi mật khẩu')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/profile.css') }}">
@@ -28,6 +28,14 @@
             </div>
             <div class="d-flex align-items-center">
                 <p>Đổi mật khẩu</p>
+            </div>
+        </a>
+        <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
+            <div class="wrapper-icon">
+                <i class="fa-sharp fa-solid fa-lock"></i>
+            </div>
+            <div class="d-flex align-items-center">
+                <p>Đổi avatar</p>
             </div>
         </a>
         
@@ -76,7 +84,6 @@
 
 @section('js')
 @if(session('alert'))
-<h1>asdasd</h1>
 <script>
     alertCustom({
         message:"{{ session('alert')['message'] }}",

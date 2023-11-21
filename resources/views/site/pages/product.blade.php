@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'product')
+@section('title', $product->name)
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/product.css') }}">

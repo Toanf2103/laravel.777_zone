@@ -27,6 +27,10 @@ class Cart extends Component
             $this->skipRender();
             return;
         }
+        if(5 < $this->cart[$productCheck]['quantity'] +1){
+            $this->skipRender();
+            return;
+        }
 
         if ($cartSer->updateQuantity($id, 1)) {
             $this->cart[$productCheck]['quantity'] += 1;

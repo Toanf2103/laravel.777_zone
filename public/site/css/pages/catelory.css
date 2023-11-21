@@ -52,6 +52,7 @@
     right: 0 !important;
     background-color: #fff;
     border-radius: 1.2rem;
+    min-width: 15rem;
 
 }
 

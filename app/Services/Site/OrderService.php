@@ -20,6 +20,7 @@ class OrderService
             'user_id' => $userId,
             'name' => $params['username'],
             'phone_number' => $params['phone-number'],
+            'email' => $params['email'],
             'province_id' => $params['province'],
             'district_id' => $params['district'],
             'ward_id' => $params['ward'],

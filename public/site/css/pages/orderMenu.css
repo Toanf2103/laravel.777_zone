@@ -15,56 +15,67 @@
     font-size: 1.8rem;
     font-weight: 400;
 }
-.nav-header-order .nav-header-items.active{
+
+.nav-header-order .nav-header-items.active {
     color: red;
     border-bottom: 5px solid red;
 }
-.content{
+
+.content {
     background-color: transparent;
 }
 
-.order-wrapper{
+.order-wrapper {
     background-color: #fff;
     color: #000;
     padding: 1rem 1.5rem;
 }
-.order-wrapper .order-title{
+
+.order-wrapper .order-title {
     font-size: 2rem;
     font-weight: bold;
     border-bottom: 2px solid #f0f0f0;
     padding: 2rem 0;
 
 }
-.order-title  a{
+
+.order-title a {
     color: #000;
     font-size: 2rem;
 
 }
 
-.order-content{
+.order-content {
     border-bottom: 2px solid #f0f0f0;
     padding: 1rem 0;
 }
-.order-content-img img{
+
+.order-content-img img {
     width: 6rem;
 }
-.order-content-info{
-    flex:1;
+
+.order-content-info {
+    flex: 1;
 }
-.order-content a,.order-content p{
+
+.order-content a,
+.order-content p {
     color: red;
     font-size: 2rem;
 }
-.price{
+
+.price {
     font-size: 2.5rem;
     font-weight: 600;
     color: red;
 
 }
-.order-wrapper .row p{
+
+.order-wrapper .row p {
     text-align: right;
     font-size: 2rem;
 }
-.order-wrapper{
+
+.order-wrapper {
     margin-bottom: 2rem
 }

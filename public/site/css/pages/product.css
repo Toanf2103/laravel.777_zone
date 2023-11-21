@@ -39,7 +39,7 @@ td {
   font-size: 1.4rem;
 }
 
-tr + tr {
+tr+tr {
   border-top: 1px solid #414141;
 }
 
@@ -90,14 +90,12 @@ tr td:first-child {
   bottom: 0;
   width: 100%;
   padding: 2rem;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(rgba(255, 255, 255, 0)),
-    color-stop(100%, #fff),
-    to(rgba(0, 0, 0, 0))
-  );
+  background-image: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(rgba(255, 255, 255, 0)),
+      color-stop(100%, #fff),
+      to(rgba(0, 0, 0, 0)));
   background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 98%, rgba(0, 0, 0, 0));
   display: flex;
