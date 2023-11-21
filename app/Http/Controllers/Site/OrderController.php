@@ -13,7 +13,7 @@ use App\Services\Site\MailService;
 use App\Services\Site\VnpayService;
 use App\Services\Site\MomoService;
 use Illuminate\Support\Facades\Validator;
-use Barryvdh\DomPDF\Facade\PDF;
+use \PDF;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
