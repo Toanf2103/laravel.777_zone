@@ -29,11 +29,11 @@ use App\Http\Middleware\UserMiddleware;
 
 //Site
 Livewire::setScriptRoute(function ($handle) {
-    return Route::get(basename(base_path()) . '/vendor/livewire/livewire/dist/livewire.js', $handle);
+    return Route::get( '/vendor/livewire/livewire/dist/livewire.js', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(basename(base_path()) . '/livewire/update', $handle);
+    return Route::post( '/livewire/update', $handle);
 });
 
 
