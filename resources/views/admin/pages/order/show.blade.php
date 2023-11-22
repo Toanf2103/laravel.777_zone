@@ -8,7 +8,7 @@ use App\Helpers\NumberHelper;
 @section('title-content', 'Chi tiết đơn hàng')
 
 @section('css')
-<link rel="stylesheet" href="{{ url('public/admin/css/customer/index.css') }}">
+<link rel="stylesheet" href="{{ url('public/admin/css/order/show.css') }}">
 @stop
 
 @section('breadcrumb')
@@ -41,101 +41,116 @@ use App\Helpers\NumberHelper;
         @endif
     </div>
 
-    <h4 class="fw-bold">Thông tin khách hàng</h4>
-    <div class="table-responsive">
-        <table class="table table-hover align-middle m-0">
-            <thead class="table-secondary">
-                <tr>
-                    <th>Họ và tên</th>
-                    <th>Số điện thoại</th>
-                    <th>Email</th>
-                    <th>Địa chỉ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $order->name }}</td>
-                    <td>{{ $order->phone_number }}</td>
-                    <td>{{ $order->email }}</td>
-                    <td>{{ $order['full_address'] }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <h4 class="fw-bold">Thông tin khách hàng</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle m-0">
+                    <tr>
+                        <th>Họ và tên</th>
+                        <td>{{ $order->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại</th>
+                        <td>{{ $order->phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ $order->email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ giao hàng</th>
+                        <td>{{ $order['full_address'] }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <h4 class="fw-bold">Thông tin đơn hàng</h4>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle m-0">
+                    <tr>
+                        <th>Phương thức thanh toán</th>
+                        <td>{{ $order->pay_method }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pay id</th>
+                        <td>{{ $order->pay_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái thanh toán</th>
+                        <td>
+                            @if($order->pay_status)
+                            <span class='badge bg-success'>Đã thanh toán</span>
+                            @else
+                            <span class='badge bg-secondary'>Chưa thanh toán</span>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái đơn hàng</th>
+                        <td>
+                            @if($order->status == 'waiting')
+                            <span class='badge bg-warning'>Đang chờ duyệt</span>
+                            @elseif($order->status == 'approved')
+                            <span class='badge bg-success'>Đã duyệt</span>
+                            @elseif($order->status == 'shipping')
+                            <span class='badge bg-success'>Đang giao hàng</span>
+                            @elseif($order->status == 'completed')
+                            <span class='badge bg-success'>Giao hàng thành công</span>
+                            @elseif($order->status == 'cancel')
+                            <span class='badge bg-danger'>Đã hủy</span>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tổng giá sản phẩm</th>
+                        <td>{{ NumberHelper::format($order->totalPrice()) }}đ</td>
+                    </tr>
+                    <tr>
+                        <th>Phí vận chuyển</th>
+                        <td>{{ NumberHelper::format($order->ship_fee) }}đ</td>
+                    </tr>
+                    <tr>
+                        <th>Tổng cộng</th>
+                        <td>{{ NumberHelper::format($order->totalPrice() + $order->ship_fee) }}đ</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-12 mt-4">
+            <h4 class="fw-bold">Thông tin sản phẩm</h4>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle m-0">
+                    <thead class="table-secondary">
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Đơn giá</th>
+                            <th class="text-center">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($order->orderDetails as $orderDetail)
+                        <tr>
+                            <td>
+                                <div class="d-flex justify-content-start align-items-center gap-3">
+                                    <img src="{{ $orderDetail->product->productImages->get(0)->link ?? '' }}" alt="" class="product-image">
+                                    {{ $orderDetail->product->name }}
+                                </div>
+                            </td>
+                            <td class="text-center">{{ $orderDetail->quantity }}</td>
+                            <td class="text-center">{{ NumberHelper::format($orderDetail->price) }}đ</td>
+                            <td class="text-center">{{ NumberHelper::format($orderDetail->price * $orderDetail->quantity) }}đ</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <hr class="my-5">
-
-    <h4 class="fw-bold">Thông tin sản phẩm</h4>
-    <div class="table-responsive">
-        <table class="table table-hover align-middle m-0">
-            <thead class="table-secondary">
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Đơn giá</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($order->orderDetails as $orderDetail)
-                <tr>
-                    <td>{{ $orderDetail->product->name }}</td>
-                    <td>{{ $orderDetail->quantity }}</td>
-                    <td>{{ NumberHelper::format($orderDetail->price) }}đ</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <hr class="my-5">
-
-    <h4 class="fw-bold">Thông tin đơn hàng</h4>
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle m-0">
-            <tr>
-                <th class="text-start">Phương thức thanh toán</th>
-                <td class="text-start">{{ $order->pay_method }}</td>
-            </tr>
-            <tr>
-                <th class="text-start">Pay id</th>
-                <td class="text-start">{{ $order->pay_id }}</td>
-            </tr>
-            <tr>
-                <th class="text-start">Trạng thái thanh toán</th>
-                <td class="text-start">{{ $order->pay_status ? 'Đã thanh toán' : 'Chưa thanh toán' }}</td>
-            </tr>
-            <tr>
-                <th class="text-start">Trạng thái đơn hàng</th>
-                <td class="text-start">
-                    @if($order->status == 'waiting')
-                    Đang chờ duyệt
-                    @elseif($order->status == 'approved')
-                    Đã duyệt
-                    @elseif($order->status == 'shipping')
-                    Đang giao hàng
-                    @elseif($order->status == 'completed')
-                    Giao hàng thành công
-                    @elseif($order->status == 'cancel')
-                    Đã hủy
-                    @endif
-                </td>
-            </tr>
-            <tr>
-                <th class="text-start">Tổng giá sản phẩm</th>
-                <td class="text-start">{{ NumberHelper::format($order->totalPrice()) }}đ</td>
-            </tr>
-            <tr>
-                <th class="text-start">Phí vận chuyển</th>
-                <td class="text-start">{{ NumberHelper::format($order->ship_fee) }}đ</td>
-            </tr>
-            <tr>
-                <th class="text-start">Tổng cộng</th>
-                <td class="text-start">{{ NumberHelper::format($order->totalPrice() + $order->ship_fee) }}đ</td>
-            </tr>
-        </table>
-    </div>
-
-    <hr class="my-5">
 </div>
 @stop
 

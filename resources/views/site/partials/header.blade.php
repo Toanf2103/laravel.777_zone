@@ -47,7 +47,7 @@
 
                     <li><a class="dropdown-item" href="{{route('site.auth.logout')}}">Đăng xuất</a></li>
                 </ul>
-                
+
                 @else
                 <a data-bs-toggle="modal" data-bs-target="#login-model">Đăng nhập</a>
                 @endauth
@@ -56,7 +56,6 @@
         </div>
 
         <livewire:site.header-search />
-
     </div>
 </header>
 <div class="bg-overlay none" id="bg-overlay">
@@ -66,9 +65,7 @@
 <div class="modal fade" id="login-model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content login">
-
             <livewire:site.login />
-
         </div>
     </div>
 </div>

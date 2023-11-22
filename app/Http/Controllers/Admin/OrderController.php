@@ -38,13 +38,6 @@ class OrderController extends Controller
 
         $orders = $orders->orderBy('id', 'desc')->paginate(20);
 
-        foreach ($orders as $index => $order) {
-            if ($order->ward_id) {
-                $address = $this->addressService->getDetailByWardId($order->ward_id);
-                $orders[$index]['full_address'] = "{$order->address}, {$address['districts']['wards']['name']}, {$address['districts']['name']}, {$address['name']}";
-            }
-        }
-
         return view('admin.pages.order.index', compact('orders'));
     }
 

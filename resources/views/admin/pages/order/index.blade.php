@@ -4,7 +4,7 @@
 @section('title-content', 'Danh sách đơn hàng')
 
 @section('css')
-<link rel="stylesheet" href="{{ url('public/admin/css/customer/index.css') }}">
+<link rel="stylesheet" href="{{ url('public/admin/css/order/index.css') }}">
 @stop
 
 @section('breadcrumb')
@@ -64,7 +64,6 @@
                     <th>Khách hàng</th>
                     <th>Số điện thoại</th>
                     <th>Email</th>
-                    <th>Địa chỉ</th>
                     <th>Phương thức thanh toán</th>
                     <th>Pay id</th>
                     <th>Trạng thái thanh toán</th>
@@ -80,7 +79,6 @@
                     <td>{{ $order->name }}</td>
                     <td>{{ $order->phone_number }}</td>
                     <td>{{ $order->email }}</td>
-                    <td>{{ $order['full_address'] }}</td>
                     <td>{{ $order->pay_method }}</td>
                     <td>{{ $order->pay_id }}</td>
                     <td>

@@ -60,10 +60,10 @@ use App\Helpers\NumberHelper;
 
 <body>
     <div class="wrapper-pdf">
-
         <div class="header-pdf">
             <h1>Cảm ơn bạn đã đặt hàng</h1>
         </div>
+
         <div class="container-pdf">
             <p style="margin:0 0 16px">Xin chào {{ $order->name }}</p>
             <br>
@@ -94,11 +94,11 @@ use App\Helpers\NumberHelper;
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px">Tổng giá:</th>
+                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px">Tổng giá sản phẩm:</th>
                         <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px"><span>{{ NumberHelper::format($order->totalPrice()-$order->ship_fee) }}<span>₫</span></span></td>
                     </tr>
                     <tr>
-                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left">Phí ship:</th>
+                        <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left">Phí vận chuyển:</th>
                         <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left"><span>{{ NumberHelper::format($order->ship_fee) }}<span>₫</span></span></td>
                     </tr>
 
