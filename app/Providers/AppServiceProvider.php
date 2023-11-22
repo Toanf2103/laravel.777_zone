@@ -23,9 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(RoutingUrlGenerator $url): void
     {
-        // if (env('APP_ENV') == 'production') {
-        //     $url->forceScheme('https');
-        // }
+        if (env('APP_ENV') == 'production') {
+            $url->forceScheme('https');
+        }
         $views = ['site.pages.*', 'admin.pages.product.*', 'admin.pages.banner.*'];
         foreach ($views as $view) {
             view()->composer($view, function ($view) {
