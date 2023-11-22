@@ -49,7 +49,7 @@ Route::get('/product/{productSlug}', [HomeController::class, 'product'])->name('
 Route::get('/mua-ngay/{idProduct}', [OrderController::class, 'buyNow'])->name('site.buyNow');
 Route::get('/order', [OrderController::class, 'order'])->name('site.order');
 Route::get('/orderMenu', [OrderController::class, 'orderMenu'])->middleware('user')->name('site.order.menu');
-Route::get('/testOrder', [OrderController::class, 'testOrder']);
+Route::get('/tra-cuu-don-hang', [OrderController::class, 'searchOrder'])->name('site.search.order');
 
 
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('site.checkout');

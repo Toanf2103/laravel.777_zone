@@ -13,7 +13,9 @@
                 <a href="{{ route('site.category',['categorySlug'=>$category->slug]) }}">{{ $category->name }}</a>
             </li>
             @endforeach
-
+            <li class='{{ request()->is("tra-cuu-don-hang") ? "active" :"" }}'>
+                <a href="{{ route('site.search.order') }}">Tra cứu đơn hàng</a>
+            </li>
 
         </ul>
         <div class="d-flex align-items-center gap-3 header-search_cart justify-content-center ">

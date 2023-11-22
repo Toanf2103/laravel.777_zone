@@ -210,4 +210,16 @@ class OrderController extends Controller
         $this->cartService->addProduct($product);
         return redirect()->route('site.cart');
     }
+
+    public function searchOrder(Request $rq){
+        
+        $order = null;
+        if($rq->has('id_order')){
+            // dd($rq->get('id_order'));
+            $orderSer =  new OrderService();
+            $order = $orderSer->getOrderById($rq->get('id_order'));
+            // dd($order);
+        }
+        return view('site.pages.searchOrder',compact('order'));
+    }
 }
