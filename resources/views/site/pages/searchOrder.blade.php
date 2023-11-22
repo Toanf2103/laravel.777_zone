@@ -1,5 +1,5 @@
 @extends('site.layouts.main')
-@section('title', 'Đơn hàng của bạn')
+@section('title', 'Tra cứu đơn hàng')
 
 @section('css')
 <link rel="stylesheet" href="{{ url('public/site/css/pages/cart.css') }}">
@@ -26,7 +26,7 @@ use App\Helpers\NumberHelper;
 @section('content')
 <form action="{{route('site.search.order')}}" method="GET">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" name="id_order" required placeholder="Nhập mã đơn hàng" aria-label="Nhập mã đơn hàng" aria-describedby="button-addon2">
+        <input value="{{ request()->get('id_order') }}" type="text" class="form-control" name="id_order" required placeholder="Nhập mã đơn hàng" aria-label="Nhập mã đơn hàng" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa-regular fa-magnifying-glass"></i></button>
     </div>
     @if(request()->has('id_order'))
@@ -69,8 +69,8 @@ use App\Helpers\NumberHelper;
                 <img src="{{ $orderDetail->product->productImages->get(0)->link }}" alt="">
             </div>
             <div class="order-content-info">
-                <a href="{{ route('site.product',['productSlug'=>$orderDetail->product->slug]) }}" target="_blank">asdsadas</a>
-                <p>x1{{$orderDetail->quantity}}</p>
+                <a href="{{ route('site.product',['productSlug'=>$orderDetail->product->slug]) }}" target="_blank">{{$orderDetail->product->name}}</a>
+                <p>x{{$orderDetail->quantity}}</p>
             </div>
             <div class="order-contetn-price">
                 <p class="price">{{ NumberHelper::format($orderDetail->price)}}đ</p>
