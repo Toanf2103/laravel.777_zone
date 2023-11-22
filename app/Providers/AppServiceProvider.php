@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         foreach ($views as $view) {
             view()->composer($view, function ($view) {
                 $view->with([
-                    'listCategories' => Category::all()
+                    'listCategories' => Category::where('status',true)->get()
                 ]);
             });
         }

@@ -60,6 +60,7 @@ class ProductService
             if ($pagination) {
                 $listProduct = $listProduct->paginate($pagination);
             }
+            $listProduct->where('status',true);
             return $listProduct;
         } catch (Exception $e) {
             return abort(404);

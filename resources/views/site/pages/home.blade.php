@@ -15,32 +15,6 @@
 @stop
 
 @section('content')
-<!-- <div class="row">
-    <a href="#" class="col-2 item-category me-5">
-        <div class="row d-flex algin-items-center justify-content-center">
-            <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/topzone/images/desktop/Mac_Desktop.png" alt="">
-        </div>
-        <div class="row d-flex algin-items-center justify-content-center mt-1 mb-4">
-            <p class="text-center">Iphone</p>
-        </div>
-    </a>
-    <a href="#" class="col-2 item-category me-5">
-        <div class="row d-flex algin-items-center justify-content-center">
-            <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/topzone/images/desktop/Mac_Desktop.png" alt="">
-        </div>
-        <div class="row d-flex algin-items-center justify-content-center mt-1 mb-4">
-            <p class="text-center">Iphone</p>
-        </div>
-    </a>
-    <a href="#" class="col-2 item-category me-5">
-        <div class="row d-flex algin-items-center justify-content-center">
-            <img src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/topzone/images/desktop/Mac_Desktop.png" alt="">
-        </div>
-        <div class="row d-flex algin-items-center justify-content-center mt-1 mb-4">
-            <p class="text-center">Iphone</p>
-        </div>
-    </a>
-</div> -->
 
 @foreach($listCategories as $category)
 <div class="row catelory-title">
