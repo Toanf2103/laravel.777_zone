@@ -9,7 +9,6 @@ use App\Http\Controllers\Site\GoogleController;
 use App\Http\Controllers\Site\OrderController;
 
 use App\Http\Controllers\Admin;
-use App\Http\Middleware\UserMiddleware;
 
 /*
 |--------------------------------------------------------------------------
