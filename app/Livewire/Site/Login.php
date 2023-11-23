@@ -27,6 +27,7 @@ class Login extends Component
     public $newPass='';
     public $newPassConfirm='';
 
+    protected $lengPass = 6;
 
 
 
@@ -87,7 +88,14 @@ class Login extends Component
         // dd($this->usernameRegister);
         if ($this->usernameRegister == null || $this->nameRegister == null || $this->passwordRegister == null || $this->confirmPasswordRegister == null) {
             $this->showAlret("Vui lòng nhập đầy đủ thông tin", 'Nhập đầy đủ thông tin', 'error');
-        } else if ($this->passwordRegister !== $this->confirmPasswordRegister) {
+        }else if(!preg_match('/^[a-zA-Z0-9\s]+$/', $this->usernameRegister)){
+            $this->showAlret("Tên tài khoản không hợp lệ", 'Tên tài khoản không được chứa các ký tự đặc biệt', 'error');
+
+        }
+        else if(strlen($this->passwordRegister) < $this->lengPass || strlen($this->confirmPasswordRegister) < $this->lengPass){
+            $this->showAlret("Mật khẩu quá ngắn", 'Mật khẩu phải có ít nhất '.$this->lengPass.' ký tự', 'error');
+        }
+        else if ($this->passwordRegister !== $this->confirmPasswordRegister) {
             $this->showAlret("Mật khẩu xác nhận không chính xác", 'Mật khẩu xác nhận không chính xác', 'error');
         } else {
             $authSer = new AuthService();
@@ -154,6 +162,12 @@ class Login extends Component
             // $this->skipRender();
             return;
         }
+        if(strlen($this->newPass) < $this->lengPass || strlen($this->newPassConfirm) < $this->lengPass){
+            $this->showAlret('Mật khẩu quá ngắn', 'Mật khẩu phải có ít nhất '.$this->lengPass.' ký tự', 'error');
+            // $this->skipRender();
+            return;
+        }
+
         if($this->newPass != $this->newPassConfirm){
             $this->showAlret('Mật khẩu xác nhận không trùng khớp', 'Mật khẩu xác nhận không trùng khớp', 'error');
             // $this->skipRender();
@@ -162,12 +176,12 @@ class Login extends Component
         $userSer = new UserService();
         $check = $userSer->changePass($this->newPass,$this->emailForgot);
         if($check){
-            $this->showAlret('Dổi mật khẩu thành công', 'Vui lòng đăng nhập', 'success');
+            $this->showAlret('Đổi mật khẩu thành công', 'Vui lòng đăng nhập', 'success');
             $this->type = 'login';
             return;
             
         }else{
-            $this->showAlret('Dổi mật khẩu thất bại', 'Vui lòng thử lại', 'error');
+            $this->showAlret('Đổi mật khẩu thất bại', 'Vui lòng thử lại', 'error');
             return;
         }
     }

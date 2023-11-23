@@ -84,6 +84,9 @@ tr td:first-child {
   position: relative;
   margin-bottom: 2rem;
 }
+.content-more .descr a{
+  color: #000;
+}
 
 .content-more .descr .view-more {
   position: absolute;

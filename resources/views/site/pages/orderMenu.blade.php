@@ -48,7 +48,7 @@ use App\Helpers\NumberHelper;
 @foreach($orders as $order)
 <div class="order-wrapper">
     <div class="order-title d-flex align-items-center justify-content-between">
-        <a href="{{route('site.showBillOrder',['orderId'=>$order->id])}}" target="_blank">Xem chi tiết</a>
+        <a href="{{route('site.showBillOrder',['orderId'=>$order->id])}}" target="_blank">Xem hóa đơn</a>
         <span>
             @php
             switch($order->status){
