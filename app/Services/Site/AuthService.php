@@ -3,6 +3,7 @@
 namespace App\Services\Site;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -19,8 +20,12 @@ class AuthService
         }
         $checkUserName = Auth::guard('user')->attempt(["username"=>$username, "password"=>$password]);
         
+        try{
 
-        $checkEmail = Auth::guard('user')->attempt(["email"=>$username, "password"=>$password]);
+            $checkEmail = Auth::guard('user')->attempt(["email"=>$username, "password"=>$password]);
+        }catch(Exception $e){
+            $checkEmail = false;
+        }
         
         if(!$checkUserName && !$checkEmail){
             return ['status'=>'error','message'=>'Sai thông tin đăng nhập'];

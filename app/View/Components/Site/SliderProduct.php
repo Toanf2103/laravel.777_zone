@@ -24,7 +24,7 @@ class SliderProduct extends Component
         // $this->products = $this->category->brandCategories->products->take(8)->get();
         $this->products = Product::whereHas('brandCategory', function($query) use ($category) {
             return $query->where('category_id',$category->id);
-        })->where('status',true)->take(8)->get();
+        })->where('status',true)->orderBy('id', 'desc')->take(8)->get();
 
         // dd($this->products);
 

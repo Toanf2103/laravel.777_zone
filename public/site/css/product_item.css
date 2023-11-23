@@ -29,11 +29,10 @@
 
 .product-item h3 {
     width: 90%;
-    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
 

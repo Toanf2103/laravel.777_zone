@@ -83,7 +83,7 @@ class AuthController extends Controller
         // dd(1);
         // dd($rq->current_pass);
         $user = User::where('id', Auth::guard('user')->user()->id)->first();
-        if (!password_verify($rq->current_pass, $user->password)) {
+        if ( $rq->has('current_pass') && !password_verify($rq->current_pass, $user->password)) {
             return redirect()->back()->with('alert', ['status' => 'error', 'message' => 'Sai mật khẩu!']);
         }
         if ($rq->new_pass !== $rq->cofirm_new_pass) {

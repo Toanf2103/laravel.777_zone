@@ -50,6 +50,7 @@ class ProductService
     {
         try {
             $listProduct = Product::query();
+            $listProduct->where('status', true)->orderBy('id', 'desc');
 
             if ($keyword) {
                 $listProduct->where('name', 'like', "%$keyword%");
@@ -60,7 +61,6 @@ class ProductService
             if ($pagination) {
                 $listProduct = $listProduct->paginate($pagination);
             }
-            $listProduct->where('status',true);
             return $listProduct;
         } catch (Exception $e) {
             return abort(404);
@@ -77,7 +77,10 @@ class ProductService
             $listProduct->where('status', true);
 
             if ($order) {
+                // dd(1);
                 $listProduct =  $this->sortProducts($listProduct, $order);
+            }else{
+                $listProduct = $listProduct->orderBy('id', 'desc');
             }
 
             if ($pagination) {
@@ -96,6 +99,8 @@ class ProductService
 
             if ($order) {
                 $listProduct =  $this->sortProducts($listProduct, $order);
+            }else{
+                $listProduct = $listProduct->orderBy('id', 'desc');
             }
             if ($pagination) {
                 $listProduct = $listProduct->paginate($pagination);
@@ -123,7 +128,7 @@ class ProductService
     {
         switch ($type) {
             case 'date':
-                return $listProduct->orderBy('created_at');
+                return $listProduct->orderBy('id', 'desc');
             case 'price':
                 return $listProduct->orderBy('price');
             case 'price_desc':

@@ -22,11 +22,9 @@ class ChangePassRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_pass'=>'required',
-            'new_pass'=>'required|min:6|max:20',
-            'cofirm_new_pass'=>'required|min:6|max:20',
-
-
+            'current_pass'=>'nullable',
+            'new_pass'=>'required|min:6|max:20|different:current_pass',
+            'cofirm_new_pass'=>'required|min:6|max:20|same:new_pass',
         ];
     }
     public function messages(): array
@@ -38,7 +36,9 @@ class ChangePassRequest extends FormRequest
             'new_pass.min'=>'Mật khẩu phải có ít nhất 6 ký tự',
             'cofirm_new_pass.min'=>'Mật khẩu phải có ít nhất 6 ký tự',
             'new_pass.max'=>'Mật khẩu phải ít hơn 20 ký tự',
-            'cofirm_new_pass.max'=>'Mật khẩu phải ít hơn 20 ký tự'
+            'cofirm_new_pass.max'=>'Mật khẩu phải ít hơn 20 ký tự',
+            'new_pass.different'=>'Mật khẩu mới không được trùng với mật khẩu cũ',
+            'cofirm_new_pass.same'=>'Mật khẩu xác nhận không trùng khớp',
         ];
     }
 }
