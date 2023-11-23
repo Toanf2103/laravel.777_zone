@@ -22,11 +22,6 @@ use App\Http\Middleware\UserMiddleware;
 |
 */
 
-
-// Route::get('/Test-ac', function () {
-//     User::create(['id'=>'nv1','username' => 'nv','password'=>bcrypt('nv'),'role' => 'nv','name' =>'nv']);
-// });
-
 //Site
 Livewire::setScriptRoute(function ($handle) {
     return Route::get(basename(base_path()) . '/vendor/livewire/livewire/dist/livewire.js', $handle);
@@ -35,7 +30,6 @@ Livewire::setScriptRoute(function ($handle) {
 Livewire::setUpdateRoute(function ($handle) {
     return Route::post(basename(base_path()) . '/livewire/update', $handle);
 });
-
 
 Route::get('/', [HomeController::class, 'home'])->name('site.home');
 Route::get('/tim-kiem', [HomeController::class, 'search'])->name('site.search');
@@ -78,7 +72,6 @@ Route::group(['prefix' => 'profile', 'middleware' => 'user'], function () {
 
     Route::get('/avatar', [AuthController::class, 'avatar'])->name('site.auth.avatar');
     Route::post('/avatar-change', [AuthController::class, 'changeAvatar'])->name('site.auth.changeAvatar');
-
 });
 
 // Google
