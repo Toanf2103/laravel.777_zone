@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 23, 2023 lúc 09:30 AM
+-- Thời gian đã tạo: Th10 23, 2023 lúc 01:33 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 8.1.17
 
@@ -208,6 +208,14 @@ CREATE TABLE `comments` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `product_id`, `content`, `reply_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 14, 'Sản phẩm này còn không shop?', NULL, '2023-11-23 19:32:43', '2023-11-23 19:32:43'),
+(2, 2, 14, 'Bạn có mua không mà hỏi?', 1, '2023-11-23 19:33:11', '2023-11-23 19:33:11');
 
 -- --------------------------------------------------------
 
@@ -1811,7 +1819,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
