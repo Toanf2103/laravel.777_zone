@@ -75,7 +75,7 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Nhập email: </label>
-                <input name="email" value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->email:null}}" type="email" class="form-control" id="phone-number-user" placeholder="Nhập số điện thoại...">
+                <input name="email" value="{{Auth::guard('user')->check()? Auth::guard('user')->user()->email:null}}" type="email" class="form-control" id="phone-number-user" placeholder="Nhập email...">
                 <div class="invalid-feedback">
                     Nhập email phải có định dạng @
                 </div>
