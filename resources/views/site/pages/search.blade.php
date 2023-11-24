@@ -26,7 +26,7 @@
         @if($listProduct->count()>0)
         <div class="mt-3 mb-3 d-flex align-items-center justify-content-end ft-sort" id="ft-sort">
             <div class="dropdown">
-                <div id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><span class="me-3" id="text-ft-sort">Xếp theo: Giá mới nhất</span><i class="fa-light fa-chevron-down"></i></div>
+                <div id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><span class="me-3" id="text-ft-sort">Xếp theo: </span><i class="fa-light fa-chevron-down"></i></div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li class="{{ request('order') == 'date' ? 'active' : '' }}" >
                         <a href="{{ request()->fullUrlWithQuery(['order' => 'date']) }}"><i class="fa-regular fa-check me-3"></i><span>Mới ra mắt</span></a>

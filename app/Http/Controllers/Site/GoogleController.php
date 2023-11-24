@@ -28,7 +28,8 @@ class GoogleController extends Controller
                 if (!$user->google_id) {
                     $user->update(['google_id' => $data->id]);
                 }
-                if($user->status === false){
+                if($user->status == false){
+                    
                     return $this->dataReturn('error', 'Tài khoản của bạn đã bị khóa');
                 }
                 $user->update(['verification_token' => null]);
