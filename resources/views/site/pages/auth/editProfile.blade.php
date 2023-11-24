@@ -129,13 +129,19 @@
 
 <script>
     const inputElms = document.querySelectorAll('input');
+    const selectElms = document.querySelectorAll('select');
     const btnSubmit = document.getElementById('submit');
 
     inputElms.forEach(function(elm) {
-        elm.addEventListener('change', (e) => {
+        elm.addEventListener('input', (e) => {
             btnSubmit.disabled = false;
         });
     });
+    selectElms.forEach(function(elm){
+        elm.addEventListener('change',(e)=>{
+            btnSubmit.disabled = false;
+        })
+    })
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>

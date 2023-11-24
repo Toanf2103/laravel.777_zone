@@ -40,6 +40,8 @@ class HomeController extends Controller
     {
         $quantityProduct = 9;
         $listProduct = $this->prodSer->findProductsByName($request->get('key') ?? '', $quantityProduct, $request->get('order') ?? null);
+        
+        
 
         $htrSearch = Session::get('historyKeySearchs') ?? [];
         array_push($htrSearch, $request->get('key'));

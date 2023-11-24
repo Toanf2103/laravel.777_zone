@@ -88,7 +88,7 @@
     const btnSubmit = document.getElementById('submit');
 
     inputElms.forEach(function(elm) {
-        elm.addEventListener('change', (e) => {
+        elm.addEventListener('input', (e) => {
             btnSubmit.disabled = false;
         });
     });
