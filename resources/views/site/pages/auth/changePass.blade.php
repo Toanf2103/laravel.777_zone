@@ -48,7 +48,7 @@
             @csrf
             @if(Auth::guard('user')->user()->password !== null)
             <div class="mb-4">
-                <label for="current_pass" class="form-label">Mật khẩu hiện tại</label>
+                <label for="current_pass" class="form-label">Mật khẩu hiện tại:</label>
                 <input type="password" name="current_pass" class="form-control" id="current_pass" placeholder="Mật khẩu hiện tại">
                 @if ($errors->has('current_pass'))
                 <small class="text-danger">{{ $errors->first('current_pass') }}</small>
@@ -57,14 +57,14 @@
             @endif
 
             <div class="mb-4">
-                <label for="new_pass" class="form-label">Mật khẩu mới</label>
+                <label for="new_pass" class="form-label">Mật khẩu mới:</label>
                 <input type="password" name="new_pass" class="form-control" id="new_pass" placeholder="Mật khẩu mới">
                 @if ($errors->has('new_pass'))
                 <small class="text-danger">{{ $errors->first('new_pass') }}</small>
                 @endif
             </div>
             <div class="mb-4">
-                <label for="cofirm_new_pass" class="form-label">Xác nhận mật khẩu mới</label>
+                <label for="cofirm_new_pass" class="form-label">Xác nhận mật khẩu mới:</label>
                 <input type="password" name="cofirm_new_pass" class="form-control" id="cofirm_new_pass" placeholder="Xác nhận mật khẩu mới">
                 @if ($errors->has('cofirm_new_pass'))
                 <small class="text-danger">{{ $errors->first('cofirm_new_pass') }}</small>

@@ -19,7 +19,7 @@
                 <i class="fa-duotone fa-address-card"></i>
             </div>
             <div class="d-flex align-items-center">
-                <p>Thông tin cá nhân</p>
+                <p>Thông tin cá nhân:</p>
             </div>
         </a>
         <a href="{{ route('site.auth.pass') }}" class="d-flex align-items-center gap-3 nav-item">
@@ -27,7 +27,7 @@
                 <i class="fa-sharp fa-solid fa-lock"></i>
             </div>
             <div class="d-flex align-items-center">
-                <p>Đổi mật khẩu</p>
+                <p>Đổi mật khẩu:</p>
             </div>
         </a>
         <a href="{{ route('site.auth.avatar') }}" class="d-flex align-items-center gap-3 nav-item">
@@ -35,7 +35,7 @@
                 <i class="fa-sharp fa-solid fa-image"></i>
             </div>
             <div class="d-flex align-items-center">
-                <p>Đổi avatar</p>
+                <p>Đổi avatar:</p>
             </div>
         </a>
 

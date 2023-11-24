@@ -34,20 +34,23 @@ class HomeController extends Controller
 
         return view('site.pages.home', compact('banners'));
     }
-   
+
 
     public function search(Request $request)
     {
         $quantityProduct = 9;
         $listProduct = $this->prodSer->findProductsByName($request->get('key') ?? '', $quantityProduct, $request->get('order') ?? null);
-        
-        
+
+
 
         $htrSearch = Session::get('historyKeySearchs') ?? [];
+        // dd($htrSearch);
         array_push($htrSearch, $request->get('key'));
+        // Xóa các giá trị trùng nhau
+        $htrSearch = array_unique($htrSearch);
         Session::put('historyKeySearchs', $htrSearch);
         Session::save();
-    
+
 
 
         return view('site.pages.search', compact('listProduct'));
@@ -112,6 +115,4 @@ class HomeController extends Controller
     {
         return view('site.pages.cart');
     }
-
-    
 }

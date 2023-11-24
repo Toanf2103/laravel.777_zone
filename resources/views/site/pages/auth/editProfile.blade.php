@@ -53,14 +53,14 @@
         <form action="{{ route('site.auth.changeInfo') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <label for="name" class="form-label">Tên</label>
+                <label for="name" class="form-label">Tên:</label>
                 <input type="text" name="full_name" value="{{ $user->full_name }}" class="form-control" id="name" placeholder="Tên">
                 @if ($errors->has('full_name'))
                 <small class="text-danger">{{ $errors->first('full_name') }}</small>
                 @endif
             </div>
             <div class="mb-4">
-                <label for="Email" class="form-label">Email</label>
+                <label for="Email" class="form-label">Email:</label>
                 <input type="email" name="email" value="{{ $user->email }}" class="form-control" id="name" placeholder="email" {{ $user->email!=null ?'disabled':'' }}>
                 @if ($errors->has('email'))
                 <small class="text-danger">{{ $errors->first('email') }}</small>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="formGroupExampleInput" class="form-label">Số điện thoại</label>
+                <label for="formGroupExampleInput" class="form-label">Số điện thoại:</label>
                 <input type="tel" pattern="[0-9]{10}" name="phone_number" value="{{ $user->phone_number }}" class="form-control" id="formGroupExampleInput" placeholder="Số điện thoại">
                 @if ($errors->has('phone_number'))
                 <small class="text-danger">{{ $errors->first('phone_number') }}</small>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="" class="form-label">Địa chỉ</label>
+                <label for="" class="form-label">Địa chỉ:</label>
                 <input type="text" name="address" value="{{ $user->address }}" class="form-control" id="" placeholder="Địa chỉ">
                 @if ($errors->has('address'))
                 <small class="text-danger">{{ $errors->first('address') }}</small>
