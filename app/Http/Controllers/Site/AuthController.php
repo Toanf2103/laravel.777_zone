@@ -109,13 +109,14 @@ class AuthController extends Controller
             $user = User::where('id', Auth::guard('user')->user()->id)->first();
 
 
-            $avatar = $firbaseSer->uploadImage($rq['avatar'], $user->id, 'user');
+            $avatar = $firbaseSer->uploadImage($rq['avatar'], $user->id.time(), 'user',$user->avatar);
             // dd($avatar);
             $user->avatar = $avatar['full_url'];
             $user->save(); 
             return redirect()->route('site.auth.avatar')->with('alert', ['status' => 'success', 'message' => 'Đổi avatar thành công']);
         } catch (Exception $e) {
-            return redirect()->route('site.auth.avatar')->with('alert', ['status' => 'danger', 'message' => 'Có lỗi! thử lại sau']);
+            // dd(1);
+            return redirect()->route('site.auth.avatar')->with('alert', ['status' => 'error', 'message' => 'Có lỗi! thử lại sau']);
         }
     }
 }

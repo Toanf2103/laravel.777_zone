@@ -56,3 +56,7 @@ form .form-select {
     font-size: 2rem;
 
 }
+
+.form-label{
+    font-weight: bold;
+}
